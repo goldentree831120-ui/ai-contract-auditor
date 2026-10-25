@@ -16,47 +16,14 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
-import platform
 import statistics
 import sys
-from datetime import datetime, timezone
-from importlib.metadata import version
 from pathlib import Path
 
 from auditor.dataset import DATASET_DIR, REPO_ROOT, load_labels, load_taxonomy
+from auditor.machine import machine_info
 from auditor.slither_map import NO_DETECTOR_FOR
 from auditor.slither_runner import run_one
-
-
-def machine_info() -> dict:
-    cpu = "unknown"
-    try:
-        for line in Path("/proc/cpuinfo").read_text().splitlines():
-            if line.startswith("model name"):
-                cpu = line.split(":", 1)[1].strip()
-                break
-    except OSError:
-        pass
-    ram_gb = None
-    try:
-        for line in Path("/proc/meminfo").read_text().splitlines():
-            if line.startswith("MemTotal"):
-                ram_gb = round(int(line.split()[1]) / 1024 / 1024, 1)
-                break
-    except OSError:
-        pass
-    kernel = platform.release()
-    return {
-        "cpu": cpu,
-        "logical_cpus": os.cpu_count(),
-        "ram_gb_visible": ram_gb,
-        "os": f"{platform.system()} {kernel}" + (" (WSL)" if "microsoft" in kernel.lower() else ""),
-        "python": platform.python_version(),
-        "slither": version("slither-analyzer"),
-        "crytic_compile": version("crytic-compile"),
-        "run_at_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-    }
 
 
 def aggregate(entries: list[dict], results: dict[str, dict]) -> dict:
@@ -159,7 +126,7 @@ def main() -> None:
         print(f"[{i:2d}/{len(entries)}] {e['id']} {state} {r['seconds']:.1f}s "
               f"results={len(r['findings'])} mapped={mapped}", flush=True)
 
-    info = machine_info()
+    info = machine_info(("slither-analyzer", "crytic-compile"))
     agg = aggregate(entries, results)
     (out / "summary.json").write_text(json.dumps({"machine": info, **agg}, indent=2) + "\n")
     write_markdown(out, info, agg, entries, results)

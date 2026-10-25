@@ -1,0 +1,23 @@
+{
+  "id": "c26",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "findings": [
+    {
+      "class": "access_control",
+      "function": "missing",
+      "line": 11,
+      "function_from_line": "missing",
+      "reasoning": "The function `missing()` is intended to be the constructor but its name does not match the contract name (`Missing`). Therefore it is a regular public function that anyone can call to set `owner` to themselves, allowing them to later call `withdraw()` and steal the contract balance.",
+      "confidence": 1.0
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 730,
+  "completion_tokens": 210,
+  "seconds": 57.464,
+  "api_seconds": 1.291
+}

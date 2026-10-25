@@ -1,0 +1,23 @@
+{
+  "id": "c48",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "findings": [
+    {
+      "class": "denial_of_service",
+      "function": "withdrawFunds",
+      "line": 22,
+      "function_from_line": "withdrawFunds",
+      "reasoning": "If the `transfer` call fails (e.g., the recipient is a contract with a fallback that uses more than 2300 gas or reverts), the subsequent line resetting `locked` is never reached, leaving `locked` true and permanently blocking all future withdrawals.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 825,
+  "completion_tokens": 321,
+  "seconds": 2.111,
+  "api_seconds": 1.603
+}

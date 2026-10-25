@@ -1,0 +1,23 @@
+{
+  "id": "c25",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "findings": [
+    {
+      "class": "access_control",
+      "function": "settle",
+      "line": 25,
+      "function_from_line": "settle",
+      "reasoning": "The function does not verify that the caller has previously locked in a guess. For a new address, guesses[msg.sender].block is 0, so the require passes (block.number > 0). blockhash(0) returns 0, and the default guess value is also 0, causing the condition to succeed and allowing the caller to withdraw 2 ether without any prior commitment.",
+      "confidence": 1.0
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 858,
+  "completion_tokens": 430,
+  "seconds": 3.823,
+  "api_seconds": 1.464
+}

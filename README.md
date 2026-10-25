@@ -11,7 +11,7 @@ scripts in this repo, with the hardware noted, including the weak ones.
 |---|---|---|
 | M1 | labeled dataset (49 contracts, 9 classes) with provenance and licenses | done |
 | M2 | Slither baseline, findings per contract | done |
-| M3 | LLM agent with structured output and function-level slicing | planned |
+| M3 | LLM agent with structured output and function-level slicing | done |
 | M4 | RAG over SWC descriptions; ablation (LLM, +Slither, +RAG, both) | planned |
 | M5 | precision, recall, F1 per class, false-positive analysis, cost and time | planned |
 | M6 | CLI, small UI, methodology and limitations write-up | planned |
@@ -25,6 +25,8 @@ python3 -m venv .venv
 .venv/bin/python scripts/validate_dataset.py         # dataset summary
 .venv/bin/python scripts/build_dataset.py --check    # rebuild from pinned sources and compare
 .venv/bin/python scripts/run_slither.py              # M2 baseline -> results/slither/
+.venv/bin/python scripts/run_llm.py --dry-run         # M3 cost preview, no key needed
+.venv/bin/python scripts/run_llm.py                   # M3 LLM run -> results/llm/llm_only/ (needs .env)
 ```
 
 `--check` needs network access to github.com (it fetches the pinned source commits into
@@ -62,6 +64,45 @@ Compilers are not taken from the system: `src/auditor/solc.py` downloads the off
 
 Precision, recall and F1 per class come in M5, from these same result files.
 
+## LLM agent (M3)
+
+`scripts/run_llm.py` sends each sanitized contract, with line numbers, to
+`openai/gpt-oss-120b` on Groq and asks for strict JSON: a list of findings, each with
+`class` (one of the 9 dataset classes), `function`, `line`, `reasoning` and `confidence`.
+The prompt contains no file name, label or source hint, and says that clean contracts are
+common and an empty list is a valid answer. Settings: temperature 0, `reasoning_effort`
+low, reasoning text not returned.
+
+Every response is validated locally even though strict schema mode is on: unknown
+classes and out-of-range lines are rejected and counted, confidence is clamped to 0..1,
+and the function is re-derived from the line number (`function_from_line`) so location
+scoring in M5 does not trust the model's own function label.
+
+**Function-level slicing.** Contracts longer than 150 lines are audited one function at a
+time. Each slice keeps every contract-level line, the signature of every other function
+and one full function body, with original line numbers; findings outside the shown body
+are rejected and the rest are merged per (class, function). No contract in this dataset
+is longer than 87 lines, so the reported run uses whole-contract mode; slicing is covered
+by unit tests and the `--slice-threshold` flag.
+
+**Cost controls** (`src/auditor/llm.py`, all unit-tested):
+
+| control | default | where |
+|---|---|---|
+| daily token cap, checked before each request using its worst case | 150,000 | `LLM_MAX_TOKENS_PER_DAY` |
+| total USD cap at Groq's paid-tier price | $0.50 | `LLM_MAX_USD_TOTAL` |
+| pacing under per-minute limits | 7,000 tokens, 25 requests | `LLM_TOKENS_PER_MINUTE`, `LLM_REQUESTS_PER_MINUTE` |
+| max output tokens per request | 4,096 | `LLM_MAX_COMPLETION_TOKENS` |
+| on-disk response cache (reruns are free) | `.cache/llm/` | git-ignored |
+
+On Groq's Free plan nothing is billed; requests over a limit are refused. When a cap is
+reached the run stops, saves what it has and exits with code 2; rerunning continues from
+the cache. The API key is read from `.env` (git-ignored, template in `.env.example`) and is
+never printed or written to results.
+
+Results: [results/llm/llm_only/SUMMARY.md](results/llm/llm_only/SUMMARY.md). Precision,
+recall and F1 per class come in M5.
+
 ## Sources
 
 | source | license (checked) | used for | used in |
@@ -71,6 +112,10 @@ Precision, recall and F1 per class come in M5, from these same result files.
 | [trailofbits/not-so-smart-contracts](https://github.com/trailofbits/not-so-smart-contracts) @ `020dbdb` | Apache-2.0 | 1 contract (modified, changes listed) | M1 |
 | [smartbugs/smartbugs-curated](https://github.com/smartbugs/smartbugs-curated) @ `230e649` | Apache-2.0 repo; contracts keep their original licenses | label cross-check only; no files redistributed | M1 |
 | [SunWeb3Sec/DeFiHackLabs](https://github.com/SunWeb3Sec/DeFiHackLabs) | Apache-2.0 (LICENSE file) | not used: holds attack PoCs, not the victim contracts | none |
+
+LLM: `openai/gpt-oss-120b` (open-weight model, Apache-2.0) served by
+[Groq](https://console.groq.com) under Groq's terms of service; only the public dataset
+contracts are sent.
 
 Tools: [Slither](https://github.com/crytic/slither) 0.11.6 (AGPL-3.0) is run as an
 unmodified external program and is not redistributed; solc binaries come from
@@ -84,10 +129,11 @@ Upstream origins credited inside some SWC samples, and their license status, are
 
 ```
 dataset/        spec.toml (labeling decisions), contracts/, labels.json, licenses/, raw/
-results/        slither/ (M2 outputs; results/raw/ is git-ignored)
-scripts/        build_dataset.py, validate_dataset.py, run_slither.py
+results/        slither/ (M2), llm/llm_only/ (M3); results/raw/ is git-ignored
+scripts/        build_dataset.py, validate_dataset.py, run_slither.py, run_llm.py
 src/auditor/    solidity.py, dataset.py, solc.py (pinned compilers),
-                slither_map.py (detector -> class), slither_runner.py
+                slither_map.py, slither_runner.py (M2),
+                llm.py (Groq client, caps, cache), agent.py (prompt, schema, slicing), report.py
 tests/          unit tests and dataset checks (run in CI)
 ```
 
@@ -98,6 +144,9 @@ tests/          unit tests and dataset checks (run in CI)
 - Per-class counts are small (2 to 8 contracts), so per-class metrics will be indicative.
 - These public samples are probably in LLM training data; sanitization limits answer lookup
   but not memorization.
+- LLM output is not fully deterministic even at temperature 0, and the hosted model can
+  change. Committed results record the model, prompt version and date; reruns may differ.
+- Only one model and one prompt are evaluated; no prompt tuning was done on this dataset.
 
 ## Safety
 

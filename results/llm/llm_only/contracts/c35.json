@@ -1,0 +1,47 @@
+{
+  "id": "c35",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "findings": [
+    {
+      "class": "access_control",
+      "function": "sendToWinner",
+      "line": 9,
+      "function_from_line": "sendToWinner",
+      "reasoning": "The function is public and lacks any authorization, allowing any caller to trigger the payout (which may be zero) and set payedOut to true, potentially locking the contract's funds.",
+      "confidence": 0.95
+    },
+    {
+      "class": "unchecked_low_level_calls",
+      "function": "sendToWinner",
+      "line": 11,
+      "function_from_line": "sendToWinner",
+      "reasoning": "The return value of winner.send(winAmount) is ignored; if the send fails the contract does not revert, leaving payedOut false and allowing repeated calls or loss of funds.",
+      "confidence": 0.9
+    },
+    {
+      "class": "access_control",
+      "function": "withdrawLeftOver",
+      "line": 15,
+      "function_from_line": "withdrawLeftOver",
+      "reasoning": "The function is public with no restriction, so any user can call it after payedOut is true and drain the contract's remaining balance.",
+      "confidence": 0.95
+    },
+    {
+      "class": "unchecked_low_level_calls",
+      "function": "withdrawLeftOver",
+      "line": 17,
+      "function_from_line": "withdrawLeftOver",
+      "reasoning": "The return value of msg.sender.send(this.balance) is ignored; a failed send does not revert, potentially leaving funds stuck in the contract.",
+      "confidence": 0.9
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 726,
+  "completion_tokens": 590,
+  "seconds": 58.062,
+  "api_seconds": 2.38
+}

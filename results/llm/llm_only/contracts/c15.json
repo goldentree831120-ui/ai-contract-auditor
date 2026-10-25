@@ -1,0 +1,39 @@
+{
+  "id": "c15",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "findings": [
+    {
+      "class": "access_control",
+      "function": "PushBonusCode",
+      "line": 15,
+      "function_from_line": "PushBonusCode",
+      "reasoning": "The function is public and allows any caller to push arbitrary values into the private bonusCodes array, effectively letting anyone modify contract state without restriction.",
+      "confidence": 0.95
+    },
+    {
+      "class": "access_control",
+      "function": "PopBonusCode",
+      "line": 19,
+      "function_from_line": "PopBonusCode",
+      "reasoning": "The function is public and lets any caller reduce the length of the bonusCodes array, potentially deleting entries added by others, which is an unrestricted state change.",
+      "confidence": 0.95
+    },
+    {
+      "class": "access_control",
+      "function": "UpdateBonusCodeAt",
+      "line": 24,
+      "function_from_line": "UpdateBonusCodeAt",
+      "reasoning": "The function is public and permits any address to overwrite values at any valid index of the bonusCodes array, giving unrestricted write access to contract storage.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 822,
+  "completion_tokens": 392,
+  "seconds": 58.655,
+  "api_seconds": 2.151
+}

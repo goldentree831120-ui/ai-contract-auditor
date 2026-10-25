@@ -1,0 +1,23 @@
+{
+  "id": "c09",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "findings": [
+    {
+      "class": "denial_of_service",
+      "function": "refundAll",
+      "line": 15,
+      "function_from_line": "refundAll",
+      "reasoning": "The contract uses `address.send` inside a loop and requires the call to succeed. If any address in `refundAddresses` is a contract whose fallback consumes more than 2300 gas or otherwise reverts, the `require` will fail and revert the entire transaction, preventing refunds to all other addresses.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 782,
+  "completion_tokens": 305,
+  "seconds": 1.163,
+  "api_seconds": 1.054
+}

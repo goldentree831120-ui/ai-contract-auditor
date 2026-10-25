@@ -1,0 +1,23 @@
+{
+  "id": "c49",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "findings": [
+    {
+      "class": "front_running",
+      "function": "lockEth",
+      "line": 13,
+      "function_from_line": "lockEth",
+      "reasoning": "unlockBlock is calculated as block.number + (_time / 14). If _time is less than 14, the division truncates to 0, making unlockBlock equal to the current block. An attacker can lock and then withdraw in the same block, effectively bypassing the intended lock period.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 835,
+  "completion_tokens": 358,
+  "seconds": 59.352,
+  "api_seconds": 1.369
+}

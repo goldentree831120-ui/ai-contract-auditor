@@ -59,7 +59,8 @@ def solc_path(version: str) -> Path:
 def compare_with_official_list() -> dict[str, str]:
     """Informational: does each pinned hash appear in soliditylang.org's list.json?"""
     try:
-        with urllib.request.urlopen(OFFICIAL_LIST, timeout=20) as r:
+        req = urllib.request.Request(OFFICIAL_LIST, headers={"User-Agent": "Mozilla/5.0 (ai-contract-auditor)"})
+        with urllib.request.urlopen(req, timeout=20) as r:
             builds = json.load(r)["builds"]
     except Exception as exc:  # network or format problem: report, do not fail
         return {v: f"official list unavailable ({type(exc).__name__})" for v in PINNED_SHA256}

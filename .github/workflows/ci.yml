@@ -8,8 +8,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
       - name: Install
@@ -18,12 +18,14 @@ jobs:
         run: pytest -q
       - name: Dataset rebuilds from pinned sources
         run: python scripts/build_dataset.py --check
+      - name: LLM run cost preview (no API key, no API calls)
+        run: python scripts/run_llm.py --dry-run
 
   slither-smoke:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
       - name: Install with Slither

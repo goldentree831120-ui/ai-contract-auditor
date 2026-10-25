@@ -150,3 +150,46 @@ def enclosing_function(src: str, line: int) -> str:
 def pragma_version(src: str) -> str | None:
     m = re.search(r"pragma\s+solidity\s+([^;]+);", src)
     return m.group(1).strip() if m else None
+
+
+def function_spans(src: str) -> list[tuple[str, int, int]]:
+    """(name, first_line, last_line) for every function/constructor/modifier body.
+
+    1-based, inclusive. Bodiless declarations (interface functions ending in ';')
+    are skipped. Names follow enclosing_function(): "constructor", "fallback",
+    "receive", or the declared name.
+    """
+    spans: list[tuple[str, int, int]] = []
+    lines = src.split("\n")
+    depth = 0
+    current: str | None = None
+    current_depth = -1
+    start = 0
+    pending: str | None = None
+    pending_start = 0
+    for idx, raw in enumerate(lines, start=1):
+        text = strip_comments(raw)
+        m = _HEADER_RE.match(text)
+        if m and current is None and pending is None:
+            if m.group("ctor"):
+                pending = "constructor"
+            elif m.group("mname"):
+                pending = m.group("mname")
+            elif m.group("fallback"):
+                pending = m.group("fallback")
+            else:
+                pending = m.group("fname") or "fallback"
+            pending_start = idx
+        for ch in text:
+            if ch == "{":
+                depth += 1
+                if pending is not None and current is None:
+                    current, current_depth, start, pending = pending, depth, pending_start, None
+            elif ch == "}":
+                if current is not None and depth == current_depth:
+                    spans.append((current, start, idx))
+                    current, current_depth = None, -1
+                depth -= 1
+            elif ch == ";" and pending is not None and current is None:
+                pending = None
+    return spans

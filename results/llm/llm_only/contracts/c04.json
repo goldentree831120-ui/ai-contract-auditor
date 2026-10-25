@@ -1,0 +1,31 @@
+{
+  "id": "c04",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "findings": [
+    {
+      "class": "access_control",
+      "function": "init",
+      "line": 6,
+      "function_from_line": "init",
+      "reasoning": "The `init` function is public with no restrictions, so any user can call it to modify the mapping arbitrarily, potentially corrupting the contract's state.",
+      "confidence": 0.9
+    },
+    {
+      "class": "arithmetic",
+      "function": "init",
+      "line": 7,
+      "function_from_line": "init",
+      "reasoning": "In Solidity 0.4.x arithmetic is unchecked; the subtraction `map[k] -= v` can underflow when `v` is greater than the current value, wrapping to a very large number and allowing an attacker to manipulate the stored data.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 655,
+  "completion_tokens": 298,
+  "seconds": 57.112,
+  "api_seconds": 1.315
+}

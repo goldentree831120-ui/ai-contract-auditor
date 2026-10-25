@@ -1,0 +1,31 @@
+{
+  "id": "c37",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "findings": [
+    {
+      "class": "arithmetic",
+      "function": "deposit",
+      "line": 9,
+      "function_from_line": "deposit",
+      "reasoning": "In Solidity 0.4.24 arithmetic is unchecked; adding `msg.value` to `balances[msg.sender]` can overflow, resetting the balance to a low value and allowing the attacker to withdraw more than deposited.",
+      "confidence": 0.9
+    },
+    {
+      "class": "arithmetic",
+      "function": "increaseLockTime",
+      "line": 14,
+      "function_from_line": "increaseLockTime",
+      "reasoning": "The addition `lockTime[msg.sender] += _secondsToIncrease` is unchecked and can overflow, wrapping the lock timestamp to a small value and enabling immediate withdrawal of locked funds.",
+      "confidence": 0.9
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 797,
+  "completion_tokens": 345,
+  "seconds": 58.171,
+  "api_seconds": 1.385
+}
