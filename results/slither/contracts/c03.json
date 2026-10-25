@@ -1,0 +1,42 @@
+{
+  "id": "c03",
+  "solc_version": "0.4.24",
+  "seconds": 1.229,
+  "success": true,
+  "error": null,
+  "findings": [
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [],
+      "functions": [],
+      "description": "solc-0.4.24 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible."
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        1
+      ],
+      "functions": [],
+      "description": "Version constraint 0.4.24 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)"
+    },
+    {
+      "check": "low-level-calls",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        13
+      ],
+      "functions": [
+        "withdraw"
+      ],
+      "description": "Low level call in SimpleDAO.withdraw(uint256) (dataset/contracts/c03.sol#10-15):"
+    }
+  ]
+}

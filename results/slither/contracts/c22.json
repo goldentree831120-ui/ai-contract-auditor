@@ -1,0 +1,59 @@
+{
+  "id": "c22",
+  "solc_version": "0.4.26",
+  "seconds": 0.868,
+  "success": true,
+  "error": null,
+  "findings": [
+    {
+      "check": "suicidal",
+      "impact": "High",
+      "confidence": "High",
+      "class": "access_control",
+      "lines": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "functions": [
+        "run"
+      ],
+      "description": "Gate.run(uint256) (dataset/contracts/c22.sol#11-17) allows anyone to destruct the contract"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        1
+      ],
+      "functions": [],
+      "description": "Version constraint ^0.4.23 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [],
+      "functions": [],
+      "description": "solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible."
+    },
+    {
+      "check": "constable-states",
+      "impact": "Optimization",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        5
+      ],
+      "functions": [],
+      "description": "Gate.count (dataset/contracts/c22.sol#5) should be constant"
+    }
+  ]
+}

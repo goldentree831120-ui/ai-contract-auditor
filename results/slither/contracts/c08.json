@@ -1,0 +1,81 @@
+{
+  "id": "c08",
+  "solc_version": "0.4.25",
+  "seconds": 0.561,
+  "success": true,
+  "error": null,
+  "findings": [
+    {
+      "check": "unchecked-lowlevel",
+      "impact": "Medium",
+      "confidence": "Medium",
+      "class": "unchecked_low_level_calls",
+      "lines": [
+        10
+      ],
+      "functions": [
+        "callB"
+      ],
+      "description": "Caller.callB(address) (dataset/contracts/c08.sol#9-11) ignores return value by callee.call() (dataset/contracts/c08.sol#10)"
+    },
+    {
+      "check": "missing-zero-check",
+      "impact": "Low",
+      "confidence": "Medium",
+      "class": null,
+      "lines": [
+        10
+      ],
+      "functions": [
+        "callB"
+      ],
+      "description": "Caller.callB(address).callee (dataset/contracts/c08.sol#9) lacks a zero-check on :"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        1
+      ],
+      "functions": [],
+      "description": "Version constraint 0.4.25 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [],
+      "functions": [],
+      "description": "solc-0.4.25 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible."
+    },
+    {
+      "check": "low-level-calls",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        6
+      ],
+      "functions": [
+        "callA"
+      ],
+      "description": "Low level call in Caller.callA(address) (dataset/contracts/c08.sol#5-7):"
+    },
+    {
+      "check": "low-level-calls",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        10
+      ],
+      "functions": [
+        "callB"
+      ],
+      "description": "Low level call in Caller.callB(address) (dataset/contracts/c08.sol#9-11):"
+    }
+  ]
+}

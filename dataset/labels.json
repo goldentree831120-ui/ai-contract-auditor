@@ -1114,6 +1114,7 @@
       "role": "vulnerable_sample",
       "pair": "",
       "classes": [
+        "bad_randomness",
         "front_running",
         "time_manipulation"
       ],
@@ -1121,6 +1122,13 @@
         {
           "class": "time_manipulation",
           "swc": "SWC-116",
+          "line": 12,
+          "function": "fallback",
+          "anchor": "if(now % 15 == 0) {"
+        },
+        {
+          "class": "bad_randomness",
+          "swc": "SWC-120",
           "line": 12,
           "function": "fallback",
           "anchor": "if(now % 15 == 0) {"
@@ -1152,14 +1160,14 @@
         "whitespace normalized",
         "added 'pragma solidity ^0.4.24;'"
       ],
-      "notes": "Miner can pick a winning timestamp; the source also notes the one-bet-per-block rule is front-runnable. Pragma added.",
+      "notes": "Miner can pick a winning timestamp; the source also notes the one-bet-per-block rule is front-runnable. Pragma added. REVISED in M2: bad_randomness added because the winner is chosen by now % 15, which taxonomy.json defines as randomness from block data (found while reviewing Slither's weak-prng result; SmartBugs-curated labels only time_manipulation).",
       "smartbugs_crosscheck": {
         "smartbugs_file": "dataset/time_manipulation/roulette.sol",
         "smartbugs_classes": [
           "time_manipulation"
         ],
-        "our_findings_on_a_smartbugs_line": "1/2",
-        "our_findings_in_a_smartbugs_function": "2/2"
+        "our_findings_on_a_smartbugs_line": "1/3",
+        "our_findings_in_a_smartbugs_function": "3/3"
       }
     },
     {

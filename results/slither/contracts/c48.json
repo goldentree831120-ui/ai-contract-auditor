@@ -1,0 +1,92 @@
+{
+  "id": "c48",
+  "solc_version": "0.4.26",
+  "seconds": 0.909,
+  "success": true,
+  "error": null,
+  "findings": [
+    {
+      "check": "write-after-write",
+      "impact": "Medium",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        21,
+        23
+      ],
+      "functions": [
+        "withdrawFunds"
+      ],
+      "description": "EtherStore.locked (dataset/contracts/c48.sol#5) is written in both"
+    },
+    {
+      "check": "timestamp",
+      "impact": "Low",
+      "confidence": "Medium",
+      "class": "time_manipulation",
+      "lines": [
+        18
+      ],
+      "functions": [
+        "withdrawFunds"
+      ],
+      "description": "EtherStore.withdrawFunds(uint256) (dataset/contracts/c48.sol#14-24) uses timestamp for comparisons"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [],
+      "functions": [],
+      "description": "solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible."
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        1
+      ],
+      "functions": [],
+      "description": "Version constraint ^0.4.24 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)"
+    },
+    {
+      "check": "naming-convention",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        14
+      ],
+      "functions": [],
+      "description": "Parameter EtherStore.withdrawFunds(uint256)._weiToWithdraw (dataset/contracts/c48.sol#14) is not in mixedCase"
+    },
+    {
+      "check": "reentrancy-unlimited-gas",
+      "impact": "Informational",
+      "confidence": "Medium",
+      "class": null,
+      "lines": [
+        22,
+        23
+      ],
+      "functions": [
+        "withdrawFunds"
+      ],
+      "description": "Reentrancy in EtherStore.withdrawFunds(uint256) (dataset/contracts/c48.sol#14-24):"
+    },
+    {
+      "check": "constable-states",
+      "impact": "Optimization",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        6
+      ],
+      "functions": [],
+      "description": "EtherStore.withdrawalLimit (dataset/contracts/c48.sol#6) should be constant"
+    }
+  ]
+}

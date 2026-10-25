@@ -1,0 +1,70 @@
+{
+  "id": "c47",
+  "solc_version": "0.4.26",
+  "seconds": 0.968,
+  "success": true,
+  "error": null,
+  "findings": [
+    {
+      "check": "events-maths",
+      "impact": "Low",
+      "confidence": "Medium",
+      "class": null,
+      "lines": [
+        17
+      ],
+      "functions": [
+        "setReward"
+      ],
+      "description": "RewardGame.setReward() (dataset/contracts/c47.sol#12-18) should emit an event for: "
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        1
+      ],
+      "functions": [],
+      "description": "Version constraint ^0.4.16 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [],
+      "functions": [],
+      "description": "solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible."
+    },
+    {
+      "check": "reentrancy-unlimited-gas",
+      "impact": "Informational",
+      "confidence": "Medium",
+      "class": null,
+      "lines": [
+        24,
+        25
+      ],
+      "functions": [
+        "claimReward"
+      ],
+      "description": "Reentrancy in RewardGame.claimReward(uint256) (dataset/contracts/c47.sol#20-26):"
+    },
+    {
+      "check": "reentrancy-unlimited-gas",
+      "impact": "Informational",
+      "confidence": "Medium",
+      "class": null,
+      "lines": [
+        16,
+        17
+      ],
+      "functions": [
+        "setReward"
+      ],
+      "description": "Reentrancy in RewardGame.setReward() (dataset/contracts/c47.sol#12-18):"
+    }
+  ]
+}

@@ -18,3 +18,19 @@ jobs:
         run: pytest -q
       - name: Dataset rebuilds from pinned sources
         run: python scripts/build_dataset.py --check
+
+  slither-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install with Slither
+        run: pip install -e ".[dev,slither]"
+      - name: Tests including detector-name check
+        run: pytest -q
+      - name: Pinned solc binaries download and verify (plus comparison with soliditylang.org list)
+        run: python -m auditor.solc
+      - name: Slither runs on one contract per solc version
+        run: python scripts/run_slither.py --only c01 c03 c08 c36 --out /tmp/slither-smoke

@@ -1,0 +1,73 @@
+{
+  "id": "c09",
+  "solc_version": "0.4.24",
+  "seconds": 0.622,
+  "success": true,
+  "error": null,
+  "findings": [
+    {
+      "check": "uninitialized-state",
+      "impact": "High",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        6,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "functions": [
+        "refundAll"
+      ],
+      "description": "Refunder.refunds (dataset/contracts/c09.sol#6) is never initialized. It is used in:"
+    },
+    {
+      "check": "calls-loop",
+      "impact": "Low",
+      "confidence": "Medium",
+      "class": "denial_of_service",
+      "lines": [
+        15
+      ],
+      "functions": [
+        "refundAll"
+      ],
+      "description": "Refunder.refundAll() (dataset/contracts/c09.sol#13-17) has external calls inside a loop: require(bool)(refundAddresses[x].send(refunds[refundAddresses[x]])) (dataset/contracts/c09.sol#15)"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [],
+      "functions": [],
+      "description": "solc-0.4.24 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible."
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        1
+      ],
+      "functions": [],
+      "description": "Version constraint 0.4.24 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)"
+    },
+    {
+      "check": "cache-array-length",
+      "impact": "Optimization",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        14
+      ],
+      "functions": [
+        "refundAll"
+      ],
+      "description": "Loop condition x < refundAddresses.length (dataset/contracts/c09.sol#14) should use cached array length instead of referencing `length` member of the storage array."
+    }
+  ]
+}

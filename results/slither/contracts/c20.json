@@ -1,0 +1,51 @@
+{
+  "id": "c20",
+  "solc_version": "0.4.26",
+  "seconds": 0.874,
+  "success": true,
+  "error": null,
+  "findings": [
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [],
+      "functions": [],
+      "description": "solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible."
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        1
+      ],
+      "functions": [],
+      "description": "Version constraint ^0.4.23 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)"
+    },
+    {
+      "check": "naming-convention",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        17
+      ],
+      "functions": [],
+      "description": "Parameter MultiOwnable.newOwner(address)._owner (dataset/contracts/c20.sol#17) is not in mixedCase"
+    },
+    {
+      "check": "naming-convention",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        23
+      ],
+      "functions": [],
+      "description": "Parameter MultiOwnable.deleteOwner(address)._owner (dataset/contracts/c20.sol#23) is not in mixedCase"
+    }
+  ]
+}

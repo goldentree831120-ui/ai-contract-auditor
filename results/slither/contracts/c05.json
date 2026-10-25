@@ -1,0 +1,94 @@
+{
+  "id": "c05",
+  "solc_version": "0.4.26",
+  "seconds": 0.778,
+  "success": true,
+  "error": null,
+  "findings": [
+    {
+      "check": "arbitrary-send-eth",
+      "impact": "High",
+      "confidence": "Medium",
+      "class": "access_control",
+      "lines": [
+        19
+      ],
+      "functions": [
+        "guess"
+      ],
+      "description": "GuessGame.guess(uint8) (dataset/contracts/c05.sol#15-21) sends eth to arbitrary user"
+    },
+    {
+      "check": "incorrect-equality",
+      "impact": "Medium",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        12
+      ],
+      "functions": [
+        "isComplete"
+      ],
+      "description": "GuessGame.isComplete() (dataset/contracts/c05.sol#11-13) uses a dangerous strict equality:"
+    },
+    {
+      "check": "incorrect-equality",
+      "impact": "Medium",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        18
+      ],
+      "functions": [
+        "guess"
+      ],
+      "description": "GuessGame.guess(uint8) (dataset/contracts/c05.sol#15-21) uses a dangerous strict equality:"
+    },
+    {
+      "check": "timestamp",
+      "impact": "Low",
+      "confidence": "Medium",
+      "class": "time_manipulation",
+      "lines": [
+        18
+      ],
+      "functions": [
+        "guess"
+      ],
+      "description": "GuessGame.guess(uint8) (dataset/contracts/c05.sol#15-21) uses timestamp for comparisons"
+    },
+    {
+      "check": "deprecated-standards",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        8
+      ],
+      "functions": [
+        "GuessGame"
+      ],
+      "description": "Deprecated standard detected answer = uint8(keccak256()(block.blockhash(block.number - 1),now)) (dataset/contracts/c05.sol#8):"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        1
+      ],
+      "functions": [],
+      "description": "Version constraint ^0.4.21 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [],
+      "functions": [],
+      "description": "solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible."
+    }
+  ]
+}

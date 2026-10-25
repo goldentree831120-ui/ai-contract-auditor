@@ -636,9 +636,10 @@ solc = "0.4.26"
 prepend = "pragma solidity ^0.4.24;"
 findings = [
   { class = "time_manipulation", swc = "SWC-116", anchor = "if(now % 15 == 0) {" },
+  { class = "bad_randomness", swc = "SWC-120", anchor = "if(now % 15 == 0) {" },
   { class = "front_running", swc = "SWC-114", anchor = "require(now != pastBlockTime);" },
 ]
-notes = "Miner can pick a winning timestamp; the source also notes the one-bet-per-block rule is front-runnable. Pragma added."
+notes = "Miner can pick a winning timestamp; the source also notes the one-bet-per-block rule is front-runnable. Pragma added. REVISED in M2: bad_randomness added because the winner is chosen by now % 15, which taxonomy.json defines as randomness from block data (found while reviewing Slither's weak-prng result; SmartBugs-curated labels only time_manipulation)."
 
 # ---------------------------------------------------------------- other
 

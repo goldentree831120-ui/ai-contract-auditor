@@ -1,0 +1,42 @@
+{
+  "id": "c06",
+  "solc_version": "0.4.26",
+  "seconds": 0.58,
+  "success": true,
+  "error": null,
+  "findings": [
+    {
+      "check": "arbitrary-send-eth",
+      "impact": "High",
+      "confidence": "Medium",
+      "class": "access_control",
+      "lines": [
+        6
+      ],
+      "functions": [
+        "withdrawAll"
+      ],
+      "description": "Vault.withdrawAll() (dataset/contracts/c06.sol#5-7) sends eth to arbitrary user"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        1
+      ],
+      "functions": [],
+      "description": "Version constraint ^0.4.22 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [],
+      "functions": [],
+      "description": "solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible."
+    }
+  ]
+}

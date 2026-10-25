@@ -1,0 +1,42 @@
+{
+  "id": "c43",
+  "solc_version": "0.4.25",
+  "seconds": 0.755,
+  "success": true,
+  "error": null,
+  "findings": [
+    {
+      "check": "missing-zero-check",
+      "impact": "Low",
+      "confidence": "Medium",
+      "class": null,
+      "lines": [
+        13
+      ],
+      "functions": [
+        "sendTo"
+      ],
+      "description": "MyContract.sendTo(address,uint256).receiver (dataset/contracts/c43.sol#11) lacks a zero-check on :"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [],
+      "functions": [],
+      "description": "solc-0.4.25 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible."
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        1
+      ],
+      "functions": [],
+      "description": "Version constraint 0.4.25 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)"
+    }
+  ]
+}

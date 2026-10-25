@@ -1,0 +1,40 @@
+{
+  "id": "c30",
+  "solc_version": "0.4.26",
+  "seconds": 0.736,
+  "success": true,
+  "error": null,
+  "findings": [
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [],
+      "functions": [],
+      "description": "solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible."
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        1
+      ],
+      "functions": [],
+      "description": "Version constraint ^0.4.23 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)"
+    },
+    {
+      "check": "constable-states",
+      "impact": "Optimization",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        4
+      ],
+      "functions": [],
+      "description": "GatedCounter.initialized (dataset/contracts/c30.sol#4) should be constant"
+    }
+  ]
+}

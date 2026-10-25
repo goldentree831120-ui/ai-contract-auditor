@@ -1,0 +1,140 @@
+{
+  "id": "c35",
+  "solc_version": "0.4.26",
+  "seconds": 0.957,
+  "success": true,
+  "error": null,
+  "findings": [
+    {
+      "check": "arbitrary-send-eth",
+      "impact": "High",
+      "confidence": "Medium",
+      "class": "access_control",
+      "lines": [
+        17
+      ],
+      "functions": [
+        "withdrawLeftOver"
+      ],
+      "description": "Lotto.withdrawLeftOver() (dataset/contracts/c35.sol#15-18) sends eth to arbitrary user"
+    },
+    {
+      "check": "uninitialized-state",
+      "impact": "High",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        6,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "functions": [
+        "sendToWinner"
+      ],
+      "description": "Lotto.winner (dataset/contracts/c35.sol#6) is never initialized. It is used in:"
+    },
+    {
+      "check": "uninitialized-state",
+      "impact": "High",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        7,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "functions": [
+        "sendToWinner"
+      ],
+      "description": "Lotto.winAmount (dataset/contracts/c35.sol#7) is never initialized. It is used in:"
+    },
+    {
+      "check": "unchecked-send",
+      "impact": "Medium",
+      "confidence": "Medium",
+      "class": "unchecked_low_level_calls",
+      "lines": [
+        17
+      ],
+      "functions": [
+        "withdrawLeftOver"
+      ],
+      "description": "Lotto.withdrawLeftOver() (dataset/contracts/c35.sol#15-18) ignores return value by msg.sender.send(this.balance) (dataset/contracts/c35.sol#17)"
+    },
+    {
+      "check": "unchecked-send",
+      "impact": "Medium",
+      "confidence": "Medium",
+      "class": "unchecked_low_level_calls",
+      "lines": [
+        11
+      ],
+      "functions": [
+        "sendToWinner"
+      ],
+      "description": "Lotto.sendToWinner() (dataset/contracts/c35.sol#9-13) ignores return value by winner.send(winAmount) (dataset/contracts/c35.sol#11)"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        1
+      ],
+      "functions": [],
+      "description": "Version constraint ^0.4.24 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [],
+      "functions": [],
+      "description": "solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible."
+    },
+    {
+      "check": "reentrancy-unlimited-gas",
+      "impact": "Informational",
+      "confidence": "Medium",
+      "class": null,
+      "lines": [
+        11,
+        12
+      ],
+      "functions": [
+        "sendToWinner"
+      ],
+      "description": "Reentrancy in Lotto.sendToWinner() (dataset/contracts/c35.sol#9-13):"
+    },
+    {
+      "check": "constable-states",
+      "impact": "Optimization",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        7
+      ],
+      "functions": [],
+      "description": "Lotto.winAmount (dataset/contracts/c35.sol#7) should be constant"
+    },
+    {
+      "check": "constable-states",
+      "impact": "Optimization",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        6
+      ],
+      "functions": [],
+      "description": "Lotto.winner (dataset/contracts/c35.sol#6) should be constant"
+    }
+  ]
+}

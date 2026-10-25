@@ -9,7 +9,7 @@ LLM auditor in later milestones. Every file is rebuilt from pinned upstream comm
 | | count |
 |---|---|
 | contracts | 49 (31 vulnerable, 18 clean) |
-| labeled findings | 34 |
+| labeled findings | 35 |
 | contract length | 9 to 87 lines (median 20) |
 | compiler versions | 0.4.24 (7), 0.4.25 (4), 0.4.26 (36), 0.5.17 (2) |
 
@@ -19,7 +19,7 @@ Contracts per class (a contract can have more than one class):
 |---|---|
 | access_control | 8 |
 | arithmetic | 5 |
-| bad_randomness | 4 |
+| bad_randomness | 5 |
 | denial_of_service | 3 |
 | front_running | 3 |
 | reentrancy | 3 |
@@ -93,12 +93,22 @@ old-style constructors), and neutral names that hint at a domain (`Roulette`, `L
 26 of these contracts. No SmartBugs files are redistributed here; its annotations are only
 compared at build time (`smartbugs_crosscheck` in `labels.json`):
 
-- 25 of 29 comparable findings sit on a line SmartBugs also marks;
-- 28 of 29 sit in a function SmartBugs also marks.
+- 25 of 30 comparable findings sit on a line SmartBugs also marks;
+- 29 of 30 sit in a function SmartBugs also marks.
 
 The one function-level difference is the extra `bad_randomness` label on
 `crypto_roulette.sol`, which SmartBugs does not annotate. Line-level differences are noted
 per contract in `spec.toml`.
+
+## Label revisions
+
+Labels can change only under the written rules above, and every change is logged here and
+in the contract's `notes` in `spec.toml`. The detector-to-class mapping for tools is never
+changed because of results.
+
+| when | contract | change | reason |
+|---|---|---|---|
+| M2 | `sigp-roulette` | added `bad_randomness` | the winner is chosen by `now % 15`, which `taxonomy.json` defines as randomness from block data. Found while reviewing Slither's `weak-prng` result; SmartBugs-curated labels only `time_manipulation`. Because a tool output prompted this review, it is disclosed as a possible source of bias toward Slither. |
 
 ## Licensing of the contracts
 

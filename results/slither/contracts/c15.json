@@ -1,0 +1,105 @@
+{
+  "id": "c15",
+  "solc_version": "0.4.25",
+  "seconds": 0.495,
+  "success": true,
+  "error": null,
+  "findings": [
+    {
+      "check": "controlled-array-length",
+      "impact": "High",
+      "confidence": "Medium",
+      "class": "access_control",
+      "lines": [
+        16
+      ],
+      "functions": [
+        "PushBonusCode"
+      ],
+      "description": "Wallet (dataset/contracts/c15.sol#3-33) contract sets array length with a user-controlled value:"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        1
+      ],
+      "functions": [],
+      "description": "Version constraint ^0.4.25 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [],
+      "functions": [],
+      "description": "solc-0.4.25 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible."
+    },
+    {
+      "check": "naming-convention",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        24,
+        25,
+        26,
+        27
+      ],
+      "functions": [
+        "UpdateBonusCodeAt"
+      ],
+      "description": "Function Wallet.UpdateBonusCodeAt(uint256,uint256) (dataset/contracts/c15.sol#24-27) is not in mixedCase"
+    },
+    {
+      "check": "naming-convention",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        19,
+        20,
+        21,
+        22
+      ],
+      "functions": [
+        "PopBonusCode"
+      ],
+      "description": "Function Wallet.PopBonusCode() (dataset/contracts/c15.sol#19-22) is not in mixedCase"
+    },
+    {
+      "check": "naming-convention",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        15,
+        16,
+        17
+      ],
+      "functions": [
+        "PushBonusCode"
+      ],
+      "description": "Function Wallet.PushBonusCode(uint256) (dataset/contracts/c15.sol#15-17) is not in mixedCase"
+    },
+    {
+      "check": "naming-convention",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        29,
+        30,
+        31,
+        32
+      ],
+      "functions": [
+        "Destroy"
+      ],
+      "description": "Function Wallet.Destroy() (dataset/contracts/c15.sol#29-32) is not in mixedCase"
+    }
+  ]
+}

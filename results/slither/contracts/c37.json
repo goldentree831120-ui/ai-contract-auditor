@@ -1,0 +1,53 @@
+{
+  "id": "c37",
+  "solc_version": "0.4.26",
+  "seconds": 0.875,
+  "success": true,
+  "error": null,
+  "findings": [
+    {
+      "check": "timestamp",
+      "impact": "Low",
+      "confidence": "Medium",
+      "class": "time_manipulation",
+      "lines": [
+        19
+      ],
+      "functions": [
+        "withdraw"
+      ],
+      "description": "TimeLock.withdraw() (dataset/contracts/c37.sol#17-23) uses timestamp for comparisons"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        1
+      ],
+      "functions": [],
+      "description": "Version constraint ^0.4.24 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [],
+      "functions": [],
+      "description": "solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible."
+    },
+    {
+      "check": "naming-convention",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        13
+      ],
+      "functions": [],
+      "description": "Parameter TimeLock.increaseLockTime(uint256)._secondsToIncrease (dataset/contracts/c37.sol#13) is not in mixedCase"
+    }
+  ]
+}

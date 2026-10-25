@@ -12,6 +12,7 @@ dependencies = []
 
 [project.optional-dependencies]
 dev = ["pytest>=8"]
+slither = ["slither-analyzer==0.11.6"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

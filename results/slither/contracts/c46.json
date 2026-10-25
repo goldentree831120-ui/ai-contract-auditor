@@ -1,0 +1,159 @@
+{
+  "id": "c46",
+  "solc_version": "0.4.26",
+  "seconds": 0.835,
+  "success": true,
+  "error": null,
+  "findings": [
+    {
+      "check": "controlled-array-length",
+      "impact": "High",
+      "confidence": "Medium",
+      "class": "access_control",
+      "lines": [
+        31
+      ],
+      "functions": [
+        "play"
+      ],
+      "description": "CryptoRoulette (dataset/contracts/c46.sol#3-48) contract sets array length with a user-controlled value:"
+    },
+    {
+      "check": "weak-prng",
+      "impact": "High",
+      "confidence": "Medium",
+      "class": "bad_randomness",
+      "lines": [
+        22
+      ],
+      "functions": [
+        "shuffle"
+      ],
+      "description": "CryptoRoulette.shuffle() (dataset/contracts/c46.sol#21-23) uses a weak PRNG: \"secretNumber = uint8(sha3()(now,block.blockhash(block.number - 1))) % 20 + 1 (dataset/contracts/c46.sol#22)\""
+    },
+    {
+      "check": "uninitialized-storage",
+      "impact": "High",
+      "confidence": "High",
+      "class": "other",
+      "lines": [
+        28
+      ],
+      "functions": [],
+      "description": "CryptoRoulette.play(uint256).game (dataset/contracts/c46.sol#28) is a storage variable never initialized"
+    },
+    {
+      "check": "incorrect-equality",
+      "impact": "Medium",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        33
+      ],
+      "functions": [
+        "play"
+      ],
+      "description": "CryptoRoulette.play(uint256) (dataset/contracts/c46.sol#25-39) uses a dangerous strict equality:"
+    },
+    {
+      "check": "timestamp",
+      "impact": "Low",
+      "confidence": "Medium",
+      "class": "time_manipulation",
+      "lines": [
+        33
+      ],
+      "functions": [
+        "play"
+      ],
+      "description": "CryptoRoulette.play(uint256) (dataset/contracts/c46.sol#25-39) uses timestamp for comparisons"
+    },
+    {
+      "check": "timestamp",
+      "impact": "Low",
+      "confidence": "Medium",
+      "class": "time_manipulation",
+      "lines": [
+        42
+      ],
+      "functions": [
+        "kill"
+      ],
+      "description": "CryptoRoulette.kill() (dataset/contracts/c46.sol#41-45) uses timestamp for comparisons"
+    },
+    {
+      "check": "deprecated-standards",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        22
+      ],
+      "functions": [
+        "shuffle"
+      ],
+      "description": "Deprecated standard detected secretNumber = uint8(sha3()(now,block.blockhash(block.number - 1))) % 20 + 1 (dataset/contracts/c46.sol#22):"
+    },
+    {
+      "check": "deprecated-standards",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        43
+      ],
+      "functions": [
+        "kill"
+      ],
+      "description": "Deprecated standard detected suicide(address)(msg.sender) (dataset/contracts/c46.sol#43):"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [],
+      "functions": [],
+      "description": "solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible."
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        1
+      ],
+      "functions": [],
+      "description": "Version constraint ^0.4.19 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)"
+    },
+    {
+      "check": "reentrancy-unlimited-gas",
+      "impact": "Informational",
+      "confidence": "Medium",
+      "class": null,
+      "lines": [
+        22,
+        34,
+        37,
+        38
+      ],
+      "functions": [
+        "play",
+        "shuffle"
+      ],
+      "description": "Reentrancy in CryptoRoulette.play(uint256) (dataset/contracts/c46.sol#25-39):"
+    },
+    {
+      "check": "constable-states",
+      "impact": "Optimization",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        7
+      ],
+      "functions": [],
+      "description": "CryptoRoulette.betPrice (dataset/contracts/c46.sol#7) should be constant"
+    }
+  ]
+}

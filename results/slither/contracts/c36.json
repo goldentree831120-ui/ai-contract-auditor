@@ -1,0 +1,53 @@
+{
+  "id": "c36",
+  "solc_version": "0.5.17",
+  "seconds": 0.891,
+  "success": true,
+  "error": null,
+  "findings": [
+    {
+      "check": "timestamp",
+      "impact": "Low",
+      "confidence": "Medium",
+      "class": "time_manipulation",
+      "lines": [
+        9
+      ],
+      "functions": [
+        "isSaleFinished"
+      ],
+      "description": "TimedCrowdsale.isSaleFinished() (dataset/contracts/c36.sol#8-10) uses timestamp for comparisons"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [],
+      "functions": [],
+      "description": "solc-0.5.17 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible."
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        1
+      ],
+      "functions": [],
+      "description": "Version constraint ^0.5.0 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)"
+    },
+    {
+      "check": "naming-convention",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        6
+      ],
+      "functions": [],
+      "description": "Event TimedCrowdsale.notFinished() (dataset/contracts/c36.sol#6) is not in CapWords"
+    }
+  ]
+}

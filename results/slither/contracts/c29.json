@@ -1,0 +1,82 @@
+{
+  "id": "c29",
+  "solc_version": "0.4.26",
+  "seconds": 0.696,
+  "success": true,
+  "error": null,
+  "findings": [
+    {
+      "check": "arbitrary-send-eth",
+      "impact": "High",
+      "confidence": "Medium",
+      "class": "access_control",
+      "lines": [
+        13
+      ],
+      "functions": [
+        "fallback"
+      ],
+      "description": "Roulette.fallback() (dataset/contracts/c29.sol#8-15) sends eth to arbitrary user"
+    },
+    {
+      "check": "weak-prng",
+      "impact": "High",
+      "confidence": "Medium",
+      "class": "bad_randomness",
+      "lines": [
+        12
+      ],
+      "functions": [
+        "fallback"
+      ],
+      "description": "Roulette.fallback() (dataset/contracts/c29.sol#8-15) uses a weak PRNG: \"now % 15 == 0 (dataset/contracts/c29.sol#12)\""
+    },
+    {
+      "check": "incorrect-equality",
+      "impact": "Medium",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        12
+      ],
+      "functions": [
+        "fallback"
+      ],
+      "description": "Roulette.fallback() (dataset/contracts/c29.sol#8-15) uses a dangerous strict equality:"
+    },
+    {
+      "check": "timestamp",
+      "impact": "Low",
+      "confidence": "Medium",
+      "class": "time_manipulation",
+      "lines": [
+        10,
+        12
+      ],
+      "functions": [
+        "fallback"
+      ],
+      "description": "Roulette.fallback() (dataset/contracts/c29.sol#8-15) uses timestamp for comparisons"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        1
+      ],
+      "functions": [],
+      "description": "Version constraint ^0.4.24 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [],
+      "functions": [],
+      "description": "solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible."
+    }
+  ]
+}

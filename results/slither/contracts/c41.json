@@ -1,0 +1,42 @@
+{
+  "id": "c41",
+  "solc_version": "0.4.26",
+  "seconds": 0.824,
+  "success": true,
+  "error": null,
+  "findings": [
+    {
+      "check": "controlled-array-length",
+      "impact": "High",
+      "confidence": "Medium",
+      "class": "access_control",
+      "lines": [
+        17
+      ],
+      "functions": [
+        "addCreditors"
+      ],
+      "description": "CreditorList (dataset/contracts/c41.sol#3-29) contract sets array length with a user-controlled value:"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        1
+      ],
+      "functions": [],
+      "description": "Version constraint ^0.4.25 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [],
+      "functions": [],
+      "description": "solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible."
+    }
+  ]
+}

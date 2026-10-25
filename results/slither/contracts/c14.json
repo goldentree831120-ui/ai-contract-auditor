@@ -1,0 +1,276 @@
+{
+  "id": "c14",
+  "solc_version": "0.4.26",
+  "seconds": 0.497,
+  "success": true,
+  "error": null,
+  "findings": [
+    {
+      "check": "constant-function-asm",
+      "impact": "Medium",
+      "confidence": "Medium",
+      "class": null,
+      "lines": [
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86
+      ],
+      "functions": [
+        "ecrecoverFromSig"
+      ],
+      "description": "SignedTransfers.ecrecoverFromSig(bytes32,bytes) (dataset/contracts/c14.sol#67-86) is declared view but contains assembly code"
+    },
+    {
+      "check": "assembly",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        76,
+        77,
+        78,
+        79,
+        80,
+        81
+      ],
+      "functions": [
+        "ecrecoverFromSig"
+      ],
+      "description": "SignedTransfers.ecrecoverFromSig(bytes32,bytes) (dataset/contracts/c14.sol#67-86) uses assembly"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [],
+      "functions": [],
+      "description": "solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible."
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        1
+      ],
+      "functions": [],
+      "description": "Version constraint ^0.4.24 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)"
+    },
+    {
+      "check": "naming-convention",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        19
+      ],
+      "functions": [],
+      "description": "Parameter SignedTransfers.transfer(bytes,address,uint256,uint256,uint256)._nonce (dataset/contracts/c14.sol#19) is not in mixedCase"
+    },
+    {
+      "check": "naming-convention",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        38
+      ],
+      "functions": [],
+      "description": "Parameter SignedTransfers.recoverTransferPreSigned(bytes,address,uint256,uint256,uint256)._value (dataset/contracts/c14.sol#38) is not in mixedCase"
+    },
+    {
+      "check": "naming-convention",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        15
+      ],
+      "functions": [],
+      "description": "Parameter SignedTransfers.transfer(bytes,address,uint256,uint256,uint256)._signature (dataset/contracts/c14.sol#15) is not in mixedCase"
+    },
+    {
+      "check": "naming-convention",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        49
+      ],
+      "functions": [],
+      "description": "Parameter SignedTransfers.getTransferHash(address,uint256,uint256,uint256)._to (dataset/contracts/c14.sol#49) is not in mixedCase"
+    },
+    {
+      "check": "naming-convention",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        16
+      ],
+      "functions": [],
+      "description": "Parameter SignedTransfers.transfer(bytes,address,uint256,uint256,uint256)._to (dataset/contracts/c14.sol#16) is not in mixedCase"
+    },
+    {
+      "check": "naming-convention",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        36
+      ],
+      "functions": [],
+      "description": "Parameter SignedTransfers.recoverTransferPreSigned(bytes,address,uint256,uint256,uint256)._sig (dataset/contracts/c14.sol#36) is not in mixedCase"
+    },
+    {
+      "check": "naming-convention",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        18
+      ],
+      "functions": [],
+      "description": "Parameter SignedTransfers.transfer(bytes,address,uint256,uint256,uint256)._gasPrice (dataset/contracts/c14.sol#18) is not in mixedCase"
+    },
+    {
+      "check": "naming-convention",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        50
+      ],
+      "functions": [],
+      "description": "Parameter SignedTransfers.getTransferHash(address,uint256,uint256,uint256)._value (dataset/contracts/c14.sol#50) is not in mixedCase"
+    },
+    {
+      "check": "naming-convention",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        59
+      ],
+      "functions": [],
+      "description": "Parameter SignedTransfers.getSignHash(bytes32)._hash (dataset/contracts/c14.sol#59) is not in mixedCase"
+    },
+    {
+      "check": "naming-convention",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        51
+      ],
+      "functions": [],
+      "description": "Parameter SignedTransfers.getTransferHash(address,uint256,uint256,uint256)._gasPrice (dataset/contracts/c14.sol#51) is not in mixedCase"
+    },
+    {
+      "check": "naming-convention",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        39
+      ],
+      "functions": [],
+      "description": "Parameter SignedTransfers.recoverTransferPreSigned(bytes,address,uint256,uint256,uint256)._gasPrice (dataset/contracts/c14.sol#39) is not in mixedCase"
+    },
+    {
+      "check": "naming-convention",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        17
+      ],
+      "functions": [],
+      "description": "Parameter SignedTransfers.transfer(bytes,address,uint256,uint256,uint256)._value (dataset/contracts/c14.sol#17) is not in mixedCase"
+    },
+    {
+      "check": "naming-convention",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        40
+      ],
+      "functions": [],
+      "description": "Parameter SignedTransfers.recoverTransferPreSigned(bytes,address,uint256,uint256,uint256)._nonce (dataset/contracts/c14.sol#40) is not in mixedCase"
+    },
+    {
+      "check": "naming-convention",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        52
+      ],
+      "functions": [],
+      "description": "Parameter SignedTransfers.getTransferHash(address,uint256,uint256,uint256)._nonce (dataset/contracts/c14.sol#52) is not in mixedCase"
+    },
+    {
+      "check": "naming-convention",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        37
+      ],
+      "functions": [],
+      "description": "Parameter SignedTransfers.recoverTransferPreSigned(bytes,address,uint256,uint256,uint256)._to (dataset/contracts/c14.sol#37) is not in mixedCase"
+    },
+    {
+      "check": "external-function",
+      "impact": "Optimization",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33
+      ],
+      "functions": [
+        "transfer"
+      ],
+      "description": "transfer(bytes,address,uint256,uint256,uint256) should be declared external:"
+    }
+  ]
+}

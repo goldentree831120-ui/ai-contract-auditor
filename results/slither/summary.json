@@ -1,0 +1,83 @@
+{
+  "machine": {
+    "cpu": "Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz",
+    "logical_cpus": 8,
+    "ram_gb_visible": 3.7,
+    "os": "Linux 6.18.54.1-microsoft-standard-WSL2 (WSL)",
+    "python": "3.12.3",
+    "slither": "0.11.6",
+    "crytic_compile": "0.4.2",
+    "run_at_utc": "2026-10-25T10:55:00Z"
+  },
+  "contracts_total": 49,
+  "contracts_analyzed_ok": 49,
+  "seconds_total": 39.8,
+  "seconds_mean": 0.81,
+  "seconds_median": 0.82,
+  "seconds_max": 1.59,
+  "detector_results_total": 259,
+  "detector_results_mapped": 41,
+  "detector_results_unmapped": 218,
+  "detector_results_by_impact": {
+    "High": 29,
+    "Informational": 183,
+    "Low": 18,
+    "Medium": 14,
+    "Optimization": 15
+  },
+  "vulnerable_contracts": 31,
+  "vulnerable_flagged_any_mapped_class": 20,
+  "clean_contracts": 18,
+  "clean_flagged_any_mapped_class": 7,
+  "per_class": {
+    "access_control": {
+      "contracts_with_class": 8,
+      "flagged_with_this_class": 6,
+      "flagged_without_having_it": 12
+    },
+    "arithmetic": {
+      "contracts_with_class": 5,
+      "flagged_with_this_class": 0,
+      "flagged_without_having_it": 0
+    },
+    "reentrancy": {
+      "contracts_with_class": 3,
+      "flagged_with_this_class": 3,
+      "flagged_without_having_it": 0
+    },
+    "bad_randomness": {
+      "contracts_with_class": 5,
+      "flagged_with_this_class": 3,
+      "flagged_without_having_it": 0
+    },
+    "unchecked_low_level_calls": {
+      "contracts_with_class": 2,
+      "flagged_with_this_class": 2,
+      "flagged_without_having_it": 0
+    },
+    "denial_of_service": {
+      "contracts_with_class": 3,
+      "flagged_with_this_class": 1,
+      "flagged_without_having_it": 0
+    },
+    "front_running": {
+      "contracts_with_class": 3,
+      "flagged_with_this_class": 0,
+      "flagged_without_having_it": 0
+    },
+    "time_manipulation": {
+      "contracts_with_class": 3,
+      "flagged_with_this_class": 2,
+      "flagged_without_having_it": 7
+    },
+    "other": {
+      "contracts_with_class": 2,
+      "flagged_with_this_class": 1,
+      "flagged_without_having_it": 0
+    }
+  },
+  "classes_without_any_slither_detector": [
+    "arithmetic",
+    "front_running"
+  ]
+}

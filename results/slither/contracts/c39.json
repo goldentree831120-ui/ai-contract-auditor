@@ -1,0 +1,71 @@
+{
+  "id": "c39",
+  "solc_version": "0.4.26",
+  "seconds": 0.678,
+  "success": true,
+  "error": null,
+  "findings": [
+    {
+      "check": "arbitrary-send-eth",
+      "impact": "High",
+      "confidence": "Medium",
+      "class": "access_control",
+      "lines": [
+        10
+      ],
+      "functions": [
+        "solve"
+      ],
+      "description": "FindThisHash.solve(string) (dataset/contracts/c39.sol#8-11) sends eth to arbitrary user"
+    },
+    {
+      "check": "deprecated-standards",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        9
+      ],
+      "functions": [
+        "solve"
+      ],
+      "description": "Deprecated standard detected require(bool)(hash == sha3()(solution)) (dataset/contracts/c39.sol#9):"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        1
+      ],
+      "functions": [],
+      "description": "Version constraint ^0.4.24 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [],
+      "functions": [],
+      "description": "solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible."
+    },
+    {
+      "check": "external-function",
+      "impact": "Optimization",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "functions": [
+        "solve"
+      ],
+      "description": "solve(string) should be declared external:"
+    }
+  ]
+}

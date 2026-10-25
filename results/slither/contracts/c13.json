@@ -1,0 +1,70 @@
+{
+  "id": "c13",
+  "solc_version": "0.4.24",
+  "seconds": 0.525,
+  "success": true,
+  "error": null,
+  "findings": [
+    {
+      "check": "missing-zero-check",
+      "impact": "Low",
+      "confidence": "Medium",
+      "class": null,
+      "lines": [
+        30
+      ],
+      "functions": [
+        "migrateTo"
+      ],
+      "description": "Wallet.migrateTo(address).to (dataset/contracts/c13.sol#28) lacks a zero-check on :"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [],
+      "functions": [],
+      "description": "solc-0.4.24 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible."
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        1
+      ],
+      "functions": [],
+      "description": "Version constraint ^0.4.24 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)"
+    },
+    {
+      "check": "reentrancy-unlimited-gas",
+      "impact": "Informational",
+      "confidence": "Medium",
+      "class": null,
+      "lines": [
+        19,
+        20
+      ],
+      "functions": [
+        "withdraw"
+      ],
+      "description": "Reentrancy in Wallet.withdraw(uint256) (dataset/contracts/c13.sol#17-21):"
+    },
+    {
+      "check": "reentrancy-unlimited-gas",
+      "impact": "Informational",
+      "confidence": "Medium",
+      "class": null,
+      "lines": [
+        24,
+        25
+      ],
+      "functions": [
+        "refund"
+      ],
+      "description": "Reentrancy in Wallet.refund() (dataset/contracts/c13.sol#23-26):"
+    }
+  ]
+}

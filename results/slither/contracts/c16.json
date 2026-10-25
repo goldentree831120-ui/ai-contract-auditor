@@ -1,0 +1,126 @@
+{
+  "id": "c16",
+  "solc_version": "0.4.26",
+  "seconds": 0.603,
+  "success": true,
+  "error": null,
+  "findings": [
+    {
+      "check": "controlled-delegatecall",
+      "impact": "High",
+      "confidence": "Medium",
+      "class": "access_control",
+      "lines": [
+        7
+      ],
+      "functions": [
+        "proxyCall"
+      ],
+      "description": "proxy.proxyCall(address,bytes) (dataset/contracts/c16.sol#6-8) uses delegatecall to a input-controlled function id"
+    },
+    {
+      "check": "uninitialized-state",
+      "impact": "High",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        4,
+        9,
+        10,
+        11,
+        12
+      ],
+      "functions": [
+        "withdraw"
+      ],
+      "description": "proxy.owner (dataset/contracts/c16.sol#4) is never initialized. It is used in:"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [],
+      "functions": [],
+      "description": "solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible."
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        1
+      ],
+      "functions": [],
+      "description": "Version constraint ^0.4.24 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)"
+    },
+    {
+      "check": "low-level-calls",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        7
+      ],
+      "functions": [
+        "proxyCall"
+      ],
+      "description": "Low level call in proxy.proxyCall(address,bytes) (dataset/contracts/c16.sol#6-8):"
+    },
+    {
+      "check": "naming-convention",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        6
+      ],
+      "functions": [],
+      "description": "Parameter proxy.proxyCall(address,bytes)._data (dataset/contracts/c16.sol#6) is not in mixedCase"
+    },
+    {
+      "check": "naming-convention",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "functions": [],
+      "description": "Contract proxy (dataset/contracts/c16.sol#3-13) is not in CapWords"
+    },
+    {
+      "check": "naming-convention",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        6
+      ],
+      "functions": [],
+      "description": "Parameter proxy.proxyCall(address,bytes)._to (dataset/contracts/c16.sol#6) is not in mixedCase"
+    },
+    {
+      "check": "constable-states",
+      "impact": "Optimization",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        4
+      ],
+      "functions": [],
+      "description": "proxy.owner (dataset/contracts/c16.sol#4) should be constant"
+    }
+  ]
+}

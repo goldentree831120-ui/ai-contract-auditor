@@ -1,0 +1,109 @@
+{
+  "id": "c17",
+  "solc_version": "0.4.26",
+  "seconds": 0.578,
+  "success": true,
+  "error": null,
+  "findings": [
+    {
+      "check": "reentrancy-eth",
+      "impact": "High",
+      "confidence": "Medium",
+      "class": "reentrancy",
+      "lines": [
+        15,
+        18
+      ],
+      "functions": [
+        "withdrawBalance"
+      ],
+      "description": "Reentrancy in Bank.withdrawBalance() (dataset/contracts/c17.sol#14-19):"
+    },
+    {
+      "check": "deprecated-standards",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        16
+      ],
+      "functions": [
+        "withdrawBalance"
+      ],
+      "description": "Deprecated standard detected THROW (dataset/contracts/c17.sol#16):"
+    },
+    {
+      "check": "deprecated-standards",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        25
+      ],
+      "functions": [
+        "withdrawBalanceV2"
+      ],
+      "description": "Deprecated standard detected THROW (dataset/contracts/c17.sol#25):"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        1
+      ],
+      "functions": [],
+      "description": "Version constraint ^0.4.15 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)"
+    },
+    {
+      "check": "solc-version",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [],
+      "functions": [],
+      "description": "solc-0.4.26 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible."
+    },
+    {
+      "check": "low-level-calls",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        24
+      ],
+      "functions": [
+        "withdrawBalanceV2"
+      ],
+      "description": "Low level call in Bank.withdrawBalanceV2() (dataset/contracts/c17.sol#21-27):"
+    },
+    {
+      "check": "low-level-calls",
+      "impact": "Informational",
+      "confidence": "High",
+      "class": null,
+      "lines": [
+        15
+      ],
+      "functions": [
+        "withdrawBalance"
+      ],
+      "description": "Low level call in Bank.withdrawBalance() (dataset/contracts/c17.sol#14-19):"
+    },
+    {
+      "check": "reentrancy-unlimited-gas",
+      "impact": "Informational",
+      "confidence": "Medium",
+      "class": null,
+      "lines": [
+        30,
+        31
+      ],
+      "functions": [
+        "withdrawBalanceV3"
+      ],
+      "description": "Reentrancy in Bank.withdrawBalanceV3() (dataset/contracts/c17.sol#29-32):"
+    }
+  ]
+}
