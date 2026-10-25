@@ -1,0 +1,41 @@
+{
+  "description": "Vulnerability classes used for labels and evaluation. Follows the DASP-style categories used by SmartBugs-curated, so results can be compared with that literature. Each class lists the SWC IDs that map to it.",
+  "classes": {
+    "access_control": {
+      "summary": "Missing or broken authorization: default visibility, unprotected selfdestruct or withdraw, tx.origin auth, wrong constructor name, delegatecall to untrusted callee, arbitrary storage write.",
+      "swc": ["SWC-100", "SWC-105", "SWC-106", "SWC-112", "SWC-115", "SWC-118", "SWC-124"]
+    },
+    "arithmetic": {
+      "summary": "Integer overflow or underflow (Solidity < 0.8 or unchecked blocks).",
+      "swc": ["SWC-101"]
+    },
+    "reentrancy": {
+      "summary": "State updated after an external call that forwards enough gas to re-enter.",
+      "swc": ["SWC-107"]
+    },
+    "bad_randomness": {
+      "summary": "Randomness derived from block data or other predictable on-chain values.",
+      "swc": ["SWC-120"]
+    },
+    "unchecked_low_level_calls": {
+      "summary": "Return value of call/send/delegatecall ignored.",
+      "swc": ["SWC-104"]
+    },
+    "denial_of_service": {
+      "summary": "Contract can be blocked: unbounded loops or storage operations hitting the gas limit, or one failing call reverting a batch.",
+      "swc": ["SWC-113", "SWC-128"]
+    },
+    "front_running": {
+      "summary": "Outcome depends on transaction ordering that users or miners can manipulate.",
+      "swc": ["SWC-114"]
+    },
+    "time_manipulation": {
+      "summary": "Logic depends on block.timestamp or block.number used as a clock.",
+      "swc": ["SWC-116"]
+    },
+    "other": {
+      "summary": "Known weaknesses outside the classes above, e.g. uninitialized storage pointer, signature malleability.",
+      "swc": ["SWC-109", "SWC-117"]
+    }
+  }
+}

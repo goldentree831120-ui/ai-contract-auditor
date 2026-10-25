@@ -1,0 +1,2020 @@
+{
+  "version": 1,
+  "generated_by": "scripts/build_dataset.py",
+  "spec": "dataset/spec.toml",
+  "contracts": [
+    {
+      "id": "c01",
+      "file": "contracts/c01.sol",
+      "key": "swc101-integer_overflow_minimal_fixed",
+      "label": "clean",
+      "role": "fixed_sample",
+      "pair": "swc101-minimal",
+      "classes": [],
+      "findings": [],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.19",
+      "sha256": "04659bdd58b1e0f0db7d3588f337e2f4bcfb08670258c51550d31ece64462d6b",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-101.md#integer_overflow_minimal_fixed.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-101.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized",
+        "identifiers renamed: IntegerOverflowMinimal->Counter"
+      ],
+      "notes": "Checked sub().",
+      "smartbugs_crosscheck": null
+    },
+    {
+      "id": "c02",
+      "file": "contracts/c02.sol",
+      "key": "swc100-visibility_not_set",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "swc100-visibility",
+      "classes": [
+        "access_control"
+      ],
+      "findings": [
+        {
+          "class": "access_control",
+          "swc": "SWC-100",
+          "line": 10,
+          "function": "_sendWinnings",
+          "anchor": "function _sendWinnings() {"
+        }
+      ],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.24",
+      "sha256": "0589df8b7c323c96ea114217ec0ec80aff63c9bbb1259d32dca9cb792a8ccce1",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-100.md#visibility_not_set.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-100.md",
+        "credited_origin": "https://github.com/sigp/solidity-security-blog#visibility",
+        "credited_author": "SigmaPrime"
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized"
+      ],
+      "notes": "Payout helper has default (public) visibility, so anyone can call it directly.",
+      "smartbugs_crosscheck": null
+    },
+    {
+      "id": "c03",
+      "file": "contracts/c03.sol",
+      "key": "swc107-simple_dao_fixed",
+      "label": "clean",
+      "role": "fixed_sample",
+      "pair": "swc107-dao",
+      "classes": [],
+      "findings": [],
+      "solc_version": "0.4.24",
+      "pragma": "0.4.24",
+      "sha256": "05cf05fa436aa519038f78889a185aafe69862e3edd3e8005cf000a18fceb08f",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-107.md#simple_dao_fixed.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-107.md",
+        "credited_origin": "http://blockchain.unica.it/projects/ethereum-survey/attacks.html#simpledao",
+        "credited_author": "Atzei N., Bartoletti M., Cimoli T"
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized"
+      ],
+      "notes": "Checks-effects-interactions order.",
+      "smartbugs_crosscheck": null
+    },
+    {
+      "id": "c04",
+      "file": "contracts/c04.sol",
+      "key": "swc101-integer_overflow_mapping_sym_1",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "swc101-mapping",
+      "classes": [
+        "arithmetic"
+      ],
+      "findings": [
+        {
+          "class": "arithmetic",
+          "swc": "SWC-101",
+          "line": 7,
+          "function": "init",
+          "anchor": "map[k] -= v;"
+        }
+      ],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.11",
+      "sha256": "07513c08ec8ba53bd110742e53aab925f185895ae3511aa3c9c881ea99957aa7",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-101.md#integer_overflow_mapping_sym_1.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-101.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized",
+        "identifiers renamed: IntegerOverflowMappingSym1->MapStore"
+      ],
+      "notes": "Unchecked subtraction on a mapping value underflows.",
+      "smartbugs_crosscheck": {
+        "smartbugs_file": "dataset/arithmetic/integer_overflow_mapping_sym_1.sol",
+        "smartbugs_classes": [
+          "arithmetic"
+        ],
+        "our_findings_on_a_smartbugs_line": "1/1",
+        "our_findings_in_a_smartbugs_function": "1/1"
+      }
+    },
+    {
+      "id": "c05",
+      "file": "contracts/c05.sol",
+      "key": "swc120-guess_the_random_number",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "",
+      "classes": [
+        "bad_randomness"
+      ],
+      "findings": [
+        {
+          "class": "bad_randomness",
+          "swc": "SWC-120",
+          "line": 8,
+          "function": "GuessGame",
+          "anchor": "answer = uint8(keccak256(block.blockhash(block.number - 1), now));"
+        }
+      ],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.21",
+      "sha256": "0b2fb0e61f3cae57dec6f11ae7e1aaf4fa1f1a7bd07e0549ce50604ccd2fc0e0",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-120.md#guess_the_random_number.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-120.md",
+        "credited_origin": "https://capturetheether.com/challenges/lotteries/guess-the-random-number/",
+        "credited_author": "Steve Marx"
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized",
+        "identifiers renamed: GuessTheRandomNumberChallenge->GuessGame"
+      ],
+      "notes": "Answer derived from public block data and stored on-chain. (The _fixed variant is excluded: still blockhash-based, and a single shared guesser slot makes it ambiguous.)",
+      "smartbugs_crosscheck": {
+        "smartbugs_file": "dataset/bad_randomness/guess_the_random_number.sol",
+        "smartbugs_classes": [
+          "bad_randomness"
+        ],
+        "our_findings_on_a_smartbugs_line": "1/1",
+        "our_findings_in_a_smartbugs_function": "1/1"
+      }
+    },
+    {
+      "id": "c06",
+      "file": "contracts/c06.sol",
+      "key": "swc105-simple_ether_drain",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "",
+      "classes": [
+        "access_control"
+      ],
+      "findings": [
+        {
+          "class": "access_control",
+          "swc": "SWC-105",
+          "line": 6,
+          "function": "withdrawAll",
+          "anchor": "msg.sender.transfer(this.balance);"
+        }
+      ],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.22",
+      "sha256": "18942d3f917896615fdbba74200a6fe406ef6f87e34f122e0c4c4ac389815d61",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-105.md#simple_ether_drain.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-105.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized",
+        "identifiers renamed: SimpleEtherDrain->Vault, withdrawAllAnyone->withdrawAll"
+      ],
+      "notes": "Anyone can withdraw the full balance.",
+      "smartbugs_crosscheck": null
+    },
+    {
+      "id": "c07",
+      "file": "contracts/c07.sol",
+      "key": "swc118-incorrect_constructor_name1_fixed",
+      "label": "clean",
+      "role": "fixed_sample",
+      "pair": "swc118-constructor",
+      "classes": [],
+      "findings": [],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.24",
+      "sha256": "1d9eb67aebea60b09773e4548650378afd98252a30423cefa8ee41b2037fe7a9",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-118.md#incorrect_constructor_name1_fixed.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-118.md",
+        "credited_origin": "https://github.com/trailofbits/not-so-smart-contracts/blob/master/wrong_constructor_name/incorrect_constructor.sol",
+        "credited_author": "Ben Perez"
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized"
+      ],
+      "notes": "Uses the constructor keyword. (incorrect_constructor_name2_fixed.sol is excluded: after sanitizing it differs from this file only by one blank line.)",
+      "smartbugs_crosscheck": null
+    },
+    {
+      "id": "c08",
+      "file": "contracts/c08.sol",
+      "key": "swc104-unchecked_return_value",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "",
+      "classes": [
+        "unchecked_low_level_calls"
+      ],
+      "findings": [
+        {
+          "class": "unchecked_low_level_calls",
+          "swc": "SWC-104",
+          "line": 10,
+          "function": "callB",
+          "anchor": "callee.call();"
+        }
+      ],
+      "solc_version": "0.4.25",
+      "pragma": "0.4.25",
+      "sha256": "1faa7c9cbf71ca6399decf10760801c324219a240874286c58cf8643447bfab6",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-104.md#unchecked_return_value.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-104.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized",
+        "identifiers renamed: ReturnValue->Caller, callnotchecked->callB, callchecked->callA"
+      ],
+      "notes": "Return value of a low-level call is ignored in one of the two functions.",
+      "smartbugs_crosscheck": {
+        "smartbugs_file": "dataset/unchecked_low_level_calls/unchecked_return_value.sol",
+        "smartbugs_classes": [
+          "unchecked_low_level_calls"
+        ],
+        "our_findings_on_a_smartbugs_line": "1/1",
+        "our_findings_in_a_smartbugs_function": "1/1"
+      }
+    },
+    {
+      "id": "c09",
+      "file": "contracts/c09.sol",
+      "key": "swc113-send_loop",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "",
+      "classes": [
+        "denial_of_service"
+      ],
+      "findings": [
+        {
+          "class": "denial_of_service",
+          "swc": "SWC-113",
+          "line": 15,
+          "function": "refundAll",
+          "anchor": "require(refundAddresses[x].send(refunds[refundAddresses[x]]));"
+        }
+      ],
+      "solc_version": "0.4.24",
+      "pragma": "0.4.24",
+      "sha256": "23b97d2d6e5aa16d9a984e7a3d7b3d9c50bf589929fc233df964a33cc1efe1bd",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-113.md#send_loop.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-113.md",
+        "credited_origin": "https://consensys.github.io/smart-contract-best-practices/known_attacks/#dos-with-unexpected-revert",
+        "credited_author": "ConsenSys Diligence"
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized"
+      ],
+      "notes": "One failing recipient reverts every refund (DoS with failed call).",
+      "smartbugs_crosscheck": {
+        "smartbugs_file": "dataset/denial_of_service/send_loop.sol",
+        "smartbugs_classes": [
+          "denial_of_service"
+        ],
+        "our_findings_on_a_smartbugs_line": "1/1",
+        "our_findings_in_a_smartbugs_function": "1/1"
+      }
+    },
+    {
+      "id": "c10",
+      "file": "contracts/c10.sol",
+      "key": "swc115-mycontract",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "swc115-txorigin",
+      "classes": [
+        "access_control"
+      ],
+      "findings": [
+        {
+          "class": "access_control",
+          "swc": "SWC-115",
+          "line": 12,
+          "function": "sendTo",
+          "anchor": "require(tx.origin == owner);"
+        }
+      ],
+      "solc_version": "0.4.24",
+      "pragma": "0.4.24",
+      "sha256": "23f172685eea46e95667475436009c297900cff3d852f6f311e27c1169588c96",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-115.md#mycontract.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-115.md",
+        "credited_origin": "https://consensys.github.io/smart-contract-best-practices/recommendations/#avoid-using-txorigin",
+        "credited_author": "Consensys Diligence"
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized"
+      ],
+      "notes": "Authorization via tx.origin is phishable through an intermediate contract.",
+      "smartbugs_crosscheck": {
+        "smartbugs_file": "dataset/access_control/mycontract.sol",
+        "smartbugs_classes": [
+          "access_control"
+        ],
+        "our_findings_on_a_smartbugs_line": "1/1",
+        "our_findings_in_a_smartbugs_function": "1/1"
+      }
+    },
+    {
+      "id": "c11",
+      "file": "contracts/c11.sol",
+      "key": "swc128-dos_simple",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "",
+      "classes": [
+        "denial_of_service"
+      ],
+      "findings": [
+        {
+          "class": "denial_of_service",
+          "swc": "SWC-128",
+          "line": 16,
+          "function": "ifillArray",
+          "anchor": "listAddresses = new address[](0);"
+        }
+      ],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.25",
+      "sha256": "2876763a4a97258fe3ebecd8f94940d5b0ec6bebaec8abff47e817f520e6c7bd",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-128.md#dos_simple.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-128.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized",
+        "identifiers renamed: DosOneFunc->Registry"
+      ],
+      "notes": "Clearing a large storage array exceeds the block gas limit. SmartBugs-curated marks the push loop in the same function instead; we mark the clear, consistent with its own label for dos_address.",
+      "smartbugs_crosscheck": {
+        "smartbugs_file": "dataset/denial_of_service/dos_simple.sol",
+        "smartbugs_classes": [
+          "denial_of_service"
+        ],
+        "our_findings_on_a_smartbugs_line": "0/1",
+        "our_findings_in_a_smartbugs_function": "1/1"
+      }
+    },
+    {
+      "id": "c12",
+      "file": "contracts/c12.sol",
+      "key": "swc101-integer_overflow_mapping_sym_1_fixed",
+      "label": "clean",
+      "role": "fixed_sample",
+      "pair": "swc101-mapping",
+      "classes": [],
+      "findings": [],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.16",
+      "sha256": "2f1467b424a2acf2dadc7ef7122f5b9a72f92f5c7c5da3381052b2340ccd8192",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-101.md#integer_overflow_mapping_sym_1_fixed.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-101.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized",
+        "identifiers renamed: IntegerOverflowMappingSym1->MapStore"
+      ],
+      "notes": "Checked sub().",
+      "smartbugs_crosscheck": null
+    },
+    {
+      "id": "c13",
+      "file": "contracts/c13.sol",
+      "key": "swc105-wallet_01_ok",
+      "label": "clean",
+      "role": "negative_sample",
+      "pair": "",
+      "classes": [],
+      "findings": [],
+      "solc_version": "0.4.24",
+      "pragma": "^0.4.24",
+      "sha256": "2f978bca4477d73cb3671cc62518be3127fae161f9a0e98acc7a1fa0694bb697",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-105.md#wallet_01_ok.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-105.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized"
+      ],
+      "notes": "Hard negative. transfer() before balance update looks like reentrancy, but transfer forwards only 2300 gas, so re-entry is not possible.",
+      "smartbugs_crosscheck": null
+    },
+    {
+      "id": "c14",
+      "file": "contracts/c14.sol",
+      "key": "swc117-transaction_malleablity",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "swc117-malleability",
+      "classes": [
+        "other"
+      ],
+      "findings": [
+        {
+          "class": "other",
+          "swc": "SWC-117",
+          "line": 23,
+          "function": "transfer",
+          "anchor": "bytes32 txid = keccak256(abi.encodePacked(getTransferHash(_to, _value, _gasPrice, _nonce), _signature));"
+        }
+      ],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.24",
+      "sha256": "34c76829f19a30a18dfae69ab7baa38faf099a2e03e4a04bac598e509e7f5967",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-117.md#transaction_malleablity.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-117.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized",
+        "identifiers renamed: transaction_malleablity->SignedTransfers"
+      ],
+      "notes": "Replay protection keys on the signature bytes, which are malleable, so a modified signature replays the transfer.",
+      "smartbugs_crosscheck": null
+    },
+    {
+      "id": "c15",
+      "file": "contracts/c15.sol",
+      "key": "swc124-arbitrary_location_write_simple_fixed",
+      "label": "clean",
+      "role": "fixed_sample",
+      "pair": "swc124-arbitrary-write",
+      "classes": [],
+      "findings": [],
+      "solc_version": "0.4.25",
+      "pragma": "^0.4.25",
+      "sha256": "356d79c36b7483c8b8baab787a63dc92925a45c77b190dab34ef7192cfc229be",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-124.md#arbitrary_location_write_simple_fixed.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-124.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized"
+      ],
+      "notes": "Strict check prevents length underflow.",
+      "smartbugs_crosscheck": null
+    },
+    {
+      "id": "c16",
+      "file": "contracts/c16.sol",
+      "key": "swc112-proxy_pattern_false_positive",
+      "label": "clean",
+      "role": "negative_sample",
+      "pair": "",
+      "classes": [],
+      "findings": [],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.24",
+      "sha256": "3807ffadb6c768afa83be1afe18cbb1ee1e6debe4c0443b304d3c7db802b86e4",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-112.md#proxy_pattern_false_positive.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-112.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized"
+      ],
+      "notes": "Hard negative. delegatecall to a user address, but the function reverts whenever the delegatecall succeeds, so storage changes never persist (per SWC-112).",
+      "smartbugs_crosscheck": null
+    },
+    {
+      "id": "c17",
+      "file": "contracts/c17.sol",
+      "key": "tob-reentrancy",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "",
+      "classes": [
+        "reentrancy"
+      ],
+      "findings": [
+        {
+          "class": "reentrancy",
+          "swc": "SWC-107",
+          "line": 15,
+          "function": "withdrawBalance",
+          "anchor": "if( ! (msg.sender.call.value(userBalance[msg.sender])() ) ){"
+        }
+      ],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.15",
+      "sha256": "3a565f3393f4cdf817746a3d25273a840d1b0f254b4d012df73bd24cede2cca9",
+      "source": {
+        "name": "tob",
+        "repo": "trailofbits/not-so-smart-contracts",
+        "commit": "020dbdbde3e0c2e8de5f3944e7455e438b0995d5",
+        "path": "reentrancy/Reentrancy.sol",
+        "license": "Apache-2.0",
+        "license_file_in_repo": "licenses/tob-Apache-2.0.txt",
+        "url": "https://github.com/trailofbits/not-so-smart-contracts/blob/020dbdbde3e0c2e8de5f3944e7455e438b0995d5/reentrancy/Reentrancy.sol",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized",
+        "identifiers renamed: Reentrance->Bank, withdrawBalance_fixed_2->withdrawBalanceV3, withdrawBalance_fixed->withdrawBalanceV2"
+      ],
+      "notes": "Only withdrawBalance is vulnerable; the two other withdraw functions are safe (useful for location accuracy).",
+      "smartbugs_crosscheck": {
+        "smartbugs_file": "dataset/reentrancy/reentrancy_simple.sol",
+        "smartbugs_classes": [
+          "reentrancy"
+        ],
+        "our_findings_on_a_smartbugs_line": "1/1",
+        "our_findings_in_a_smartbugs_function": "1/1"
+      }
+    },
+    {
+      "id": "c18",
+      "file": "contracts/c18.sol",
+      "key": "swc118-incorrect_constructor_name2",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "swc118-constructor",
+      "classes": [
+        "access_control"
+      ],
+      "findings": [
+        {
+          "class": "access_control",
+          "swc": "SWC-118",
+          "line": 11,
+          "function": "Constructor",
+          "anchor": "function Constructor()"
+        }
+      ],
+      "solc_version": "0.4.24",
+      "pragma": "0.4.24",
+      "sha256": "3c570de8b3a3ab66b4aaa57cb8c87eee3e3ad898b566aa36f76a7e2c8a0bbbf4",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-118.md#incorrect_constructor_name2.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-118.md",
+        "credited_origin": "https://github.com/trailofbits/not-so-smart-contracts/blob/master/wrong_constructor_name/incorrect_constructor.sol",
+        "credited_author": "Ben Perez"
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized"
+      ],
+      "notes": "Function named Constructor is not a constructor; anyone can call it to become owner.",
+      "smartbugs_crosscheck": {
+        "smartbugs_file": "dataset/access_control/incorrect_constructor_name3.sol",
+        "smartbugs_classes": [
+          "access_control"
+        ],
+        "our_findings_on_a_smartbugs_line": "1/1",
+        "our_findings_in_a_smartbugs_function": "1/1"
+      }
+    },
+    {
+      "id": "c19",
+      "file": "contracts/c19.sol",
+      "key": "swc101-integer_overflow_mul_fixed",
+      "label": "clean",
+      "role": "fixed_sample",
+      "pair": "swc101-mul",
+      "classes": [],
+      "findings": [],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.19",
+      "sha256": "41cc42436d7ff02150af2fefc64137153dad84d34654e91176d506f635691c8f",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-101.md#integer_overflow_mul_fixed.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-101.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized",
+        "identifiers renamed: IntegerOverflowMul->Multiplier"
+      ],
+      "notes": "Checked mul().",
+      "smartbugs_crosscheck": null
+    },
+    {
+      "id": "c20",
+      "file": "contracts/c20.sol",
+      "key": "swc105-multiowned_not_vulnerable",
+      "label": "clean",
+      "role": "negative_sample",
+      "pair": "",
+      "classes": [],
+      "findings": [],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.23",
+      "sha256": "43862331ad93b3b98011405c202a7fdd185af0316579b02d32e90d9cf9049d4c",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-105.md#multiowned_not_vulnerable.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-105.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized"
+      ],
+      "notes": "Hard negative. Owner-management functions are protected by onlyOwner (per SWC-105).",
+      "smartbugs_crosscheck": null
+    },
+    {
+      "id": "c21",
+      "file": "contracts/c21.sol",
+      "key": "swc107-simple_dao",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "swc107-dao",
+      "classes": [
+        "reentrancy"
+      ],
+      "findings": [
+        {
+          "class": "reentrancy",
+          "swc": "SWC-107",
+          "line": 12,
+          "function": "withdraw",
+          "anchor": "require(msg.sender.call.value(amount)());"
+        }
+      ],
+      "solc_version": "0.4.24",
+      "pragma": "0.4.24",
+      "sha256": "4c8a4409e577c51a800bde80355e605101ec4f08a548392c5fad89a35ee5c653",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-107.md#simple_dao.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-107.md",
+        "credited_origin": "http://blockchain.unica.it/projects/ethereum-survey/attacks.html#simpledao",
+        "credited_author": "Atzei N., Bartoletti M., Cimoli T"
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized"
+      ],
+      "notes": "External call with all gas before the credit is reduced. SmartBugs-curated uses a modified copy of this sample, so its line text differs; same function.",
+      "smartbugs_crosscheck": {
+        "smartbugs_file": "dataset/reentrancy/simple_dao.sol",
+        "smartbugs_classes": [
+          "reentrancy"
+        ],
+        "our_findings_on_a_smartbugs_line": "0/1",
+        "our_findings_in_a_smartbugs_function": "1/1"
+      }
+    },
+    {
+      "id": "c22",
+      "file": "contracts/c22.sol",
+      "key": "swc106-suicide_multitx_infeasible",
+      "label": "clean",
+      "role": "negative_sample",
+      "pair": "",
+      "classes": [],
+      "findings": [],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.23",
+      "sha256": "4ddca8b75b762087b5d774cf603447a79e22b8ded6b2a5fc2cac6cf8129334af",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-106.md#suicide_multitx_infeasible.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-106.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized",
+        "identifiers renamed: SuicideMultiTxFeasible->Gate"
+      ],
+      "notes": "Hard negative. selfdestruct is guarded by initialized == 2, which no function can set (per SWC-106: infeasible).",
+      "smartbugs_crosscheck": null
+    },
+    {
+      "id": "c23",
+      "file": "contracts/c23.sol",
+      "key": "swc112-proxy_fixed",
+      "label": "clean",
+      "role": "fixed_sample",
+      "pair": "swc112-proxy",
+      "classes": [],
+      "findings": [],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.24",
+      "sha256": "4f6a2c3cd9bec8e4d053395910c53ce6318e2d04250244237d6041f5b2df5c06",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-112.md#proxy_fixed.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-112.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized"
+      ],
+      "notes": "Callee is set only by the owner.",
+      "smartbugs_crosscheck": null
+    },
+    {
+      "id": "c24",
+      "file": "contracts/c24.sol",
+      "key": "swc124-arbitrary_location_write_simple",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "swc124-arbitrary-write",
+      "classes": [
+        "access_control"
+      ],
+      "findings": [
+        {
+          "class": "access_control",
+          "swc": "SWC-124",
+          "line": 20,
+          "function": "PopBonusCode",
+          "anchor": "require(0 <= bonusCodes.length);"
+        }
+      ],
+      "solc_version": "0.4.25",
+      "pragma": "^0.4.25",
+      "sha256": "647951b7f3e71bab193175b5f169025b8ba2498a4aa1fef7d87aceced7d7a270",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-124.md#arbitrary_location_write_simple.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-124.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized"
+      ],
+      "notes": "Always-true check lets array length underflow to 2^256-1; UpdateBonusCodeAt can then write any storage slot, including owner. Location matches SmartBugs-curated's annotation.",
+      "smartbugs_crosscheck": {
+        "smartbugs_file": "dataset/access_control/arbitrary_location_write_simple.sol",
+        "smartbugs_classes": [
+          "access_control"
+        ],
+        "our_findings_on_a_smartbugs_line": "1/1",
+        "our_findings_in_a_smartbugs_function": "1/1"
+      }
+    },
+    {
+      "id": "c25",
+      "file": "contracts/c25.sol",
+      "key": "swc120-old_blockhash",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "",
+      "classes": [
+        "bad_randomness"
+      ],
+      "findings": [
+        {
+          "class": "bad_randomness",
+          "swc": "SWC-120",
+          "line": 27,
+          "function": "settle",
+          "anchor": "bytes32 answer = blockhash(guesses[msg.sender].block);"
+        }
+      ],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.24",
+      "sha256": "653d436c56877249531c7860679c9e27d127cd6783fc7a1dd1d86f6f8f487148",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-120.md#old_blockhash.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-120.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized"
+      ],
+      "notes": "blockhash returns 0 for blocks older than 256, so guessing 0 and waiting always wins. (The _fixed variant is excluded: its new check 'block - block.number < 256' underflows, so the fix itself is broken.)",
+      "smartbugs_crosscheck": {
+        "smartbugs_file": "dataset/bad_randomness/old_blockhash.sol",
+        "smartbugs_classes": [
+          "bad_randomness"
+        ],
+        "our_findings_on_a_smartbugs_line": "1/1",
+        "our_findings_in_a_smartbugs_function": "1/1"
+      }
+    },
+    {
+      "id": "c26",
+      "file": "contracts/c26.sol",
+      "key": "swc118-incorrect_constructor_name1",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "swc118-constructor",
+      "classes": [
+        "access_control"
+      ],
+      "findings": [
+        {
+          "class": "access_control",
+          "swc": "SWC-118",
+          "line": 11,
+          "function": "missing",
+          "anchor": "function missing()"
+        }
+      ],
+      "solc_version": "0.4.24",
+      "pragma": "0.4.24",
+      "sha256": "6692a6b46c165a787a20bc3477897f148fe88196d5dc1f46cea57722220c3b66",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-118.md#incorrect_constructor_name1.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-118.md",
+        "credited_origin": "https://github.com/trailofbits/not-so-smart-contracts/blob/master/wrong_constructor_name/incorrect_constructor.sol",
+        "credited_author": "Ben Perez"
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized"
+      ],
+      "notes": "Intended constructor name differs in case from the contract name, so it is a public function anyone can call to become owner. Names kept as-is because the bug depends on them.",
+      "smartbugs_crosscheck": {
+        "smartbugs_file": "dataset/access_control/incorrect_constructor_name2.sol",
+        "smartbugs_classes": [
+          "access_control"
+        ],
+        "our_findings_on_a_smartbugs_line": "1/1",
+        "our_findings_in_a_smartbugs_function": "1/1"
+      }
+    },
+    {
+      "id": "c27",
+      "file": "contracts/c27.sol",
+      "key": "sigp-etherstore",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "sigp-etherstore",
+      "classes": [
+        "reentrancy"
+      ],
+      "findings": [
+        {
+          "class": "reentrancy",
+          "swc": "SWC-107",
+          "line": 17,
+          "function": "withdrawFunds",
+          "anchor": "require(msg.sender.call.value(_weiToWithdraw)());"
+        }
+      ],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.24",
+      "sha256": "7c32bf5650874145d696ac4e78e0c13e849a20f3b18b57bae7a4072a1c44e7d5",
+      "source": {
+        "name": "sigp",
+        "repo": "sigp/solidity-security-blog",
+        "commit": "a412a46e0e182e63966d3c4953b5a6119c34a1c6",
+        "path": "README.md (code block containing: contract EtherStore { | require(msg.sender.call.value(_weiToWithdraw)());)",
+        "license": "CC-BY-4.0",
+        "license_file_in_repo": "licenses/sigp-CC-BY-4.0.txt",
+        "url": "https://github.com/sigp/solidity-security-blog/blob/a412a46e0e182e63966d3c4953b5a6119c34a1c6/README.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized",
+        "added 'pragma solidity ^0.4.24;'"
+      ],
+      "notes": "Balance and timestamp are updated after the external call. Pragma added.",
+      "smartbugs_crosscheck": {
+        "smartbugs_file": "dataset/reentrancy/etherstore.sol",
+        "smartbugs_classes": [
+          "reentrancy"
+        ],
+        "our_findings_on_a_smartbugs_line": "1/1",
+        "our_findings_in_a_smartbugs_function": "1/1"
+      }
+    },
+    {
+      "id": "c28",
+      "file": "contracts/c28.sol",
+      "key": "swc100-visibility_not_set_fixed",
+      "label": "clean",
+      "role": "fixed_sample",
+      "pair": "swc100-visibility",
+      "classes": [],
+      "findings": [],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.24",
+      "sha256": "7cc07f14938209c8f4e351d0f00ae79a08e2eab6c307c2641a2745f5c6768c46",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-100.md#visibility_not_set_fixed.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-100.md",
+        "credited_origin": "https://github.com/sigp/solidity-security-blog#visibility",
+        "credited_author": "SigmaPrime"
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized"
+      ],
+      "notes": "Helper made internal. Winning condition (address ends in 8 zero hex chars) is the intended game rule.",
+      "smartbugs_crosscheck": null
+    },
+    {
+      "id": "c29",
+      "file": "contracts/c29.sol",
+      "key": "sigp-roulette",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "",
+      "classes": [
+        "front_running",
+        "time_manipulation"
+      ],
+      "findings": [
+        {
+          "class": "time_manipulation",
+          "swc": "SWC-116",
+          "line": 12,
+          "function": "fallback",
+          "anchor": "if(now % 15 == 0) {"
+        },
+        {
+          "class": "front_running",
+          "swc": "SWC-114",
+          "line": 10,
+          "function": "fallback",
+          "anchor": "require(now != pastBlockTime);"
+        }
+      ],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.24",
+      "sha256": "804547d27c7401f1e990ec1875585c6cf7e706042b651008210a0ba2a72989a3",
+      "source": {
+        "name": "sigp",
+        "repo": "sigp/solidity-security-blog",
+        "commit": "a412a46e0e182e63966d3c4953b5a6119c34a1c6",
+        "path": "README.md (code block containing: contract Roulette {)",
+        "license": "CC-BY-4.0",
+        "license_file_in_repo": "licenses/sigp-CC-BY-4.0.txt",
+        "url": "https://github.com/sigp/solidity-security-blog/blob/a412a46e0e182e63966d3c4953b5a6119c34a1c6/README.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized",
+        "added 'pragma solidity ^0.4.24;'"
+      ],
+      "notes": "Miner can pick a winning timestamp; the source also notes the one-bet-per-block rule is front-runnable. Pragma added.",
+      "smartbugs_crosscheck": {
+        "smartbugs_file": "dataset/time_manipulation/roulette.sol",
+        "smartbugs_classes": [
+          "time_manipulation"
+        ],
+        "our_findings_on_a_smartbugs_line": "1/2",
+        "our_findings_in_a_smartbugs_function": "2/2"
+      }
+    },
+    {
+      "id": "c30",
+      "file": "contracts/c30.sol",
+      "key": "swc101-integer_overflow_multitx_onefunc_infeasible",
+      "label": "clean",
+      "role": "negative_sample",
+      "pair": "",
+      "classes": [],
+      "findings": [],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.23",
+      "sha256": "860174f5b652a2d71c19af34a849bd4f821d624b70069bace0f418c75143c4cc",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-101.md#integer_overflow_multitx_onefunc_infeasible.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-101.md",
+        "credited_origin": "https://github.com/ConsenSys/evm-analyzer-benchmark-suite",
+        "credited_author": "Suhabe Bugrara"
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized",
+        "identifiers renamed: IntegerOverflowMultiTxOneFuncInfeasible->GatedCounter"
+      ],
+      "notes": "Hard negative. Unchecked subtraction exists but is unreachable: initialized is never set (per SWC-101: infeasible).",
+      "smartbugs_crosscheck": null
+    },
+    {
+      "id": "c31",
+      "file": "contracts/c31.sol",
+      "key": "swc112-proxy",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "swc112-proxy",
+      "classes": [
+        "access_control"
+      ],
+      "findings": [
+        {
+          "class": "access_control",
+          "swc": "SWC-112",
+          "line": 12,
+          "function": "forward",
+          "anchor": "require(callee.delegatecall(_data));"
+        }
+      ],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.24",
+      "sha256": "8fc5282518e0c3310d397b5a22738380df2926d1e085e87af85697e176fe51e7",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-112.md#proxy.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-112.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized"
+      ],
+      "notes": "delegatecall to a caller-supplied address lets anyone overwrite storage (e.g. owner).",
+      "smartbugs_crosscheck": {
+        "smartbugs_file": "dataset/access_control/proxy.sol",
+        "smartbugs_classes": [
+          "access_control"
+        ],
+        "our_findings_on_a_smartbugs_line": "1/1",
+        "our_findings_in_a_smartbugs_function": "1/1"
+      }
+    },
+    {
+      "id": "c32",
+      "file": "contracts/c32.sol",
+      "key": "swc106-simple_suicide",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "",
+      "classes": [
+        "access_control"
+      ],
+      "findings": [
+        {
+          "class": "access_control",
+          "swc": "SWC-106",
+          "line": 6,
+          "function": "close",
+          "anchor": "selfdestruct(msg.sender);"
+        }
+      ],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.22",
+      "sha256": "9206a35bbc7ca9ff68ce609eb467d25aaded39cbc532759470d5437a4f8b2681",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-106.md#simple_suicide.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-106.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized",
+        "identifiers renamed: SimpleSuicide->Closable, sudicideAnyone->close"
+      ],
+      "notes": "Unprotected selfdestruct callable by anyone.",
+      "smartbugs_crosscheck": {
+        "smartbugs_file": "dataset/access_control/simple_suicide.sol",
+        "smartbugs_classes": [
+          "access_control"
+        ],
+        "our_findings_on_a_smartbugs_line": "1/1",
+        "our_findings_in_a_smartbugs_function": "1/1"
+      }
+    },
+    {
+      "id": "c33",
+      "file": "contracts/c33.sol",
+      "key": "swc101-integer_overflow_minimal",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "swc101-minimal",
+      "classes": [
+        "arithmetic"
+      ],
+      "findings": [
+        {
+          "class": "arithmetic",
+          "swc": "SWC-101",
+          "line": 7,
+          "function": "run",
+          "anchor": "count -= input;"
+        }
+      ],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.19",
+      "sha256": "93c910344793d59eabcfaab802b2ce0096b22f35340dda2520fbfff2b6f1bb9c",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-101.md#integer_overflow_minimal.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-101.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized",
+        "identifiers renamed: IntegerOverflowMinimal->Counter"
+      ],
+      "notes": "Unchecked subtraction underflows (Solidity < 0.8).",
+      "smartbugs_crosscheck": {
+        "smartbugs_file": "dataset/arithmetic/integer_overflow_minimal.sol",
+        "smartbugs_classes": [
+          "arithmetic"
+        ],
+        "our_findings_on_a_smartbugs_line": "1/1",
+        "our_findings_in_a_smartbugs_function": "1/1"
+      }
+    },
+    {
+      "id": "c34",
+      "file": "contracts/c34.sol",
+      "key": "sigp-timelock_safemath",
+      "label": "clean",
+      "role": "fixed_sample",
+      "pair": "sigp-timelock",
+      "classes": [],
+      "findings": [],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.24",
+      "sha256": "943d823f04b1184ef10ba93e569d80728d084f5b774f3e5038b31417c4b8ec66",
+      "source": {
+        "name": "sigp",
+        "repo": "sigp/solidity-security-blog",
+        "commit": "a412a46e0e182e63966d3c4953b5a6119c34a1c6",
+        "path": "README.md (code block containing: library SafeMath { | contract TimeLock {)",
+        "license": "CC-BY-4.0",
+        "license_file_in_repo": "licenses/sigp-CC-BY-4.0.txt",
+        "url": "https://github.com/sigp/solidity-security-blog/blob/a412a46e0e182e63966d3c4953b5a6119c34a1c6/README.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized",
+        "added 'pragma solidity ^0.4.24;'"
+      ],
+      "notes": "SafeMath version. Pragma added.",
+      "smartbugs_crosscheck": null
+    },
+    {
+      "id": "c35",
+      "file": "contracts/c35.sol",
+      "key": "sigp-lotto",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "",
+      "classes": [
+        "unchecked_low_level_calls"
+      ],
+      "findings": [
+        {
+          "class": "unchecked_low_level_calls",
+          "swc": "SWC-104",
+          "line": 11,
+          "function": "sendToWinner",
+          "anchor": "winner.send(winAmount);"
+        }
+      ],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.24",
+      "sha256": "961b1b90e16f3d8b52948d84d802f71ddf8f9ff0b5e9886f714e1d52bdff9fd2",
+      "source": {
+        "name": "sigp",
+        "repo": "sigp/solidity-security-blog",
+        "commit": "a412a46e0e182e63966d3c4953b5a6119c34a1c6",
+        "path": "README.md (code block containing: contract Lotto { | winner.send(winAmount);)",
+        "license": "CC-BY-4.0",
+        "license_file_in_repo": "licenses/sigp-CC-BY-4.0.txt",
+        "url": "https://github.com/sigp/solidity-security-blog/blob/a412a46e0e182e63966d3c4953b5a6119c34a1c6/README.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized",
+        "added 'pragma solidity ^0.4.24;'"
+      ],
+      "notes": "If send fails, payedOut is still set and anyone can take the prize via withdrawLeftOver. Pragma added.",
+      "smartbugs_crosscheck": {
+        "smartbugs_file": "dataset/unchecked_low_level_calls/lotto.sol",
+        "smartbugs_classes": [
+          "unchecked_low_level_calls"
+        ],
+        "our_findings_on_a_smartbugs_line": "1/1",
+        "our_findings_in_a_smartbugs_function": "1/1"
+      }
+    },
+    {
+      "id": "c36",
+      "file": "contracts/c36.sol",
+      "key": "swc116-timed_crowdsale",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "",
+      "classes": [
+        "time_manipulation"
+      ],
+      "findings": [
+        {
+          "class": "time_manipulation",
+          "swc": "SWC-116",
+          "line": 9,
+          "function": "isSaleFinished",
+          "anchor": "return block.timestamp >= 1546300800;"
+        }
+      ],
+      "solc_version": "0.5.17",
+      "pragma": "^0.5.0",
+      "sha256": "9623939b2231333266032bd437052672f931dc9012bab52d160e0f121d4cd1e1",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-116.md#timed_crowdsale.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-116.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized"
+      ],
+      "notes": "Exact deadline depends on miner-influenced block.timestamp.",
+      "smartbugs_crosscheck": {
+        "smartbugs_file": "dataset/time_manipulation/timed_crowdsale.sol",
+        "smartbugs_classes": [
+          "time_manipulation"
+        ],
+        "our_findings_on_a_smartbugs_line": "1/1",
+        "our_findings_in_a_smartbugs_function": "1/1"
+      }
+    },
+    {
+      "id": "c37",
+      "file": "contracts/c37.sol",
+      "key": "sigp-timelock",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "sigp-timelock",
+      "classes": [
+        "arithmetic"
+      ],
+      "findings": [
+        {
+          "class": "arithmetic",
+          "swc": "SWC-101",
+          "line": 14,
+          "function": "increaseLockTime",
+          "anchor": "lockTime[msg.sender] += _secondsToIncrease;"
+        }
+      ],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.24",
+      "sha256": "996d02dfc06ce02b6a824ad29e8af5609e3e07e2df66879f408498f3fce6e099",
+      "source": {
+        "name": "sigp",
+        "repo": "sigp/solidity-security-blog",
+        "commit": "a412a46e0e182e63966d3c4953b5a6119c34a1c6",
+        "path": "README.md (code block containing: contract TimeLock { | lockTime[msg.sender] += _secondsToIncrease;)",
+        "license": "CC-BY-4.0",
+        "license_file_in_repo": "licenses/sigp-CC-BY-4.0.txt",
+        "url": "https://github.com/sigp/solidity-security-blog/blob/a412a46e0e182e63966d3c4953b5a6119c34a1c6/README.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized",
+        "added 'pragma solidity ^0.4.24;'"
+      ],
+      "notes": "Lock time can be overflowed to wrap around and withdraw early. Pragma added (the blog snippet has none).",
+      "smartbugs_crosscheck": {
+        "smartbugs_file": "dataset/arithmetic/timelock.sol",
+        "smartbugs_classes": [
+          "arithmetic"
+        ],
+        "our_findings_on_a_smartbugs_line": "1/1",
+        "our_findings_in_a_smartbugs_function": "1/1"
+      }
+    },
+    {
+      "id": "c38",
+      "file": "contracts/c38.sol",
+      "key": "swc101-integer_overflow_mul",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "swc101-mul",
+      "classes": [
+        "arithmetic"
+      ],
+      "findings": [
+        {
+          "class": "arithmetic",
+          "swc": "SWC-101",
+          "line": 7,
+          "function": "run",
+          "anchor": "count *= input;"
+        }
+      ],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.19",
+      "sha256": "9af7f758cd9603b7fb83e0920026ef956be0a30596cd9b46c37efeca8e9e44dc",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-101.md#integer_overflow_mul.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-101.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized",
+        "identifiers renamed: IntegerOverflowMul->Multiplier"
+      ],
+      "notes": "Unchecked multiplication overflows.",
+      "smartbugs_crosscheck": {
+        "smartbugs_file": "dataset/arithmetic/integer_overflow_mul.sol",
+        "smartbugs_classes": [
+          "arithmetic"
+        ],
+        "our_findings_on_a_smartbugs_line": "1/1",
+        "our_findings_in_a_smartbugs_function": "1/1"
+      }
+    },
+    {
+      "id": "c39",
+      "file": "contracts/c39.sol",
+      "key": "sigp-findthishash",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "",
+      "classes": [
+        "front_running"
+      ],
+      "findings": [
+        {
+          "class": "front_running",
+          "swc": "SWC-114",
+          "line": 9,
+          "function": "solve",
+          "anchor": "require(hash == sha3(solution));"
+        }
+      ],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.24",
+      "sha256": "a1d092c8669d663a8ce8bc22fd646d5ea2efc6876c4b46af58bd153f3be65c2f",
+      "source": {
+        "name": "sigp",
+        "repo": "sigp/solidity-security-blog",
+        "commit": "a412a46e0e182e63966d3c4953b5a6119c34a1c6",
+        "path": "README.md (code block containing: contract FindThisHash {)",
+        "license": "CC-BY-4.0",
+        "license_file_in_repo": "licenses/sigp-CC-BY-4.0.txt",
+        "url": "https://github.com/sigp/solidity-security-blog/blob/a412a46e0e182e63966d3c4953b5a6119c34a1c6/README.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized",
+        "added 'pragma solidity ^0.4.24;'"
+      ],
+      "notes": "A submitted solution is visible in the mempool and can be copied with a higher gas price. Pragma added.",
+      "smartbugs_crosscheck": {
+        "smartbugs_file": "dataset/front_running/FindThisHash.sol",
+        "smartbugs_classes": [
+          "front_running"
+        ],
+        "our_findings_on_a_smartbugs_line": "1/1",
+        "our_findings_in_a_smartbugs_function": "1/1"
+      }
+    },
+    {
+      "id": "c40",
+      "file": "contracts/c40.sol",
+      "key": "swc117-transaction_malleablity_fixed",
+      "label": "clean",
+      "role": "fixed_sample",
+      "pair": "swc117-malleability",
+      "classes": [],
+      "findings": [],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.24",
+      "sha256": "add586d98aac3b07d30d781875079d8458cf06f8b59e36f0a3f01e89246154ad",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-117.md#transaction_malleablity_fixed.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-117.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized",
+        "identifiers renamed: transaction_malleablity->SignedTransfers"
+      ],
+      "notes": "Replay protection keys on the message hash, not the signature.",
+      "smartbugs_crosscheck": null
+    },
+    {
+      "id": "c41",
+      "file": "contracts/c41.sol",
+      "key": "swc128-dos_address",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "",
+      "classes": [
+        "denial_of_service"
+      ],
+      "findings": [
+        {
+          "class": "denial_of_service",
+          "swc": "SWC-128",
+          "line": 10,
+          "function": "emptyCreditors",
+          "anchor": "creditorAddresses = new address[](0);"
+        }
+      ],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.25",
+      "sha256": "b1570653ecc82ac0e1589b506229a1017ab14339c0a62e56a7620a18ff4f89e0",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-128.md#dos_address.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-128.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized",
+        "identifiers renamed: DosGas->CreditorList"
+      ],
+      "notes": "Clearing a large storage array exceeds the block gas limit.",
+      "smartbugs_crosscheck": {
+        "smartbugs_file": "dataset/denial_of_service/dos_address.sol",
+        "smartbugs_classes": [
+          "denial_of_service"
+        ],
+        "our_findings_on_a_smartbugs_line": "1/1",
+        "our_findings_in_a_smartbugs_function": "1/1"
+      }
+    },
+    {
+      "id": "c42",
+      "file": "contracts/c42.sol",
+      "key": "swc101-integer_overflow_multitx_multifunc_feasible",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "swc101-multitx",
+      "classes": [
+        "arithmetic"
+      ],
+      "findings": [
+        {
+          "class": "arithmetic",
+          "swc": "SWC-101",
+          "line": 16,
+          "function": "run",
+          "anchor": "count -= input;"
+        }
+      ],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.23",
+      "sha256": "c1147fc3f7435269fe1510daaa5707e5b447d6e2f8f8375484fdaec3c3f506b8",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-101.md#integer_overflow_multitx_multifunc_feasible.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-101.md",
+        "credited_origin": "https://github.com/ConsenSys/evm-analyzer-benchmark-suite",
+        "credited_author": "Suhabe Bugrara"
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized",
+        "identifiers renamed: IntegerOverflowMultiTxMultiFuncFeasible->TwoStepCounter"
+      ],
+      "notes": "Underflow reachable after anyone calls init() (two transactions).",
+      "smartbugs_crosscheck": {
+        "smartbugs_file": "dataset/arithmetic/integer_overflow_multitx_multifunc_feasible.sol",
+        "smartbugs_classes": [
+          "arithmetic"
+        ],
+        "our_findings_on_a_smartbugs_line": "1/1",
+        "our_findings_in_a_smartbugs_function": "1/1"
+      }
+    },
+    {
+      "id": "c43",
+      "file": "contracts/c43.sol",
+      "key": "swc115-mycontract_fixed",
+      "label": "clean",
+      "role": "fixed_sample",
+      "pair": "swc115-txorigin",
+      "classes": [],
+      "findings": [],
+      "solc_version": "0.4.25",
+      "pragma": "0.4.25",
+      "sha256": "c1ec02edf19dc3e58068a0e5277211dbfa3632b02c5b23b1b61385b0b699d9fb",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-115.md#mycontract_fixed.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-115.md",
+        "credited_origin": "https://consensys.github.io/smart-contract-best-practices/recommendations/#avoid-using-txorigin",
+        "credited_author": "Consensys Diligence"
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized"
+      ],
+      "notes": "Uses msg.sender.",
+      "smartbugs_crosscheck": null
+    },
+    {
+      "id": "c44",
+      "file": "contracts/c44.sol",
+      "key": "swc109-crypto_roulette_fixed",
+      "label": "vulnerable",
+      "role": "fixed_sample_residual",
+      "pair": "swc109-roulette",
+      "classes": [
+        "bad_randomness"
+      ],
+      "findings": [
+        {
+          "class": "bad_randomness",
+          "swc": "SWC-120",
+          "line": 22,
+          "function": "shuffle",
+          "anchor": "secretNumber = uint8(sha3(now, block.blockhash(block.number-1))) % 20 + 1;"
+        }
+      ],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.19",
+      "sha256": "c99f28c877defc793f39b19c723662e35d2d7f671b96f0b12770195c99e43dd8",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-109.md#crypto_roulette_fixed.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-109.md",
+        "credited_origin": "https://github.com/thec00n/smart-contract-honeypots/blob/master/CryptoRoulette.sol",
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized"
+      ],
+      "notes": "Source calls it fixed for SWC-109 (memory struct), but the block-data randomness remains, so it is labeled vulnerable.",
+      "smartbugs_crosscheck": null
+    },
+    {
+      "id": "c45",
+      "file": "contracts/c45.sol",
+      "key": "swc101-integer_overflow_multitx_multifunc_feasible_fixed",
+      "label": "clean",
+      "role": "fixed_sample",
+      "pair": "swc101-multitx",
+      "classes": [],
+      "findings": [],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.23",
+      "sha256": "dbcb85276d97cf44880471f8e0594de99f61d11a3f4c820f5eb7e935961ef2a5",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-101.md#integer_overflow_multitx_multifunc_feasible_fixed.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-101.md",
+        "credited_origin": "https://github.com/ConsenSys/evm-analyzer-benchmark-suite",
+        "credited_author": "Suhabe Bugrara"
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized",
+        "identifiers renamed: IntegerOverflowMultiTxMultiFuncFeasible->TwoStepCounter"
+      ],
+      "notes": "Checked sub().",
+      "smartbugs_crosscheck": null
+    },
+    {
+      "id": "c46",
+      "file": "contracts/c46.sol",
+      "key": "swc109-crypto_roulette",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "swc109-roulette",
+      "classes": [
+        "bad_randomness",
+        "other"
+      ],
+      "findings": [
+        {
+          "class": "other",
+          "swc": "SWC-109",
+          "line": 28,
+          "function": "play",
+          "anchor": "Game game;"
+        },
+        {
+          "class": "bad_randomness",
+          "swc": "SWC-120",
+          "line": 22,
+          "function": "shuffle",
+          "anchor": "secretNumber = uint8(sha3(now, block.blockhash(block.number-1))) % 20 + 1;"
+        }
+      ],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.19",
+      "sha256": "e0cead6d55c7f2c4469d600786e1054bb4d724dafe384f9bdfe4c097ea072902",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-109.md#crypto_roulette.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-109.md",
+        "credited_origin": "https://github.com/thec00n/smart-contract-honeypots/blob/master/CryptoRoulette.sol",
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized"
+      ],
+      "notes": "Uninitialized storage pointer overwrites secretNumber/lastPlayed (a known honeypot). Randomness also comes from block data. SmartBugs-curated labels only the first issue.",
+      "smartbugs_crosscheck": {
+        "smartbugs_file": "dataset/other/crypto_roulette.sol",
+        "smartbugs_classes": [
+          "other"
+        ],
+        "our_findings_on_a_smartbugs_line": "1/2",
+        "our_findings_in_a_smartbugs_function": "1/2"
+      }
+    },
+    {
+      "id": "c47",
+      "file": "contracts/c47.sol",
+      "key": "swc114-eth_tx_order_dependence_minimal",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "",
+      "classes": [
+        "front_running"
+      ],
+      "findings": [
+        {
+          "class": "front_running",
+          "swc": "SWC-114",
+          "line": 16,
+          "function": "setReward",
+          "anchor": "owner.transfer(reward);"
+        },
+        {
+          "class": "front_running",
+          "swc": "SWC-114",
+          "line": 24,
+          "function": "claimReward",
+          "anchor": "msg.sender.transfer(reward);"
+        }
+      ],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.16",
+      "sha256": "f0163c0e3218f9967c03cf789d385b8a5425515e307497058cfd70e120d4c668",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-114.md#eth_tx_order_dependence_minimal.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-114.md",
+        "credited_origin": "https://github.com/ConsenSys/evm-analyzer-benchmark-suite",
+        "credited_author": "Suhabe Bugrara"
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized",
+        "identifiers renamed: EthTxOrderDependenceMinimal->RewardGame"
+      ],
+      "notes": "Owner can change the reward while a claim is pending (transaction order dependence). Both racing transfers are labeled, matching SmartBugs-curated.",
+      "smartbugs_crosscheck": {
+        "smartbugs_file": "dataset/front_running/eth_tx_order_dependence_minimal.sol",
+        "smartbugs_classes": [
+          "front_running"
+        ],
+        "our_findings_on_a_smartbugs_line": "2/2",
+        "our_findings_in_a_smartbugs_function": "2/2"
+      }
+    },
+    {
+      "id": "c48",
+      "file": "contracts/c48.sol",
+      "key": "sigp-etherstore_fixed",
+      "label": "clean",
+      "role": "fixed_sample",
+      "pair": "sigp-etherstore",
+      "classes": [],
+      "findings": [],
+      "solc_version": "0.4.26",
+      "pragma": "^0.4.24",
+      "sha256": "f251340d5ca781a7d14c20d57a200de2c14070a2888eb45e4469415427250832",
+      "source": {
+        "name": "sigp",
+        "repo": "sigp/solidity-security-blog",
+        "commit": "a412a46e0e182e63966d3c4953b5a6119c34a1c6",
+        "path": "README.md (code block containing: contract EtherStore { | reEntrancyMutex = true;)",
+        "license": "CC-BY-4.0",
+        "license_file_in_repo": "licenses/sigp-CC-BY-4.0.txt",
+        "url": "https://github.com/sigp/solidity-security-blog/blob/a412a46e0e182e63966d3c4953b5a6119c34a1c6/README.md",
+        "credited_origin": null,
+        "credited_author": null
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized",
+        "identifiers renamed: reEntrancyMutex->locked",
+        "added 'pragma solidity ^0.4.24;'"
+      ],
+      "notes": "Mutex, effects before interaction, and transfer(). Pragma added.",
+      "smartbugs_crosscheck": null
+    },
+    {
+      "id": "c49",
+      "file": "contracts/c49.sol",
+      "key": "swc116-time_lock",
+      "label": "vulnerable",
+      "role": "vulnerable_sample",
+      "pair": "",
+      "classes": [
+        "time_manipulation"
+      ],
+      "findings": [
+        {
+          "class": "time_manipulation",
+          "swc": "SWC-116",
+          "line": 13,
+          "function": "lockEth",
+          "anchor": "users[msg.sender].unlockBlock = block.number + (_time / 14);"
+        }
+      ],
+      "solc_version": "0.5.17",
+      "pragma": "^0.5.0",
+      "sha256": "fd612a895f838b99e2dfe7fdeb1bcd86af1e1463b84daf77c78f55d66a0af4ad",
+      "source": {
+        "name": "swc",
+        "repo": "SmartContractSecurity/SWC-registry",
+        "commit": "1b6227074ecd180b374e4844153afdda0332f979",
+        "path": "entries/docs/SWC-116.md#time_lock.sol",
+        "license": "MIT",
+        "license_file_in_repo": "licenses/swc-MIT.txt",
+        "url": "https://github.com/SmartContractSecurity/SWC-registry/blob/1b6227074ecd180b374e4844153afdda0332f979/entries/docs/SWC-116.md",
+        "credited_origin": null,
+        "credited_author": "Kaden Zipfel"
+      },
+      "modifications": [
+        "comments removed",
+        "whitespace normalized"
+      ],
+      "notes": "Uses block number as a proxy for time (assumes 14 s blocks).",
+      "smartbugs_crosscheck": null
+    }
+  ]
+}

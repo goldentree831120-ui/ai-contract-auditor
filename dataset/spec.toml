@@ -1,0 +1,669 @@
+# Label spec for the P5 evaluation dataset.
+#
+# Every human labeling decision lives in this file. scripts/build_dataset.py reads it,
+# fetches each sample from its source repo at a pinned commit, sanitizes it
+# (strips comments, applies renames), locates each finding by its anchor text and
+# writes dataset/contracts/*.sol + dataset/labels.json.
+#
+# label    : "vulnerable" or "clean" (clean = no known issue in ANY class of taxonomy.json,
+#            judged against the whole taxonomy, not only the sample's own SWC entry)
+# role     : vulnerable_sample | fixed_sample | negative_sample | fixed_sample_residual
+#            (fixed_sample_residual = the source calls it "fixed" for one weakness,
+#             but it still has another one, so it is labeled vulnerable)
+# anchor   : text that must match exactly one line of the sanitized contract
+#            (whitespace-insensitive); that line is the labeled location
+# renames  : identifiers that state the label or class (e.g. withdrawBalance_fixed)
+#            are renamed so the model cannot read the answer from a name
+
+[sources.swc]
+repo = "SmartContractSecurity/SWC-registry"
+commit = "1b6227074ecd180b374e4844153afdda0332f979"
+license = "MIT"
+license_file = "LICENSE"
+
+[sources.tob]
+repo = "trailofbits/not-so-smart-contracts"
+commit = "020dbdbde3e0c2e8de5f3944e7455e438b0995d5"
+license = "Apache-2.0"
+license_file = "LICENSE"
+
+[sources.sigp]
+repo = "sigp/solidity-security-blog"
+commit = "a412a46e0e182e63966d3c4953b5a6119c34a1c6"
+license = "CC-BY-4.0"
+license_file = "LICENSE"
+
+# ---------------------------------------------------------------- access_control
+
+[[contract]]
+key = "swc100-visibility_not_set"
+source = "swc"
+doc = "SWC-100"
+sample = "visibility_not_set.sol"
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = "swc100-visibility"
+solc = "0.4.26"
+findings = [{ class = "access_control", swc = "SWC-100", anchor = "function _sendWinnings() {" }]
+notes = "Payout helper has default (public) visibility, so anyone can call it directly."
+
+[[contract]]
+key = "swc100-visibility_not_set_fixed"
+source = "swc"
+doc = "SWC-100"
+sample = "visibility_not_set_fixed.sol"
+label = "clean"
+role = "fixed_sample"
+pair = "swc100-visibility"
+solc = "0.4.26"
+findings = []
+notes = "Helper made internal. Winning condition (address ends in 8 zero hex chars) is the intended game rule."
+
+[[contract]]
+key = "swc112-proxy"
+source = "swc"
+doc = "SWC-112"
+sample = "proxy.sol"
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = "swc112-proxy"
+solc = "0.4.26"
+findings = [{ class = "access_control", swc = "SWC-112", anchor = "require(callee.delegatecall(_data));" }]
+notes = "delegatecall to a caller-supplied address lets anyone overwrite storage (e.g. owner)."
+
+[[contract]]
+key = "swc112-proxy_fixed"
+source = "swc"
+doc = "SWC-112"
+sample = "proxy_fixed.sol"
+label = "clean"
+role = "fixed_sample"
+pair = "swc112-proxy"
+solc = "0.4.26"
+findings = []
+notes = "Callee is set only by the owner."
+
+[[contract]]
+key = "swc112-proxy_pattern_false_positive"
+source = "swc"
+doc = "SWC-112"
+sample = "proxy_pattern_false_positive.sol"
+label = "clean"
+role = "negative_sample"
+pair = ""
+solc = "0.4.26"
+findings = []
+notes = "Hard negative. delegatecall to a user address, but the function reverts whenever the delegatecall succeeds, so storage changes never persist (per SWC-112)."
+
+[[contract]]
+key = "swc115-mycontract"
+source = "swc"
+doc = "SWC-115"
+sample = "mycontract.sol"
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = "swc115-txorigin"
+solc = "0.4.24"
+findings = [{ class = "access_control", swc = "SWC-115", anchor = "require(tx.origin == owner);" }]
+notes = "Authorization via tx.origin is phishable through an intermediate contract."
+
+[[contract]]
+key = "swc115-mycontract_fixed"
+source = "swc"
+doc = "SWC-115"
+sample = "mycontract_fixed.sol"
+label = "clean"
+role = "fixed_sample"
+pair = "swc115-txorigin"
+solc = "0.4.25"
+findings = []
+notes = "Uses msg.sender."
+
+[[contract]]
+key = "swc118-incorrect_constructor_name1"
+source = "swc"
+doc = "SWC-118"
+sample = "incorrect_constructor_name1.sol"
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = "swc118-constructor"
+solc = "0.4.24"
+findings = [{ class = "access_control", swc = "SWC-118", anchor = "function missing()" }]
+notes = "Intended constructor name differs in case from the contract name, so it is a public function anyone can call to become owner. Names kept as-is because the bug depends on them."
+
+[[contract]]
+key = "swc118-incorrect_constructor_name2"
+source = "swc"
+doc = "SWC-118"
+sample = "incorrect_constructor_name2.sol"
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = "swc118-constructor"
+solc = "0.4.24"
+findings = [{ class = "access_control", swc = "SWC-118", anchor = "function Constructor()" }]
+notes = "Function named Constructor is not a constructor; anyone can call it to become owner."
+
+[[contract]]
+key = "swc118-incorrect_constructor_name1_fixed"
+source = "swc"
+doc = "SWC-118"
+sample = "incorrect_constructor_name1_fixed.sol"
+label = "clean"
+role = "fixed_sample"
+pair = "swc118-constructor"
+solc = "0.4.26"
+findings = []
+notes = "Uses the constructor keyword. (incorrect_constructor_name2_fixed.sol is excluded: after sanitizing it differs from this file only by one blank line.)"
+
+[[contract]]
+key = "swc124-arbitrary_location_write_simple"
+source = "swc"
+doc = "SWC-124"
+sample = "arbitrary_location_write_simple.sol"
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = "swc124-arbitrary-write"
+solc = "0.4.25"
+findings = [{ class = "access_control", swc = "SWC-124", anchor = "require(0 <= bonusCodes.length);" }]
+notes = "Always-true check lets array length underflow to 2^256-1; UpdateBonusCodeAt can then write any storage slot, including owner. Location matches SmartBugs-curated's annotation."
+
+[[contract]]
+key = "swc124-arbitrary_location_write_simple_fixed"
+source = "swc"
+doc = "SWC-124"
+sample = "arbitrary_location_write_simple_fixed.sol"
+label = "clean"
+role = "fixed_sample"
+pair = "swc124-arbitrary-write"
+solc = "0.4.25"
+findings = []
+notes = "Strict check prevents length underflow."
+
+[[contract]]
+key = "swc106-simple_suicide"
+source = "swc"
+doc = "SWC-106"
+sample = "simple_suicide.sol"
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = ""
+solc = "0.4.26"
+renames = { SimpleSuicide = "Closable", sudicideAnyone = "close" }
+findings = [{ class = "access_control", swc = "SWC-106", anchor = "selfdestruct(msg.sender);" }]
+notes = "Unprotected selfdestruct callable by anyone."
+
+[[contract]]
+key = "swc106-suicide_multitx_infeasible"
+source = "swc"
+doc = "SWC-106"
+sample = "suicide_multitx_infeasible.sol"
+label = "clean"
+role = "negative_sample"
+pair = ""
+solc = "0.4.26"
+renames = { SuicideMultiTxFeasible = "Gate" }
+findings = []
+notes = "Hard negative. selfdestruct is guarded by initialized == 2, which no function can set (per SWC-106: infeasible)."
+
+[[contract]]
+key = "swc105-simple_ether_drain"
+source = "swc"
+doc = "SWC-105"
+sample = "simple_ether_drain.sol"
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = ""
+solc = "0.4.26"
+renames = { SimpleEtherDrain = "Vault", withdrawAllAnyone = "withdrawAll" }
+findings = [{ class = "access_control", swc = "SWC-105", anchor = "msg.sender.transfer(this.balance);" }]
+notes = "Anyone can withdraw the full balance."
+
+[[contract]]
+key = "swc105-wallet_01_ok"
+source = "swc"
+doc = "SWC-105"
+sample = "wallet_01_ok.sol"
+label = "clean"
+role = "negative_sample"
+pair = ""
+solc = "0.4.24"
+findings = []
+notes = "Hard negative. transfer() before balance update looks like reentrancy, but transfer forwards only 2300 gas, so re-entry is not possible."
+
+[[contract]]
+key = "swc105-multiowned_not_vulnerable"
+source = "swc"
+doc = "SWC-105"
+sample = "multiowned_not_vulnerable.sol"
+label = "clean"
+role = "negative_sample"
+pair = ""
+solc = "0.4.26"
+findings = []
+notes = "Hard negative. Owner-management functions are protected by onlyOwner (per SWC-105)."
+
+# ---------------------------------------------------------------- arithmetic
+
+[[contract]]
+key = "swc101-integer_overflow_minimal"
+source = "swc"
+doc = "SWC-101"
+sample = "integer_overflow_minimal.sol"
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = "swc101-minimal"
+solc = "0.4.26"
+renames = { IntegerOverflowMinimal = "Counter" }
+findings = [{ class = "arithmetic", swc = "SWC-101", anchor = "count -= input;" }]
+notes = "Unchecked subtraction underflows (Solidity < 0.8)."
+
+[[contract]]
+key = "swc101-integer_overflow_minimal_fixed"
+source = "swc"
+doc = "SWC-101"
+sample = "integer_overflow_minimal_fixed.sol"
+label = "clean"
+role = "fixed_sample"
+pair = "swc101-minimal"
+solc = "0.4.26"
+renames = { IntegerOverflowMinimal = "Counter" }
+findings = []
+notes = "Checked sub()."
+
+[[contract]]
+key = "swc101-integer_overflow_mul"
+source = "swc"
+doc = "SWC-101"
+sample = "integer_overflow_mul.sol"
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = "swc101-mul"
+solc = "0.4.26"
+renames = { IntegerOverflowMul = "Multiplier" }
+findings = [{ class = "arithmetic", swc = "SWC-101", anchor = "count *= input;" }]
+notes = "Unchecked multiplication overflows."
+
+[[contract]]
+key = "swc101-integer_overflow_mul_fixed"
+source = "swc"
+doc = "SWC-101"
+sample = "integer_overflow_mul_fixed.sol"
+label = "clean"
+role = "fixed_sample"
+pair = "swc101-mul"
+solc = "0.4.26"
+renames = { IntegerOverflowMul = "Multiplier" }
+findings = []
+notes = "Checked mul()."
+
+[[contract]]
+key = "swc101-integer_overflow_mapping_sym_1"
+source = "swc"
+doc = "SWC-101"
+sample = "integer_overflow_mapping_sym_1.sol"
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = "swc101-mapping"
+solc = "0.4.26"
+renames = { IntegerOverflowMappingSym1 = "MapStore" }
+findings = [{ class = "arithmetic", swc = "SWC-101", anchor = "map[k] -= v;" }]
+notes = "Unchecked subtraction on a mapping value underflows."
+
+[[contract]]
+key = "swc101-integer_overflow_mapping_sym_1_fixed"
+source = "swc"
+doc = "SWC-101"
+sample = "integer_overflow_mapping_sym_1_fixed.sol"
+label = "clean"
+role = "fixed_sample"
+pair = "swc101-mapping"
+solc = "0.4.26"
+renames = { IntegerOverflowMappingSym1 = "MapStore" }
+findings = []
+notes = "Checked sub()."
+
+[[contract]]
+key = "swc101-integer_overflow_multitx_multifunc_feasible"
+source = "swc"
+doc = "SWC-101"
+sample = "integer_overflow_multitx_multifunc_feasible.sol"
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = "swc101-multitx"
+solc = "0.4.26"
+renames = { IntegerOverflowMultiTxMultiFuncFeasible = "TwoStepCounter" }
+findings = [{ class = "arithmetic", swc = "SWC-101", anchor = "count -= input;" }]
+notes = "Underflow reachable after anyone calls init() (two transactions)."
+
+[[contract]]
+key = "swc101-integer_overflow_multitx_multifunc_feasible_fixed"
+source = "swc"
+doc = "SWC-101"
+sample = "integer_overflow_multitx_multifunc_feasible_fixed.sol"
+label = "clean"
+role = "fixed_sample"
+pair = "swc101-multitx"
+solc = "0.4.26"
+renames = { IntegerOverflowMultiTxMultiFuncFeasible = "TwoStepCounter" }
+findings = []
+notes = "Checked sub()."
+
+[[contract]]
+key = "swc101-integer_overflow_multitx_onefunc_infeasible"
+source = "swc"
+doc = "SWC-101"
+sample = "integer_overflow_multitx_onefunc_infeasible.sol"
+label = "clean"
+role = "negative_sample"
+pair = ""
+solc = "0.4.26"
+renames = { IntegerOverflowMultiTxOneFuncInfeasible = "GatedCounter" }
+findings = []
+notes = "Hard negative. Unchecked subtraction exists but is unreachable: initialized is never set (per SWC-101: infeasible)."
+
+[[contract]]
+key = "sigp-timelock"
+source = "sigp"
+block_match = ["contract TimeLock {", "lockTime[msg.sender] += _secondsToIncrease;"]
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = "sigp-timelock"
+solc = "0.4.26"
+prepend = "pragma solidity ^0.4.24;"
+findings = [{ class = "arithmetic", swc = "SWC-101", anchor = "lockTime[msg.sender] += _secondsToIncrease;" }]
+notes = "Lock time can be overflowed to wrap around and withdraw early. Pragma added (the blog snippet has none)."
+
+[[contract]]
+key = "sigp-timelock_safemath"
+source = "sigp"
+block_match = ["library SafeMath {", "contract TimeLock {"]
+label = "clean"
+role = "fixed_sample"
+pair = "sigp-timelock"
+solc = "0.4.26"
+prepend = "pragma solidity ^0.4.24;"
+findings = []
+notes = "SafeMath version. Pragma added."
+
+# ---------------------------------------------------------------- reentrancy
+
+[[contract]]
+key = "swc107-simple_dao"
+source = "swc"
+doc = "SWC-107"
+sample = "simple_dao.sol"
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = "swc107-dao"
+solc = "0.4.24"
+findings = [{ class = "reentrancy", swc = "SWC-107", anchor = "require(msg.sender.call.value(amount)());" }]
+notes = "External call with all gas before the credit is reduced. SmartBugs-curated uses a modified copy of this sample, so its line text differs; same function."
+
+[[contract]]
+key = "swc107-simple_dao_fixed"
+source = "swc"
+doc = "SWC-107"
+sample = "simple_dao_fixed.sol"
+label = "clean"
+role = "fixed_sample"
+pair = "swc107-dao"
+solc = "0.4.24"
+findings = []
+notes = "Checks-effects-interactions order."
+
+[[contract]]
+key = "tob-reentrancy"
+source = "tob"
+path = "reentrancy/Reentrancy.sol"
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = ""
+solc = "0.4.26"
+renames = { Reentrance = "Bank", withdrawBalance_fixed_2 = "withdrawBalanceV3", withdrawBalance_fixed = "withdrawBalanceV2" }
+findings = [{ class = "reentrancy", swc = "SWC-107", anchor = "if( ! (msg.sender.call.value(userBalance[msg.sender])() ) ){" }]
+notes = "Only withdrawBalance is vulnerable; the two other withdraw functions are safe (useful for location accuracy)."
+
+[[contract]]
+key = "sigp-etherstore"
+source = "sigp"
+block_match = ["contract EtherStore {", "require(msg.sender.call.value(_weiToWithdraw)());"]
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = "sigp-etherstore"
+solc = "0.4.26"
+prepend = "pragma solidity ^0.4.24;"
+findings = [{ class = "reentrancy", swc = "SWC-107", anchor = "require(msg.sender.call.value(_weiToWithdraw)());" }]
+notes = "Balance and timestamp are updated after the external call. Pragma added."
+
+[[contract]]
+key = "sigp-etherstore_fixed"
+source = "sigp"
+block_match = ["contract EtherStore {", "reEntrancyMutex = true;"]
+label = "clean"
+role = "fixed_sample"
+pair = "sigp-etherstore"
+solc = "0.4.26"
+prepend = "pragma solidity ^0.4.24;"
+renames = { reEntrancyMutex = "locked" }
+findings = []
+notes = "Mutex, effects before interaction, and transfer(). Pragma added."
+
+# ---------------------------------------------------------------- bad_randomness
+
+[[contract]]
+key = "swc120-guess_the_random_number"
+source = "swc"
+doc = "SWC-120"
+sample = "guess_the_random_number.sol"
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = ""
+solc = "0.4.26"
+renames = { GuessTheRandomNumberChallenge = "GuessGame" }
+findings = [{ class = "bad_randomness", swc = "SWC-120", anchor = "answer = uint8(keccak256(block.blockhash(block.number - 1), now));" }]
+notes = "Answer derived from public block data and stored on-chain. (The _fixed variant is excluded: still blockhash-based, and a single shared guesser slot makes it ambiguous.)"
+
+[[contract]]
+key = "swc120-old_blockhash"
+source = "swc"
+doc = "SWC-120"
+sample = "old_blockhash.sol"
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = ""
+solc = "0.4.26"
+findings = [{ class = "bad_randomness", swc = "SWC-120", anchor = "bytes32 answer = blockhash(guesses[msg.sender].block);" }]
+notes = "blockhash returns 0 for blocks older than 256, so guessing 0 and waiting always wins. (The _fixed variant is excluded: its new check 'block - block.number < 256' underflows, so the fix itself is broken.)"
+
+[[contract]]
+key = "swc109-crypto_roulette"
+source = "swc"
+doc = "SWC-109"
+sample = "crypto_roulette.sol"
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = "swc109-roulette"
+solc = "0.4.26"
+findings = [
+  { class = "other", swc = "SWC-109", anchor = "Game game;" },
+  { class = "bad_randomness", swc = "SWC-120", anchor = "secretNumber = uint8(sha3(now, block.blockhash(block.number-1))) % 20 + 1;" },
+]
+notes = "Uninitialized storage pointer overwrites secretNumber/lastPlayed (a known honeypot). Randomness also comes from block data. SmartBugs-curated labels only the first issue."
+
+[[contract]]
+key = "swc109-crypto_roulette_fixed"
+source = "swc"
+doc = "SWC-109"
+sample = "crypto_roulette_fixed.sol"
+label = "vulnerable"
+role = "fixed_sample_residual"
+pair = "swc109-roulette"
+solc = "0.4.26"
+findings = [{ class = "bad_randomness", swc = "SWC-120", anchor = "secretNumber = uint8(sha3(now, block.blockhash(block.number-1))) % 20 + 1;" }]
+notes = "Source calls it fixed for SWC-109 (memory struct), but the block-data randomness remains, so it is labeled vulnerable."
+
+# ---------------------------------------------------------------- unchecked_low_level_calls
+
+[[contract]]
+key = "swc104-unchecked_return_value"
+source = "swc"
+doc = "SWC-104"
+sample = "unchecked_return_value.sol"
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = ""
+solc = "0.4.25"
+renames = { ReturnValue = "Caller", callnotchecked = "callB", callchecked = "callA" }
+findings = [{ class = "unchecked_low_level_calls", swc = "SWC-104", anchor = "callee.call();" }]
+notes = "Return value of a low-level call is ignored in one of the two functions."
+
+[[contract]]
+key = "sigp-lotto"
+source = "sigp"
+block_match = ["contract Lotto {", "winner.send(winAmount);"]
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = ""
+solc = "0.4.26"
+prepend = "pragma solidity ^0.4.24;"
+findings = [{ class = "unchecked_low_level_calls", swc = "SWC-104", anchor = "winner.send(winAmount);" }]
+notes = "If send fails, payedOut is still set and anyone can take the prize via withdrawLeftOver. Pragma added."
+
+# ---------------------------------------------------------------- denial_of_service
+
+[[contract]]
+key = "swc128-dos_simple"
+source = "swc"
+doc = "SWC-128"
+sample = "dos_simple.sol"
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = ""
+solc = "0.4.26"
+renames = { DosOneFunc = "Registry" }
+findings = [{ class = "denial_of_service", swc = "SWC-128", anchor = "listAddresses = new address[](0);" }]
+notes = "Clearing a large storage array exceeds the block gas limit. SmartBugs-curated marks the push loop in the same function instead; we mark the clear, consistent with its own label for dos_address."
+
+[[contract]]
+key = "swc128-dos_address"
+source = "swc"
+doc = "SWC-128"
+sample = "dos_address.sol"
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = ""
+solc = "0.4.26"
+renames = { DosGas = "CreditorList" }
+findings = [{ class = "denial_of_service", swc = "SWC-128", anchor = "creditorAddresses = new address[](0);" }]
+notes = "Clearing a large storage array exceeds the block gas limit."
+
+[[contract]]
+key = "swc113-send_loop"
+source = "swc"
+doc = "SWC-113"
+sample = "send_loop.sol"
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = ""
+solc = "0.4.24"
+findings = [{ class = "denial_of_service", swc = "SWC-113", anchor = "require(refundAddresses[x].send(refunds[refundAddresses[x]]));" }]
+notes = "One failing recipient reverts every refund (DoS with failed call)."
+
+# ---------------------------------------------------------------- front_running
+
+[[contract]]
+key = "swc114-eth_tx_order_dependence_minimal"
+source = "swc"
+doc = "SWC-114"
+sample = "eth_tx_order_dependence_minimal.sol"
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = ""
+solc = "0.4.26"
+renames = { EthTxOrderDependenceMinimal = "RewardGame" }
+findings = [
+  { class = "front_running", swc = "SWC-114", anchor = "owner.transfer(reward);" },
+  { class = "front_running", swc = "SWC-114", anchor = "msg.sender.transfer(reward);" },
+]
+notes = "Owner can change the reward while a claim is pending (transaction order dependence). Both racing transfers are labeled, matching SmartBugs-curated."
+
+[[contract]]
+key = "sigp-findthishash"
+source = "sigp"
+block_match = ["contract FindThisHash {"]
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = ""
+solc = "0.4.26"
+prepend = "pragma solidity ^0.4.24;"
+findings = [{ class = "front_running", swc = "SWC-114", anchor = "require(hash == sha3(solution));" }]
+notes = "A submitted solution is visible in the mempool and can be copied with a higher gas price. Pragma added."
+
+# ---------------------------------------------------------------- time_manipulation
+
+[[contract]]
+key = "swc116-time_lock"
+source = "swc"
+doc = "SWC-116"
+sample = "time_lock.sol"
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = ""
+solc = "0.5.17"
+findings = [{ class = "time_manipulation", swc = "SWC-116", anchor = "users[msg.sender].unlockBlock = block.number + (_time / 14);" }]
+notes = "Uses block number as a proxy for time (assumes 14 s blocks)."
+
+[[contract]]
+key = "swc116-timed_crowdsale"
+source = "swc"
+doc = "SWC-116"
+sample = "timed_crowdsale.sol"
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = ""
+solc = "0.5.17"
+findings = [{ class = "time_manipulation", swc = "SWC-116", anchor = "return block.timestamp >= 1546300800;" }]
+notes = "Exact deadline depends on miner-influenced block.timestamp."
+
+[[contract]]
+key = "sigp-roulette"
+source = "sigp"
+block_match = ["contract Roulette {"]
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = ""
+solc = "0.4.26"
+prepend = "pragma solidity ^0.4.24;"
+findings = [
+  { class = "time_manipulation", swc = "SWC-116", anchor = "if(now % 15 == 0) {" },
+  { class = "front_running", swc = "SWC-114", anchor = "require(now != pastBlockTime);" },
+]
+notes = "Miner can pick a winning timestamp; the source also notes the one-bet-per-block rule is front-runnable. Pragma added."
+
+# ---------------------------------------------------------------- other
+
+[[contract]]
+key = "swc117-transaction_malleablity"
+source = "swc"
+doc = "SWC-117"
+sample = "transaction_malleablity.sol"
+label = "vulnerable"
+role = "vulnerable_sample"
+pair = "swc117-malleability"
+solc = "0.4.26"
+renames = { transaction_malleablity = "SignedTransfers" }
+findings = [{ class = "other", swc = "SWC-117", anchor = "bytes32 txid = keccak256(abi.encodePacked(getTransferHash(_to, _value, _gasPrice, _nonce), _signature));" }]
+notes = "Replay protection keys on the signature bytes, which are malleable, so a modified signature replays the transfer."
+
+[[contract]]
+key = "swc117-transaction_malleablity_fixed"
+source = "swc"
+doc = "SWC-117"
+sample = "transaction_malleablity_fixed.sol"
+label = "clean"
+role = "fixed_sample"
+pair = "swc117-malleability"
+solc = "0.4.26"
+renames = { transaction_malleablity = "SignedTransfers" }
+findings = []
+notes = "Replay protection keys on the message hash, not the signature."

@@ -1,0 +1,16 @@
+# secrets: never commit
+.env
+.env.*
+!.env.example
+
+# python
+.venv/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+
+# fetched source repos (rebuilt by scripts/build_dataset.py)
+.cache/
+
+# later milestones: raw run outputs
+results/raw/
