@@ -28,6 +28,8 @@ jobs:
           python scripts/run_llm.py --dry-run --context both
       - name: Ablation table builds from committed results
         run: python scripts/ablation.py
+      - name: Evaluation report matches committed results
+        run: python scripts/evaluate.py --check
 
   slither-smoke:
     runs-on: ubuntu-24.04

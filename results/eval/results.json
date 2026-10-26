@@ -1,0 +1,1017 @@
+{
+  "slither": {
+    "contract_level": {
+      "per_class": {
+        "access_control": {
+          "tp": 6,
+          "fp": 12,
+          "fn": 2,
+          "precision": 0.333,
+          "recall": 0.75,
+          "f1": 0.462
+        },
+        "arithmetic": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 5,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "reentrancy": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "bad_randomness": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 2,
+          "precision": 1.0,
+          "recall": 0.6,
+          "f1": 0.75
+        },
+        "unchecked_low_level_calls": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "denial_of_service": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 2,
+          "precision": 1.0,
+          "recall": 0.333,
+          "f1": 0.5
+        },
+        "front_running": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 3,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "time_manipulation": {
+          "tp": 2,
+          "fp": 7,
+          "fn": 1,
+          "precision": 0.222,
+          "recall": 0.667,
+          "f1": 0.333
+        },
+        "other": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.667
+        }
+      },
+      "micro": {
+        "tp": 18,
+        "fp": 19,
+        "fn": 16,
+        "precision": 0.486,
+        "recall": 0.529,
+        "f1": 0.507
+      },
+      "macro": {
+        "precision": 0.617,
+        "recall": 0.539,
+        "f1": 0.524
+      }
+    },
+    "function_level": {
+      "per_class": {
+        "access_control": {
+          "tp": 5,
+          "fp": 13,
+          "fn": 3,
+          "precision": 0.278,
+          "recall": 0.625,
+          "f1": 0.385
+        },
+        "arithmetic": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 5,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "reentrancy": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "bad_randomness": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 2,
+          "precision": 1.0,
+          "recall": 0.6,
+          "f1": 0.75
+        },
+        "unchecked_low_level_calls": {
+          "tp": 2,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.667,
+          "recall": 1.0,
+          "f1": 0.8
+        },
+        "denial_of_service": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 2,
+          "precision": 1.0,
+          "recall": 0.333,
+          "f1": 0.5
+        },
+        "front_running": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 4,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "time_manipulation": {
+          "tp": 2,
+          "fp": 9,
+          "fn": 1,
+          "precision": 0.182,
+          "recall": 0.667,
+          "f1": 0.286
+        },
+        "other": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 2,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "micro": {
+        "tp": 16,
+        "fp": 24,
+        "fn": 19,
+        "precision": 0.4,
+        "recall": 0.457,
+        "f1": 0.427
+      },
+      "macro": {
+        "precision": 0.459,
+        "recall": 0.469,
+        "f1": 0.413
+      }
+    },
+    "detection": {
+      "tp": 20,
+      "fp": 7,
+      "fn": 11,
+      "precision": 0.741,
+      "recall": 0.645,
+      "f1": 0.69
+    },
+    "contract_micro_f1_95ci": [
+      0.369,
+      0.63
+    ]
+  },
+  "llm_both": {
+    "contract_level": {
+      "per_class": {
+        "access_control": {
+          "tp": 6,
+          "fp": 4,
+          "fn": 2,
+          "precision": 0.6,
+          "recall": 0.75,
+          "f1": 0.667
+        },
+        "arithmetic": {
+          "tp": 5,
+          "fp": 4,
+          "fn": 0,
+          "precision": 0.556,
+          "recall": 1.0,
+          "f1": 0.714
+        },
+        "reentrancy": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.667,
+          "f1": 0.8
+        },
+        "bad_randomness": {
+          "tp": 4,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.8,
+          "f1": 0.889
+        },
+        "unchecked_low_level_calls": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.667
+        },
+        "denial_of_service": {
+          "tp": 1,
+          "fp": 1,
+          "fn": 2,
+          "precision": 0.5,
+          "recall": 0.333,
+          "f1": 0.4
+        },
+        "front_running": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 3,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "time_manipulation": {
+          "tp": 1,
+          "fp": 3,
+          "fn": 2,
+          "precision": 0.25,
+          "recall": 0.333,
+          "f1": 0.286
+        },
+        "other": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.667
+        }
+      },
+      "micro": {
+        "tp": 21,
+        "fp": 13,
+        "fn": 13,
+        "precision": 0.618,
+        "recall": 0.618,
+        "f1": 0.618
+      },
+      "macro": {
+        "precision": 0.656,
+        "recall": 0.543,
+        "f1": 0.566
+      }
+    },
+    "function_level": {
+      "per_class": {
+        "access_control": {
+          "tp": 6,
+          "fp": 4,
+          "fn": 2,
+          "precision": 0.6,
+          "recall": 0.75,
+          "f1": 0.667
+        },
+        "arithmetic": {
+          "tp": 5,
+          "fp": 5,
+          "fn": 0,
+          "precision": 0.5,
+          "recall": 1.0,
+          "f1": 0.667
+        },
+        "reentrancy": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.667,
+          "f1": 0.8
+        },
+        "bad_randomness": {
+          "tp": 4,
+          "fp": 1,
+          "fn": 1,
+          "precision": 0.8,
+          "recall": 0.8,
+          "f1": 0.8
+        },
+        "unchecked_low_level_calls": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.667
+        },
+        "denial_of_service": {
+          "tp": 1,
+          "fp": 1,
+          "fn": 2,
+          "precision": 0.5,
+          "recall": 0.333,
+          "f1": 0.4
+        },
+        "front_running": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 4,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "time_manipulation": {
+          "tp": 1,
+          "fp": 4,
+          "fn": 2,
+          "precision": 0.2,
+          "recall": 0.333,
+          "f1": 0.25
+        },
+        "other": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.667
+        }
+      },
+      "micro": {
+        "tp": 21,
+        "fp": 16,
+        "fn": 14,
+        "precision": 0.568,
+        "recall": 0.6,
+        "f1": 0.583
+      },
+      "macro": {
+        "precision": 0.622,
+        "recall": 0.543,
+        "f1": 0.546
+      }
+    },
+    "detection": {
+      "tp": 22,
+      "fp": 5,
+      "fn": 9,
+      "precision": 0.815,
+      "recall": 0.71,
+      "f1": 0.759
+    },
+    "contract_micro_f1_95ci": [
+      0.464,
+      0.756
+    ]
+  },
+  "llm_only": {
+    "contract_level": {
+      "per_class": {
+        "access_control": {
+          "tp": 6,
+          "fp": 7,
+          "fn": 2,
+          "precision": 0.462,
+          "recall": 0.75,
+          "f1": 0.571
+        },
+        "arithmetic": {
+          "tp": 5,
+          "fp": 4,
+          "fn": 0,
+          "precision": 0.556,
+          "recall": 1.0,
+          "f1": 0.714
+        },
+        "reentrancy": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "bad_randomness": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 2,
+          "precision": 1.0,
+          "recall": 0.6,
+          "f1": 0.75
+        },
+        "unchecked_low_level_calls": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "denial_of_service": {
+          "tp": 1,
+          "fp": 1,
+          "fn": 2,
+          "precision": 0.5,
+          "recall": 0.333,
+          "f1": 0.4
+        },
+        "front_running": {
+          "tp": 1,
+          "fp": 2,
+          "fn": 2,
+          "precision": 0.333,
+          "recall": 0.333,
+          "f1": 0.333
+        },
+        "time_manipulation": {
+          "tp": 2,
+          "fp": 1,
+          "fn": 1,
+          "precision": 0.667,
+          "recall": 0.667,
+          "f1": 0.667
+        },
+        "other": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 2,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "micro": {
+        "tp": 23,
+        "fp": 15,
+        "fn": 11,
+        "precision": 0.605,
+        "recall": 0.676,
+        "f1": 0.639
+      },
+      "macro": {
+        "precision": 0.613,
+        "recall": 0.631,
+        "f1": 0.604
+      }
+    },
+    "function_level": {
+      "per_class": {
+        "access_control": {
+          "tp": 5,
+          "fp": 12,
+          "fn": 3,
+          "precision": 0.294,
+          "recall": 0.625,
+          "f1": 0.4
+        },
+        "arithmetic": {
+          "tp": 5,
+          "fp": 5,
+          "fn": 0,
+          "precision": 0.5,
+          "recall": 1.0,
+          "f1": 0.667
+        },
+        "reentrancy": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "bad_randomness": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 2,
+          "precision": 1.0,
+          "recall": 0.6,
+          "f1": 0.75
+        },
+        "unchecked_low_level_calls": {
+          "tp": 2,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.667,
+          "recall": 1.0,
+          "f1": 0.8
+        },
+        "denial_of_service": {
+          "tp": 1,
+          "fp": 1,
+          "fn": 2,
+          "precision": 0.5,
+          "recall": 0.333,
+          "f1": 0.4
+        },
+        "front_running": {
+          "tp": 1,
+          "fp": 2,
+          "fn": 3,
+          "precision": 0.333,
+          "recall": 0.25,
+          "f1": 0.286
+        },
+        "time_manipulation": {
+          "tp": 2,
+          "fp": 1,
+          "fn": 1,
+          "precision": 0.667,
+          "recall": 0.667,
+          "f1": 0.667
+        },
+        "other": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 2,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "micro": {
+        "tp": 22,
+        "fp": 22,
+        "fn": 13,
+        "precision": 0.5,
+        "recall": 0.629,
+        "f1": 0.557
+      },
+      "macro": {
+        "precision": 0.551,
+        "recall": 0.608,
+        "f1": 0.552
+      }
+    },
+    "detection": {
+      "tp": 26,
+      "fp": 6,
+      "fn": 5,
+      "precision": 0.812,
+      "recall": 0.839,
+      "f1": 0.825
+    },
+    "contract_micro_f1_95ci": [
+      0.519,
+      0.75
+    ]
+  },
+  "llm_rag": {
+    "contract_level": {
+      "per_class": {
+        "access_control": {
+          "tp": 6,
+          "fp": 7,
+          "fn": 2,
+          "precision": 0.462,
+          "recall": 0.75,
+          "f1": 0.571
+        },
+        "arithmetic": {
+          "tp": 4,
+          "fp": 7,
+          "fn": 1,
+          "precision": 0.364,
+          "recall": 0.8,
+          "f1": 0.5
+        },
+        "reentrancy": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "bad_randomness": {
+          "tp": 5,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "unchecked_low_level_calls": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.667
+        },
+        "denial_of_service": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 3,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "front_running": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 3,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "time_manipulation": {
+          "tp": 1,
+          "fp": 2,
+          "fn": 2,
+          "precision": 0.333,
+          "recall": 0.333,
+          "f1": 0.333
+        },
+        "other": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 2,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "micro": {
+        "tp": 20,
+        "fp": 17,
+        "fn": 14,
+        "precision": 0.541,
+        "recall": 0.588,
+        "f1": 0.563
+      },
+      "macro": {
+        "precision": 0.462,
+        "recall": 0.487,
+        "f1": 0.452
+      }
+    },
+    "function_level": {
+      "per_class": {
+        "access_control": {
+          "tp": 6,
+          "fp": 7,
+          "fn": 2,
+          "precision": 0.462,
+          "recall": 0.75,
+          "f1": 0.571
+        },
+        "arithmetic": {
+          "tp": 4,
+          "fp": 7,
+          "fn": 1,
+          "precision": 0.364,
+          "recall": 0.8,
+          "f1": 0.5
+        },
+        "reentrancy": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "bad_randomness": {
+          "tp": 5,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "unchecked_low_level_calls": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.667
+        },
+        "denial_of_service": {
+          "tp": 0,
+          "fp": 2,
+          "fn": 3,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "front_running": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 4,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "time_manipulation": {
+          "tp": 1,
+          "fp": 2,
+          "fn": 2,
+          "precision": 0.333,
+          "recall": 0.333,
+          "f1": 0.333
+        },
+        "other": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 2,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "micro": {
+        "tp": 20,
+        "fp": 18,
+        "fn": 15,
+        "precision": 0.526,
+        "recall": 0.571,
+        "f1": 0.548
+      },
+      "macro": {
+        "precision": 0.462,
+        "recall": 0.487,
+        "f1": 0.452
+      }
+    },
+    "detection": {
+      "tp": 24,
+      "fp": 8,
+      "fn": 7,
+      "precision": 0.75,
+      "recall": 0.774,
+      "f1": 0.762
+    },
+    "contract_micro_f1_95ci": [
+      0.441,
+      0.683
+    ]
+  },
+  "llm_slither": {
+    "contract_level": {
+      "per_class": {
+        "access_control": {
+          "tp": 6,
+          "fp": 9,
+          "fn": 2,
+          "precision": 0.4,
+          "recall": 0.75,
+          "f1": 0.522
+        },
+        "arithmetic": {
+          "tp": 4,
+          "fp": 2,
+          "fn": 1,
+          "precision": 0.667,
+          "recall": 0.8,
+          "f1": 0.727
+        },
+        "reentrancy": {
+          "tp": 3,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.75,
+          "recall": 1.0,
+          "f1": 0.857
+        },
+        "bad_randomness": {
+          "tp": 4,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.8,
+          "f1": 0.889
+        },
+        "unchecked_low_level_calls": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "denial_of_service": {
+          "tp": 1,
+          "fp": 1,
+          "fn": 2,
+          "precision": 0.5,
+          "recall": 0.333,
+          "f1": 0.4
+        },
+        "front_running": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 3,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "time_manipulation": {
+          "tp": 2,
+          "fp": 5,
+          "fn": 1,
+          "precision": 0.286,
+          "recall": 0.667,
+          "f1": 0.4
+        },
+        "other": {
+          "tp": 1,
+          "fp": 1,
+          "fn": 1,
+          "precision": 0.5,
+          "recall": 0.5,
+          "f1": 0.5
+        }
+      },
+      "micro": {
+        "tp": 23,
+        "fp": 20,
+        "fn": 11,
+        "precision": 0.535,
+        "recall": 0.676,
+        "f1": 0.597
+      },
+      "macro": {
+        "precision": 0.567,
+        "recall": 0.65,
+        "f1": 0.588
+      }
+    },
+    "function_level": {
+      "per_class": {
+        "access_control": {
+          "tp": 6,
+          "fp": 14,
+          "fn": 2,
+          "precision": 0.3,
+          "recall": 0.75,
+          "f1": 0.429
+        },
+        "arithmetic": {
+          "tp": 4,
+          "fp": 2,
+          "fn": 1,
+          "precision": 0.667,
+          "recall": 0.8,
+          "f1": 0.727
+        },
+        "reentrancy": {
+          "tp": 3,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.75,
+          "recall": 1.0,
+          "f1": 0.857
+        },
+        "bad_randomness": {
+          "tp": 4,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.8,
+          "f1": 0.889
+        },
+        "unchecked_low_level_calls": {
+          "tp": 2,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.667,
+          "recall": 1.0,
+          "f1": 0.8
+        },
+        "denial_of_service": {
+          "tp": 0,
+          "fp": 2,
+          "fn": 3,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "front_running": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 4,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "time_manipulation": {
+          "tp": 2,
+          "fp": 5,
+          "fn": 1,
+          "precision": 0.286,
+          "recall": 0.667,
+          "f1": 0.4
+        },
+        "other": {
+          "tp": 1,
+          "fp": 1,
+          "fn": 1,
+          "precision": 0.5,
+          "recall": 0.5,
+          "f1": 0.5
+        }
+      },
+      "micro": {
+        "tp": 22,
+        "fp": 27,
+        "fn": 13,
+        "precision": 0.449,
+        "recall": 0.629,
+        "f1": 0.524
+      },
+      "macro": {
+        "precision": 0.463,
+        "recall": 0.613,
+        "f1": 0.511
+      }
+    },
+    "detection": {
+      "tp": 23,
+      "fp": 9,
+      "fn": 8,
+      "precision": 0.719,
+      "recall": 0.742,
+      "f1": 0.73
+    },
+    "contract_micro_f1_95ci": [
+      0.479,
+      0.692
+    ]
+  },
+  "_variance": [],
+  "_false_positives": {
+    "slither": {
+      "findings": 7,
+      "contracts": 7,
+      "on_hard_negatives": 2,
+      "echo_slither": 0
+    },
+    "llm_only": {
+      "findings": 8,
+      "contracts": 6,
+      "on_hard_negatives": 1,
+      "echo_slither": 5
+    },
+    "llm_slither": {
+      "findings": 12,
+      "contracts": 9,
+      "on_hard_negatives": 1,
+      "echo_slither": 8
+    },
+    "llm_rag": {
+      "findings": 9,
+      "contracts": 8,
+      "on_hard_negatives": 4,
+      "echo_slither": 5
+    },
+    "llm_both": {
+      "findings": 6,
+      "contracts": 5,
+      "on_hard_negatives": 2,
+      "echo_slither": 3
+    }
+  },
+  "_missed_by_all": [
+    [
+      "c11",
+      "denial_of_service"
+    ],
+    [
+      "c14",
+      "other"
+    ],
+    [
+      "c29",
+      "front_running"
+    ],
+    [
+      "c39",
+      "front_running"
+    ],
+    [
+      "c49",
+      "time_manipulation"
+    ]
+  ]
+}

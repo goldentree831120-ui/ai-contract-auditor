@@ -87,6 +87,8 @@ def main() -> None:
     ap.add_argument("--slice-threshold", type=int, default=150,
                     help="contracts longer than this many lines are audited per function")
     ap.add_argument("--reasoning-effort", default="low", choices=["low", "medium", "high"])
+    ap.add_argument("--repeat", type=int, default=0,
+                    help="repeat index for variance runs: N>0 bypasses the cache and writes <run>_rN")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 
@@ -95,7 +97,7 @@ def main() -> None:
         entries = [e for e in entries if e["id"] in set(args.only)]
         if not entries:
             sys.exit("no matching contract ids")
-    args.run = args.run or RUN_NAMES[args.context]
+    args.run = args.run or RUN_NAMES[args.context] + (f"_r{args.repeat}" if args.repeat else "")
     limits = Limits.from_settings()
     if args.dry_run:
         dry_run(entries, args.model, args.slice_threshold, limits, args.context)
@@ -111,7 +113,7 @@ def main() -> None:
         src = (DATASET_DIR / e["file"]).read_text()
         try:
             r = audit(src, client, args.slice_threshold, args.reasoning_effort,
-                      build_context(args.context, e["id"], src))
+                      build_context(args.context, e["id"], src), args.repeat)
         except BudgetExceeded as exc:
             stopped = f"budget cap reached before {e['id']}: {exc}"
             print(f"\nSTOPPED: {stopped}", flush=True)
@@ -139,6 +141,7 @@ def main() -> None:
         "model": args.model,
         "prompt_version": PROMPT_VERSION,
         "context": args.context,
+        "repeat": args.repeat,
         "settings": {"reasoning_effort": args.reasoning_effort, "temperature": 0,
                      "slice_threshold": args.slice_threshold,
                      "max_completion_tokens": limits.max_completion_tokens},
@@ -146,6 +149,7 @@ def main() -> None:
         "contracts_done": len(done),
         "stopped": stopped,
         "api_calls": sum(r["calls"] for r in recs),
+        "api_calls_from_cache": sum(r["cached_calls"] for r in recs),
         "prompt_tokens": pt,
         "completion_tokens": ct,
         "tokens_per_contract_mean": round((pt + ct) / len(recs), 1) if recs else None,
@@ -179,7 +183,8 @@ def main() -> None:
                      f"{len(r['rejected'])} | {r['prompt_tokens'] + r['completion_tokens']} |")
     (out / "SUMMARY.md").write_text("\n".join(L) + "\n")
 
-    print(f"\ndone: {len(done)}/{len(entries)} contracts, {summary['api_calls']} API calls")
+    print(f"\ndone: {len(done)}/{len(entries)} contracts, {summary['api_calls']} calls "
+          f"({summary['api_calls_from_cache']} answered from cache)")
     print(f"tokens: {pt} prompt + {ct} completion = {pt + ct} "
           f"(cost at paid-tier prices ${summary['cost_usd_at_paid_prices']:.4f}; Free plan $0)")
     if done:

@@ -125,3 +125,13 @@ def test_pacing_waits_when_minute_token_budget_is_used(tmp_path):
     c.complete_json("s", "first", SCHEMA)
     c.complete_json("s", "second", SCHEMA)
     assert waits and sum(waits) >= 59
+
+
+def test_repeat_changes_cache_key_but_not_request(tmp_path):
+    t = FakeTransport([ok_response({"findings": []}), ok_response({"findings": []})])
+    c = make_client(tmp_path, t)
+    c.complete_json("s", "u", SCHEMA)
+    again = c.complete_json("s", "u", SCHEMA, repeat=1)
+    assert not again["cached"] and len(t.calls) == 2
+    assert t.calls[0][2] == t.calls[1][2]  # identical request body
+    assert c.complete_json("s", "u", SCHEMA, repeat=1)["cached"]

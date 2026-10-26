@@ -178,7 +178,7 @@ class GroqClient:
             )
 
     def complete_json(self, system: str, user: str, schema: dict, schema_name: str = "audit",
-                      reasoning_effort: str = "low") -> dict:
+                      reasoning_effort: str = "low", repeat: int = 0) -> dict:
         """Return {"content": parsed JSON, "usage": {...}, "cached": bool, "seconds": float}."""
         body = {
             "model": self.model,
@@ -192,7 +192,10 @@ class GroqClient:
                 "json_schema": {"name": schema_name, "strict": True, "schema": schema},
             },
         }
-        digest = hashlib.sha256(json.dumps(body, sort_keys=True).encode()).hexdigest()
+        # `repeat` only changes the cache key (never the request), so repeat runs of the same
+        # prompt are fresh samples; repeat 0 keeps the original key and reuses earlier runs.
+        key = body if repeat == 0 else {**body, "_repeat": repeat}
+        digest = hashlib.sha256(json.dumps(key, sort_keys=True).encode()).hexdigest()
         cache_file = self.cache_dir / f"{digest}.json"
         if cache_file.exists():
             hit = json.loads(cache_file.read_text())

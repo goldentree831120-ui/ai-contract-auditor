@@ -13,7 +13,7 @@ scripts in this repo, with the hardware noted, including the weak ones.
 | M2 | Slither baseline, findings per contract | done |
 | M3 | LLM agent with structured output and function-level slicing | done |
 | M4 | RAG over SWC descriptions; ablation (LLM, +Slither, +RAG, both) | done |
-| M5 | precision, recall, F1 per class, false-positive analysis, cost and time | planned |
+| M5 | precision, recall, F1 per class, false-positive analysis, cost and time | done |
 | M6 | CLI, small UI, methodology and limitations write-up | planned |
 
 ## Quickstart
@@ -31,6 +31,8 @@ python3 -m venv .venv
 .venv/bin/python scripts/eval_retrieval.py            # M4 retriever quality, no API calls
 .venv/bin/python scripts/run_llm.py --context slither # M4 ablation runs: slither | rag | both
 .venv/bin/python scripts/ablation.py                  # M4 table -> results/ablation/ABLATION.md
+.venv/bin/python scripts/evaluate.py                  # M5 report -> results/eval/RESULTS.md
+.venv/bin/python scripts/run_llm.py --repeat 1        # M5 variance run (cache bypassed) -> llm_only_r1
 ```
 
 `--check` needs network access to github.com (it fetches the pinned source commits into
@@ -146,6 +148,51 @@ no-context prompt is byte-identical to M3's, so the M3 run is reused as "LLM onl
 Results: [results/ablation/ABLATION.md](results/ablation/ABLATION.md) and
 [results/retrieval/SUMMARY.md](results/retrieval/SUMMARY.md).
 
+## Evaluation (M5)
+
+`scripts/evaluate.py` turns the committed result files into
+[results/eval/RESULTS.md](results/eval/RESULTS.md) with no API calls; CI fails if the
+committed report is out of date. Measured on an Intel i5-10210U laptop (WSL Ubuntu);
+LLM times are Groq API round-trips.
+
+| condition | contract P | contract R | contract F1 (95% CI) | function F1 | detection P / R | clean flagged |
+|---|---|---|---|---|---|---|
+| Slither 0.11.6 | 0.49 | 0.53 | 0.51 (0.37-0.63) | 0.43 | 0.74 / 0.65 | 7/18 |
+| LLM only | 0.60 | 0.68 | 0.64 (0.52-0.75) | 0.56 | 0.81 / 0.84 | 6/18 |
+| LLM + Slither | 0.54 | 0.68 | 0.60 (0.48-0.69) | 0.52 | 0.72 / 0.74 | 9/18 |
+| LLM + RAG | 0.54 | 0.59 | 0.56 (0.44-0.68) | 0.55 | 0.75 / 0.77 | 8/18 |
+| LLM + RAG + Slither | 0.62 | 0.62 | 0.62 (0.46-0.76) | 0.58 | 0.81 / 0.71 | 5/18 |
+
+Contract level = right class anywhere in the contract; function level = right class in
+the right function; detection = vulnerable or not. Intervals resample the 49 contracts.
+
+What the numbers support, and what they do not:
+
+- Every LLM condition scores above Slither at contract level, mostly because Slither has no
+  detector for integer overflow or front-running. The intervals overlap, so even this gap
+  is not established on 49 contracts.
+- **No added context clearly helped.** The four LLM conditions differ by a few contracts,
+  their intervals overlap almost completely, and run-to-run variance (see RESULTS.md) is of
+  a similar size. Retrieval raised bad_randomness recall but added arithmetic false
+  positives; Slither output raised false alarms on clean contracts (6 to 9).
+- Function-level F1 is 0.01 to 0.08 below contract level: the tools sometimes name the
+  right weakness in the wrong function.
+- Five labeled issues were missed by every tool and condition: signature malleability
+  (c14), two front-running cases (c29, c39), a block-number clock (c49) and a gas-limit
+  DoS (c11). They are listed in RESULTS.md with the labeled function.
+- Every false positive on a clean contract is listed in RESULTS.md with the model's
+  reasoning. Recurring causes, read from that list:
+  - the hard-negative proxy (c16), whose delegatecall can never persist state, is flagged
+    by Slither and all four LLM conditions;
+  - overflow warnings on `+= msg.value`, where wrapping would need more Ether than exists
+    (c03, c48);
+  - intentionally public functions or owner-set callees reported as missing access
+    control (c01, c12, c15, c23, c45);
+  - week-long time locks reported as timestamp manipulation, though miners can shift
+    timestamps only by seconds (c34, c48); these appear only in conditions given Slither
+    output or retrieved notes, matching Slither's own `timestamp` alerts;
+  - with retrieval, an underflow the code can never reach (hard negative c30).
+
 ## Sources
 
 | source | license (checked) | used for | used in |
@@ -176,11 +223,12 @@ dataset/        spec.toml (labeling decisions), contracts/, labels.json, license
 knowledge/      swc_kb.json (M4 knowledge base, text only)
 results/        slither/ (M2), llm/<run>/ (M3, M4), retrieval/, ablation/ (M4); results/raw/ is git-ignored
 scripts/        build_dataset.py, validate_dataset.py, run_slither.py, run_llm.py,
-                build_kb.py, eval_retrieval.py, ablation.py
+                build_kb.py, eval_retrieval.py, ablation.py, evaluate.py
 src/auditor/    solidity.py, dataset.py, solc.py (pinned compilers),
                 slither_map.py, slither_runner.py (M2),
                 llm.py (Groq client, caps, cache), agent.py (prompt, schema, slicing), report.py,
-                kb.py (knowledge base, BM25), context.py (Slither/RAG prompt context), sources.py
+                kb.py (knowledge base, BM25), context.py (Slither/RAG prompt context), sources.py,
+                metrics.py (precision/recall/F1, bootstrap intervals)
 tests/          unit tests and dataset checks (run in CI)
 ```
 
@@ -194,6 +242,8 @@ tests/          unit tests and dataset checks (run in CI)
 - LLM output is not fully deterministic even at temperature 0, and the hosted model can
   change. Committed results record the model, prompt version and date; reruns may differ.
 - Only one model and one prompt are evaluated; no prompt tuning was done on this dataset.
+- Each ablation condition was run once; repeat runs measure variance for two conditions only.
+- 49 contracts give wide intervals (about +/-0.12 F1); small differences are not evidence.
 
 ## Safety
 

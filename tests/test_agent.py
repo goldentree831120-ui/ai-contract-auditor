@@ -30,7 +30,7 @@ class StubClient:
         self.findings_by_call = list(findings_by_call)
         self.prompts = []
 
-    def complete_json(self, system, user, schema, reasoning_effort="low"):
+    def complete_json(self, system, user, schema, reasoning_effort="low", repeat=0):
         self.prompts.append(user)
         return {"content": {"findings": self.findings_by_call.pop(0)}, "cached": False,
                 "usage": {"prompt_tokens": 10, "completion_tokens": 5}, "seconds": 0.1}

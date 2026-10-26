@@ -154,7 +154,8 @@ def validate_findings(raw: list, src: str, allowed_lines: set[int] | None = None
 
 
 def audit(src: str, client: GroqClient, slice_threshold: int = 150,
-          reasoning_effort: str = "low", context: str | None = None) -> AuditResult:
+          reasoning_effort: str = "low", context: str | None = None,
+          repeat: int = 0) -> AuditResult:
     n_lines = src.rstrip("\n").count("\n") + 1
     schema, system = output_schema(), system_prompt()
     if n_lines <= slice_threshold or not function_spans(src):
@@ -170,7 +171,7 @@ def audit(src: str, client: GroqClient, slice_threshold: int = 150,
     start = time.perf_counter()
     for focus, keep in jobs:
         resp = client.complete_json(system, user_prompt(src, keep, focus, context), schema,
-                                    reasoning_effort=reasoning_effort)
+                                    reasoning_effort=reasoning_effort, repeat=repeat)
         calls += 1
         cached += resp["cached"]
         pt += resp["usage"]["prompt_tokens"]
