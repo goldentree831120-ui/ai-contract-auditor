@@ -1,0 +1,24 @@
+{
+  "id": "c08",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "rag",
+  "findings": [
+    {
+      "class": "unchecked_low_level_calls",
+      "function": "callB",
+      "line": 10,
+      "function_from_line": "callB",
+      "reasoning": "The low\u2011level call to `callee.call()` ignores the returned success flag, so a failed call will not revert and the contract will continue execution as if it succeeded, which can be abused by an attacker to trigger unexpected behavior.",
+      "confidence": 0.99
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 1,
+  "prompt_tokens": 1147,
+  "completion_tokens": 222,
+  "seconds": 0.003,
+  "api_seconds": 1.316
+}

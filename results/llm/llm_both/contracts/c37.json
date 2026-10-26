@@ -1,0 +1,48 @@
+{
+  "id": "c37",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "both",
+  "findings": [
+    {
+      "class": "arithmetic",
+      "function": "deposit",
+      "line": 9,
+      "function_from_line": "deposit",
+      "reasoning": "`balances[msg.sender] += msg.value;` can overflow the uint balance in Solidity 0.4.24 because arithmetic is unchecked.",
+      "confidence": 0.9
+    },
+    {
+      "class": "time_manipulation",
+      "function": "deposit",
+      "line": 10,
+      "function_from_line": "deposit",
+      "reasoning": "Lock time is set using `now + 1 weeks`, making the lock duration dependent on a manipulable block timestamp.",
+      "confidence": 0.95
+    },
+    {
+      "class": "arithmetic",
+      "function": "increaseLockTime",
+      "line": 14,
+      "function_from_line": "increaseLockTime",
+      "reasoning": "`lockTime[msg.sender] += _secondsToIncrease;` may overflow the timestamp value, allowing the lock to wrap around and become bypassable.",
+      "confidence": 0.9
+    },
+    {
+      "class": "time_manipulation",
+      "function": "withdraw",
+      "line": 19,
+      "function_from_line": "withdraw",
+      "reasoning": "The contract relies on `now` (block.timestamp) to enforce the lock period, which miners can manipulate within allowed bounds to release funds earlier or later than intended.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 1603,
+  "completion_tokens": 458,
+  "seconds": 62.108,
+  "api_seconds": 2.048
+}

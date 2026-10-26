@@ -1,0 +1,24 @@
+{
+  "id": "c06",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "slither",
+  "findings": [
+    {
+      "class": "access_control",
+      "function": "withdrawAll",
+      "line": 6,
+      "function_from_line": "withdrawAll",
+      "reasoning": "The withdrawAll function has no access restriction, allowing any caller to invoke it and transfer the entire contract balance to themselves, enabling complete theft of funds.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 725,
+  "completion_tokens": 159,
+  "seconds": 0.762,
+  "api_seconds": 0.759
+}

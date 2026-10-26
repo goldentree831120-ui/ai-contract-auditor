@@ -1,0 +1,24 @@
+{
+  "id": "c03",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "slither",
+  "findings": [
+    {
+      "class": "arithmetic",
+      "function": "donate",
+      "line": 7,
+      "function_from_line": "donate",
+      "reasoning": "The contract adds msg.value to credit[to] without overflow checks. In Solidity 0.4.24, uint addition can overflow, allowing an attacker to wrap their credit balance to a low value and later withdraw more than they deposited.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 780,
+  "completion_tokens": 235,
+  "seconds": 1.078,
+  "api_seconds": 1.07
+}

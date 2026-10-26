@@ -1,0 +1,24 @@
+{
+  "id": "c34",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "both",
+  "findings": [
+    {
+      "class": "time_manipulation",
+      "function": "withdraw",
+      "line": 47,
+      "function_from_line": "withdraw",
+      "reasoning": "The contract relies on `now` (block.timestamp) to enforce the lock period. A miner can set the timestamp slightly ahead within allowed limits, allowing early withdrawal before the intended lock expires.",
+      "confidence": 0.9
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 1803,
+  "completion_tokens": 199,
+  "seconds": 61.682,
+  "api_seconds": 1.624
+}

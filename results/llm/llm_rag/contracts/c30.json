@@ -1,0 +1,24 @@
+{
+  "id": "c30",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "rag",
+  "findings": [
+    {
+      "class": "arithmetic",
+      "function": "run",
+      "line": 12,
+      "function_from_line": "run",
+      "reasoning": "The subtraction `count -= input;` can underflow when `input` is greater than `count` because Solidity 0.4.23 does not have built\u2011in overflow/underflow checks.",
+      "confidence": 0.99
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 887,
+  "completion_tokens": 187,
+  "seconds": 1.007,
+  "api_seconds": 1.004
+}

@@ -1,0 +1,24 @@
+{
+  "id": "c35",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "both",
+  "findings": [
+    {
+      "class": "access_control",
+      "function": "withdrawLeftOver",
+      "line": 17,
+      "function_from_line": "withdrawLeftOver",
+      "reasoning": "The function can be called by any address after payedOut is set to true (which any user can trigger via sendToWinner with uninitialized winner and winAmount). This allows an arbitrary user to drain the contract's balance.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 1450,
+  "completion_tokens": 477,
+  "seconds": 62.636,
+  "api_seconds": 2.533
+}

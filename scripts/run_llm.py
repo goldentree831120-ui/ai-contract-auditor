@@ -21,9 +21,9 @@ import argparse
 import json
 import statistics
 import sys
-from pathlib import Path
 
 from auditor.agent import PROMPT_VERSION, audit, make_slices, system_prompt, user_prompt
+from auditor.context import build_context
 from auditor.dataset import DATASET_DIR, REPO_ROOT, load_labels
 from auditor.llm import (
     DEFAULT_MODEL,
@@ -40,26 +40,30 @@ from auditor.report import contract_level, per_class_table
 from auditor.solidity import function_spans
 
 
-def prompts_for(src: str, threshold: int) -> list[str]:
+RUN_NAMES = {"none": "llm_only", "slither": "llm_slither", "rag": "llm_rag", "both": "llm_both"}
+
+
+def prompts_for(src: str, threshold: int, context: str | None = None) -> list[str]:
     n = src.rstrip("\n").count("\n") + 1
     if n <= threshold or not function_spans(src):
-        return [user_prompt(src)]
-    return [user_prompt(src, keep, name) for name, keep in make_slices(src)]
+        return [user_prompt(src, context=context)]
+    return [user_prompt(src, keep, name, context) for name, keep in make_slices(src)]
 
 
-def dry_run(entries: list[dict], model: str, threshold: int, limits: Limits) -> None:
+def dry_run(entries: list[dict], model: str, threshold: int, limits: Limits, kind: str) -> None:
     sys_tokens = estimate_tokens(system_prompt())
     calls = prompt_tokens = 0
     sliced = 0
     for e in entries:
-        ps = prompts_for((DATASET_DIR / e["file"]).read_text(), threshold)
+        src = (DATASET_DIR / e["file"]).read_text()
+        ps = prompts_for(src, threshold, build_context(kind, e["id"], src))
         sliced += len(ps) > 1
         calls += len(ps)
         prompt_tokens += sum(sys_tokens + estimate_tokens(p) for p in ps)
     worst_completion = calls * limits.max_completion_tokens
     worst_total = prompt_tokens + worst_completion
     ledger = Ledger()
-    print(f"model: {model}")
+    print(f"model: {model}, context: {kind}")
     print(f"contracts: {len(entries)}, sliced: {sliced}, API calls: {calls}")
     print(f"estimated prompt tokens: {prompt_tokens}")
     print(f"worst-case completion tokens (calls x {limits.max_completion_tokens}): {worst_completion}")
@@ -77,7 +81,9 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--only", nargs="*")
     ap.add_argument("--model", default=DEFAULT_MODEL)
-    ap.add_argument("--run", default="llm_only", help="results/llm/<run>/")
+    ap.add_argument("--context", default="none", choices=list(RUN_NAMES),
+                    help="extra prompt context for the M4 ablation")
+    ap.add_argument("--run", default=None, help="results/llm/<run>/ (default depends on --context)")
     ap.add_argument("--slice-threshold", type=int, default=150,
                     help="contracts longer than this many lines are audited per function")
     ap.add_argument("--reasoning-effort", default="low", choices=["low", "medium", "high"])
@@ -89,9 +95,10 @@ def main() -> None:
         entries = [e for e in entries if e["id"] in set(args.only)]
         if not entries:
             sys.exit("no matching contract ids")
+    args.run = args.run or RUN_NAMES[args.context]
     limits = Limits.from_settings()
     if args.dry_run:
-        dry_run(entries, args.model, args.slice_threshold, limits)
+        dry_run(entries, args.model, args.slice_threshold, limits, args.context)
         return
 
     client = GroqClient(model=args.model, limits=limits)
@@ -103,7 +110,8 @@ def main() -> None:
     for i, e in enumerate(entries, start=1):
         src = (DATASET_DIR / e["file"]).read_text()
         try:
-            r = audit(src, client, args.slice_threshold, args.reasoning_effort)
+            r = audit(src, client, args.slice_threshold, args.reasoning_effort,
+                      build_context(args.context, e["id"], src))
         except BudgetExceeded as exc:
             stopped = f"budget cap reached before {e['id']}: {exc}"
             print(f"\nSTOPPED: {stopped}", flush=True)
@@ -112,7 +120,7 @@ def main() -> None:
             stopped = f"API error on {e['id']}: {exc}"
             print(f"\nSTOPPED: {stopped}", flush=True)
             break
-        rec = {"id": e["id"], "model": args.model, "prompt_version": PROMPT_VERSION,
+        rec = {"id": e["id"], "model": args.model, "prompt_version": PROMPT_VERSION, "context": args.context,
                **{k: getattr(r, k) for k in r.__dataclass_fields__}}
         results[e["id"]] = rec
         (out / "contracts" / f"{e['id']}.json").write_text(json.dumps(rec, indent=2) + "\n")
@@ -130,6 +138,7 @@ def main() -> None:
         "machine": machine_info(),
         "model": args.model,
         "prompt_version": PROMPT_VERSION,
+        "context": args.context,
         "settings": {"reasoning_effort": args.reasoning_effort, "temperature": 0,
                      "slice_threshold": args.slice_threshold,
                      "max_completion_tokens": limits.max_completion_tokens},
@@ -149,11 +158,11 @@ def main() -> None:
         summary.update(contract_level(done, results))
     (out / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")
 
-    L = [f"# LLM agent run `{args.run}` (M3)", "",
+    L = [f"# LLM agent run `{args.run}`", "",
          "Generated by `scripts/run_llm.py`. Numbers are from the machine below; API time is "
          "Groq's server round-trip, not local compute.", "", "| setting | value |", "|---|---|"]
     L += [f"| {k} | {v} |" for k, v in summary["machine"].items()]
-    L += [f"| model | {args.model} |", f"| prompt version | {PROMPT_VERSION} |"]
+    L += [f"| model | {args.model} |", f"| prompt version | {PROMPT_VERSION} |", f"| context | {args.context} |"]
     L += [f"| {k} | {v} |" for k, v in summary["settings"].items()]
     L += ["", "## Totals", "", "| metric | value |", "|---|---|"]
     L += [f"| {k} | {v} |" for k, v in summary.items() if not isinstance(v, (dict, list))]

@@ -1,0 +1,24 @@
+{
+  "id": "c49",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "rag",
+  "findings": [
+    {
+      "class": "arithmetic",
+      "function": "lockEth",
+      "line": 13,
+      "function_from_line": "lockEth",
+      "reasoning": "In Solidity 0.5 arithmetic overflow is unchecked. Adding _time/14 to block.number can overflow the uint and wrap around, allowing a user to set an unlockBlock far in the past and withdraw prematurely.",
+      "confidence": 0.85
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 1368,
+  "completion_tokens": 285,
+  "seconds": 62.221,
+  "api_seconds": 2.198
+}

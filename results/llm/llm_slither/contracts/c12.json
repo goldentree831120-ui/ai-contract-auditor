@@ -1,0 +1,24 @@
+{
+  "id": "c12",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "slither",
+  "findings": [
+    {
+      "class": "access_control",
+      "function": "init",
+      "line": 7,
+      "function_from_line": "init",
+      "reasoning": "The `init` function is public and allows any caller to modify the contract's internal `map` state without any authorization checks, enabling arbitrary state changes by an attacker.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 748,
+  "completion_tokens": 256,
+  "seconds": 1.057,
+  "api_seconds": 1.055
+}

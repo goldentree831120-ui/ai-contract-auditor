@@ -1,0 +1,24 @@
+{
+  "id": "c35",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "rag",
+  "findings": [
+    {
+      "class": "access_control",
+      "function": "withdrawLeftOver",
+      "line": 17,
+      "function_from_line": "withdrawLeftOver",
+      "reasoning": "Anyone can call withdrawLeftOver after payedOut is true and receive the contract's entire balance, allowing an attacker to steal funds.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 1219,
+  "completion_tokens": 224,
+  "seconds": 61.268,
+  "api_seconds": 1.417
+}

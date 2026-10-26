@@ -12,7 +12,7 @@ scripts in this repo, with the hardware noted, including the weak ones.
 | M1 | labeled dataset (49 contracts, 9 classes) with provenance and licenses | done |
 | M2 | Slither baseline, findings per contract | done |
 | M3 | LLM agent with structured output and function-level slicing | done |
-| M4 | RAG over SWC descriptions; ablation (LLM, +Slither, +RAG, both) | planned |
+| M4 | RAG over SWC descriptions; ablation (LLM, +Slither, +RAG, both) | done |
 | M5 | precision, recall, F1 per class, false-positive analysis, cost and time | planned |
 | M6 | CLI, small UI, methodology and limitations write-up | planned |
 
@@ -27,6 +27,10 @@ python3 -m venv .venv
 .venv/bin/python scripts/run_slither.py              # M2 baseline -> results/slither/
 .venv/bin/python scripts/run_llm.py --dry-run         # M3 cost preview, no key needed
 .venv/bin/python scripts/run_llm.py                   # M3 LLM run -> results/llm/llm_only/ (needs .env)
+.venv/bin/python scripts/build_kb.py --check          # M4 knowledge base matches pinned SWC
+.venv/bin/python scripts/eval_retrieval.py            # M4 retriever quality, no API calls
+.venv/bin/python scripts/run_llm.py --context slither # M4 ablation runs: slither | rag | both
+.venv/bin/python scripts/ablation.py                  # M4 table -> results/ablation/ABLATION.md
 ```
 
 `--check` needs network access to github.com (it fetches the pinned source commits into
@@ -103,6 +107,45 @@ never printed or written to results.
 Results: [results/llm/llm_only/SUMMARY.md](results/llm/llm_only/SUMMARY.md). Precision,
 recall and F1 per class come in M5.
 
+## Retrieval and ablation (M4)
+
+**Knowledge base** (`knowledge/swc_kb.json`, built by `scripts/build_kb.py` from the pinned
+SWC commit): the Title, Description and Remediation prose of each SWC entry. The Samples
+section, references and all code are dropped, because the dataset's contracts come from
+those samples. Tests check that no dataset code line of 20+ characters and no sample file
+name appears in the knowledge base.
+
+**Retriever** (`src/auditor/kb.py`): BM25 in pure Python (no embedding API, no extra cost),
+query = the contract's code, top 3 entries, each cut to 220 words.
+`scripts/eval_retrieval.py` measures it without any API call: is a labeled SWC entry among
+the top 3 for each vulnerable contract?
+
+| knowledge base | entries | labeled SWC in top 3 | labeled class in top 3 |
+|---|---|---|---|
+| all SWC entries (first design) | 37 | 9/31 | 14/31 |
+| taxonomy entries only (used) | 17 | 15/31 | 20/31 |
+
+The first design retrieved generic entries (for example "code with no effects") for most
+contracts. It was changed once, to keep only the 17 entries that map to the 9 classes the
+model can output, and then not tuned further. That decision was made after seeing the first
+number on the same 31 contracts, so the second number is optimistic. Keyword retrieval from
+code to prose is weak either way: for the reentrancy contract c17 it returns delegatecall,
+front-running and tx.origin entries.
+
+**Ablation**: four LLM conditions on the same 49 contracts with the same model, system
+prompt, schema and settings; only the context added before the code differs. The
+no-context prompt is byte-identical to M3's, so the M3 run is reused as "LLM only".
+
+| condition | added context |
+|---|---|
+| LLM only | none |
+| LLM + Slither | Slither results of Low impact or above (Informational and Optimization dropped; rule fixed before any run), file names hidden |
+| LLM + RAG | top 3 retrieved SWC passages |
+| LLM + RAG + Slither | both |
+
+Results: [results/ablation/ABLATION.md](results/ablation/ABLATION.md) and
+[results/retrieval/SUMMARY.md](results/retrieval/SUMMARY.md).
+
 ## Sources
 
 | source | license (checked) | used for | used in |
@@ -112,6 +155,7 @@ recall and F1 per class come in M5.
 | [trailofbits/not-so-smart-contracts](https://github.com/trailofbits/not-so-smart-contracts) @ `020dbdb` | Apache-2.0 | 1 contract (modified, changes listed) | M1 |
 | [smartbugs/smartbugs-curated](https://github.com/smartbugs/smartbugs-curated) @ `230e649` | Apache-2.0 repo; contracts keep their original licenses | label cross-check only; no files redistributed | M1 |
 | [SunWeb3Sec/DeFiHackLabs](https://github.com/SunWeb3Sec/DeFiHackLabs) | Apache-2.0 (LICENSE file) | not used: holds attack PoCs, not the victim contracts | none |
+| SWC-registry entry text (same commit as above) | MIT | knowledge base: Title, Description, Remediation only | M4 |
 
 LLM: `openai/gpt-oss-120b` (open-weight model, Apache-2.0) served by
 [Groq](https://console.groq.com) under Groq's terms of service; only the public dataset
@@ -129,11 +173,14 @@ Upstream origins credited inside some SWC samples, and their license status, are
 
 ```
 dataset/        spec.toml (labeling decisions), contracts/, labels.json, licenses/, raw/
-results/        slither/ (M2), llm/llm_only/ (M3); results/raw/ is git-ignored
-scripts/        build_dataset.py, validate_dataset.py, run_slither.py, run_llm.py
+knowledge/      swc_kb.json (M4 knowledge base, text only)
+results/        slither/ (M2), llm/<run>/ (M3, M4), retrieval/, ablation/ (M4); results/raw/ is git-ignored
+scripts/        build_dataset.py, validate_dataset.py, run_slither.py, run_llm.py,
+                build_kb.py, eval_retrieval.py, ablation.py
 src/auditor/    solidity.py, dataset.py, solc.py (pinned compilers),
                 slither_map.py, slither_runner.py (M2),
-                llm.py (Groq client, caps, cache), agent.py (prompt, schema, slicing), report.py
+                llm.py (Groq client, caps, cache), agent.py (prompt, schema, slicing), report.py,
+                kb.py (knowledge base, BM25), context.py (Slither/RAG prompt context), sources.py
 tests/          unit tests and dataset checks (run in CI)
 ```
 

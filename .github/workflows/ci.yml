@@ -6,7 +6,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
@@ -18,11 +18,19 @@ jobs:
         run: pytest -q
       - name: Dataset rebuilds from pinned sources
         run: python scripts/build_dataset.py --check
-      - name: LLM run cost preview (no API key, no API calls)
-        run: python scripts/run_llm.py --dry-run
+      - name: Knowledge base rebuilds from the pinned SWC commit
+        run: python scripts/build_kb.py --check
+      - name: Retrieval evaluation (deterministic, no API calls)
+        run: python scripts/eval_retrieval.py --out /tmp/retrieval
+      - name: LLM run cost previews (no API key, no API calls)
+        run: |
+          python scripts/run_llm.py --dry-run
+          python scripts/run_llm.py --dry-run --context both
+      - name: Ablation table builds from committed results
+        run: python scripts/ablation.py
 
   slither-smoke:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6

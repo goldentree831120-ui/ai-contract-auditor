@@ -1,0 +1,24 @@
+{
+  "id": "c08",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "both",
+  "findings": [
+    {
+      "class": "unchecked_low_level_calls",
+      "function": "callB",
+      "line": 10,
+      "function_from_line": "callB",
+      "reasoning": "The low\u2011level `call` to `callee` ignores the returned boolean, so a failed call (e.g., if the callee is a non\u2011contract or reverts) is not detected and the function proceeds as if it succeeded, which can be abused to hide errors or cause unexpected state.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 1256,
+  "completion_tokens": 205,
+  "seconds": 60.517,
+  "api_seconds": 1.334
+}

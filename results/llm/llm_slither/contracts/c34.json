@@ -1,0 +1,24 @@
+{
+  "id": "c34",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "slither",
+  "findings": [
+    {
+      "class": "time_manipulation",
+      "function": "withdraw",
+      "line": 47,
+      "function_from_line": "withdraw",
+      "reasoning": "The withdrawal condition uses `now > lockTime[msg.sender]`. Miners can influence `block.timestamp` within a reasonable range, allowing them to front\u2011run or manipulate the lock period and potentially withdraw funds earlier than intended.",
+      "confidence": 0.9
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 1107,
+  "completion_tokens": 178,
+  "seconds": 59.146,
+  "api_seconds": 1.185
+}

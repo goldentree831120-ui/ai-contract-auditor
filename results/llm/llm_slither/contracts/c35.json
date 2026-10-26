@@ -1,0 +1,48 @@
+{
+  "id": "c35",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "slither",
+  "findings": [
+    {
+      "class": "other",
+      "function": "sendToWinner",
+      "line": 11,
+      "function_from_line": "sendToWinner",
+      "reasoning": "The state variables winner and winAmount are never initialized, so sendToWinner will attempt to send zero ether to the zero address, marking the lottery as paid out without actually distributing any funds and potentially locking the contract's balance.",
+      "confidence": 0.85
+    },
+    {
+      "class": "unchecked_low_level_calls",
+      "function": "sendToWinner",
+      "line": 11,
+      "function_from_line": "sendToWinner",
+      "reasoning": "The return value of winner.send(winAmount) is ignored, allowing the call to fail silently and still mark the payout as completed.",
+      "confidence": 0.9
+    },
+    {
+      "class": "access_control",
+      "function": "withdrawLeftOver",
+      "line": 17,
+      "function_from_line": "withdrawLeftOver",
+      "reasoning": "Anyone can call withdrawLeftOver after payedOut is true and have the contract send its entire balance to msg.sender, allowing arbitrary draining of funds.",
+      "confidence": 0.95
+    },
+    {
+      "class": "unchecked_low_level_calls",
+      "function": "withdrawLeftOver",
+      "line": 17,
+      "function_from_line": "withdrawLeftOver",
+      "reasoning": "The return value of msg.sender.send(this.balance) is ignored, so a failed send does not revert and the contract may appear to have transferred funds when it has not.",
+      "confidence": 0.9
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 957,
+  "completion_tokens": 589,
+  "seconds": 3.126,
+  "api_seconds": 2.204
+}

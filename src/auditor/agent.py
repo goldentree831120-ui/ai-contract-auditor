@@ -97,13 +97,16 @@ def make_slices(src: str) -> list[tuple[str, set[int]]]:
     return [(name, context | signatures | set(range(a, b + 1))) for name, a, b in spans]
 
 
-def user_prompt(src: str, keep: set[int] | None = None, focus: str | None = None) -> str:
+def user_prompt(src: str, keep: set[int] | None = None, focus: str | None = None,
+                context: str | None = None) -> str:
     head = "Audit this Solidity contract."
     if focus is not None:
         head = (f"Audit the function `{focus}` in this excerpt. Contract-level declarations and "
                 "the signature lines of other functions are shown for context; their bodies are "
                 "omitted. Report only issues inside the shown body of the function being audited.")
-    return f"{head}\n\n```solidity\n{numbered(src, keep)}\n```"
+    # Without context the prompt is byte-identical to M3, so the llm_only run stays valid.
+    extra = f"\n\n{context}" if context else ""
+    return f"{head}{extra}\n\n```solidity\n{numbered(src, keep)}\n```"
 
 
 @dataclass
@@ -151,7 +154,7 @@ def validate_findings(raw: list, src: str, allowed_lines: set[int] | None = None
 
 
 def audit(src: str, client: GroqClient, slice_threshold: int = 150,
-          reasoning_effort: str = "low") -> AuditResult:
+          reasoning_effort: str = "low", context: str | None = None) -> AuditResult:
     n_lines = src.rstrip("\n").count("\n") + 1
     schema, system = output_schema(), system_prompt()
     if n_lines <= slice_threshold or not function_spans(src):
@@ -166,7 +169,7 @@ def audit(src: str, client: GroqClient, slice_threshold: int = 150,
     api_seconds = 0.0
     start = time.perf_counter()
     for focus, keep in jobs:
-        resp = client.complete_json(system, user_prompt(src, keep, focus), schema,
+        resp = client.complete_json(system, user_prompt(src, keep, focus, context), schema,
                                     reasoning_effort=reasoning_effort)
         calls += 1
         cached += resp["cached"]

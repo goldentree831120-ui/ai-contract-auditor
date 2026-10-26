@@ -1,0 +1,817 @@
+{
+  "all_swc_entries": {
+    "kb_entries": 37,
+    "k": 3,
+    "contracts": 31,
+    "recall_exact_swc": 9,
+    "recall_class_level": 14,
+    "rows": [
+      {
+        "id": "c02",
+        "gold_swc": [
+          "SWC-100"
+        ],
+        "retrieved": [
+          "SWC-132",
+          "SWC-135",
+          "SWC-105"
+        ],
+        "exact": false,
+        "class_level": true
+      },
+      {
+        "id": "c04",
+        "gold_swc": [
+          "SWC-101"
+        ],
+        "retrieved": [
+          "SWC-121"
+        ],
+        "exact": false,
+        "class_level": false
+      },
+      {
+        "id": "c05",
+        "gold_swc": [
+          "SWC-120"
+        ],
+        "retrieved": [
+          "SWC-111",
+          "SWC-116",
+          "SWC-114"
+        ],
+        "exact": false,
+        "class_level": false
+      },
+      {
+        "id": "c06",
+        "gold_swc": [
+          "SWC-105"
+        ],
+        "retrieved": [
+          "SWC-135",
+          "SWC-112",
+          "SWC-115"
+        ],
+        "exact": false,
+        "class_level": true
+      },
+      {
+        "id": "c08",
+        "gold_swc": [
+          "SWC-104"
+        ],
+        "retrieved": [
+          "SWC-112",
+          "SWC-126",
+          "SWC-104"
+        ],
+        "exact": true,
+        "class_level": true
+      },
+      {
+        "id": "c09",
+        "gold_swc": [
+          "SWC-113"
+        ],
+        "retrieved": [
+          "SWC-118",
+          "SWC-133",
+          "SWC-105"
+        ],
+        "exact": false,
+        "class_level": false
+      },
+      {
+        "id": "c10",
+        "gold_swc": [
+          "SWC-115"
+        ],
+        "retrieved": [
+          "SWC-115",
+          "SWC-134",
+          "SWC-122"
+        ],
+        "exact": true,
+        "class_level": true
+      },
+      {
+        "id": "c11",
+        "gold_swc": [
+          "SWC-128"
+        ],
+        "retrieved": [
+          "SWC-133",
+          "SWC-135",
+          "SWC-115"
+        ],
+        "exact": false,
+        "class_level": false
+      },
+      {
+        "id": "c14",
+        "gold_swc": [
+          "SWC-117"
+        ],
+        "retrieved": [
+          "SWC-133",
+          "SWC-122",
+          "SWC-117"
+        ],
+        "exact": true,
+        "class_level": true
+      },
+      {
+        "id": "c17",
+        "gold_swc": [
+          "SWC-107"
+        ],
+        "retrieved": [
+          "SWC-112",
+          "SWC-134",
+          "SWC-135"
+        ],
+        "exact": false,
+        "class_level": false
+      },
+      {
+        "id": "c18",
+        "gold_swc": [
+          "SWC-118"
+        ],
+        "retrieved": [
+          "SWC-105",
+          "SWC-118",
+          "SWC-135"
+        ],
+        "exact": true,
+        "class_level": true
+      },
+      {
+        "id": "c21",
+        "gold_swc": [
+          "SWC-107"
+        ],
+        "retrieved": [
+          "SWC-135",
+          "SWC-134",
+          "SWC-112"
+        ],
+        "exact": false,
+        "class_level": false
+      },
+      {
+        "id": "c24",
+        "gold_swc": [
+          "SWC-124"
+        ],
+        "retrieved": [
+          "SWC-118",
+          "SWC-135",
+          "SWC-111"
+        ],
+        "exact": false,
+        "class_level": true
+      },
+      {
+        "id": "c25",
+        "gold_swc": [
+          "SWC-120"
+        ],
+        "retrieved": [
+          "SWC-114",
+          "SWC-105",
+          "SWC-120"
+        ],
+        "exact": true,
+        "class_level": true
+      },
+      {
+        "id": "c26",
+        "gold_swc": [
+          "SWC-118"
+        ],
+        "retrieved": [
+          "SWC-135",
+          "SWC-112",
+          "SWC-122"
+        ],
+        "exact": false,
+        "class_level": true
+      },
+      {
+        "id": "c27",
+        "gold_swc": [
+          "SWC-107"
+        ],
+        "retrieved": [
+          "SWC-105",
+          "SWC-135",
+          "SWC-113"
+        ],
+        "exact": false,
+        "class_level": false
+      },
+      {
+        "id": "c29",
+        "gold_swc": [
+          "SWC-114",
+          "SWC-116",
+          "SWC-120"
+        ],
+        "retrieved": [
+          "SWC-116",
+          "SWC-135",
+          "SWC-132"
+        ],
+        "exact": true,
+        "class_level": true
+      },
+      {
+        "id": "c31",
+        "gold_swc": [
+          "SWC-112"
+        ],
+        "retrieved": [
+          "SWC-112",
+          "SWC-118",
+          "SWC-124"
+        ],
+        "exact": true,
+        "class_level": true
+      },
+      {
+        "id": "c32",
+        "gold_swc": [
+          "SWC-106"
+        ],
+        "retrieved": [
+          "SWC-135",
+          "SWC-111",
+          "SWC-115"
+        ],
+        "exact": false,
+        "class_level": true
+      },
+      {
+        "id": "c33",
+        "gold_swc": [
+          "SWC-101"
+        ],
+        "retrieved": [
+          "SWC-123",
+          "SWC-112"
+        ],
+        "exact": false,
+        "class_level": false
+      },
+      {
+        "id": "c35",
+        "gold_swc": [
+          "SWC-104"
+        ],
+        "retrieved": [
+          "SWC-112",
+          "SWC-134",
+          "SWC-128"
+        ],
+        "exact": false,
+        "class_level": false
+      },
+      {
+        "id": "c36",
+        "gold_swc": [
+          "SWC-116"
+        ],
+        "retrieved": [
+          "SWC-116",
+          "SWC-120",
+          "SWC-107"
+        ],
+        "exact": true,
+        "class_level": true
+      },
+      {
+        "id": "c37",
+        "gold_swc": [
+          "SWC-101"
+        ],
+        "retrieved": [
+          "SWC-116",
+          "SWC-134",
+          "SWC-135"
+        ],
+        "exact": false,
+        "class_level": false
+      },
+      {
+        "id": "c38",
+        "gold_swc": [
+          "SWC-101"
+        ],
+        "retrieved": [
+          "SWC-123",
+          "SWC-112"
+        ],
+        "exact": false,
+        "class_level": false
+      },
+      {
+        "id": "c39",
+        "gold_swc": [
+          "SWC-114"
+        ],
+        "retrieved": [
+          "SWC-111",
+          "SWC-105",
+          "SWC-122"
+        ],
+        "exact": false,
+        "class_level": false
+      },
+      {
+        "id": "c41",
+        "gold_swc": [
+          "SWC-128"
+        ],
+        "retrieved": [
+          "SWC-135",
+          "SWC-133",
+          "SWC-115"
+        ],
+        "exact": false,
+        "class_level": false
+      },
+      {
+        "id": "c42",
+        "gold_swc": [
+          "SWC-101"
+        ],
+        "retrieved": [
+          "SWC-123",
+          "SWC-112"
+        ],
+        "exact": false,
+        "class_level": false
+      },
+      {
+        "id": "c44",
+        "gold_swc": [
+          "SWC-120"
+        ],
+        "retrieved": [
+          "SWC-111",
+          "SWC-132",
+          "SWC-116"
+        ],
+        "exact": false,
+        "class_level": false
+      },
+      {
+        "id": "c46",
+        "gold_swc": [
+          "SWC-109",
+          "SWC-120"
+        ],
+        "retrieved": [
+          "SWC-111",
+          "SWC-132",
+          "SWC-116"
+        ],
+        "exact": false,
+        "class_level": false
+      },
+      {
+        "id": "c47",
+        "gold_swc": [
+          "SWC-114"
+        ],
+        "retrieved": [
+          "SWC-114",
+          "SWC-135",
+          "SWC-122"
+        ],
+        "exact": true,
+        "class_level": true
+      },
+      {
+        "id": "c49",
+        "gold_swc": [
+          "SWC-116"
+        ],
+        "retrieved": [
+          "SWC-134",
+          "SWC-128",
+          "SWC-113"
+        ],
+        "exact": false,
+        "class_level": false
+      }
+    ]
+  },
+  "taxonomy_entries_used": {
+    "kb_entries": 17,
+    "k": 3,
+    "contracts": 31,
+    "recall_exact_swc": 15,
+    "recall_class_level": 20,
+    "rows": [
+      {
+        "id": "c02",
+        "gold_swc": [
+          "SWC-100"
+        ],
+        "retrieved": [
+          "SWC-112",
+          "SWC-105",
+          "SWC-114"
+        ],
+        "exact": false,
+        "class_level": true
+      },
+      {
+        "id": "c04",
+        "gold_swc": [
+          "SWC-101"
+        ],
+        "retrieved": [],
+        "exact": false,
+        "class_level": false
+      },
+      {
+        "id": "c05",
+        "gold_swc": [
+          "SWC-120"
+        ],
+        "retrieved": [
+          "SWC-114",
+          "SWC-112",
+          "SWC-120"
+        ],
+        "exact": true,
+        "class_level": true
+      },
+      {
+        "id": "c06",
+        "gold_swc": [
+          "SWC-105"
+        ],
+        "retrieved": [
+          "SWC-112",
+          "SWC-115",
+          "SWC-114"
+        ],
+        "exact": false,
+        "class_level": true
+      },
+      {
+        "id": "c08",
+        "gold_swc": [
+          "SWC-104"
+        ],
+        "retrieved": [
+          "SWC-112",
+          "SWC-128",
+          "SWC-104"
+        ],
+        "exact": true,
+        "class_level": true
+      },
+      {
+        "id": "c09",
+        "gold_swc": [
+          "SWC-113"
+        ],
+        "retrieved": [
+          "SWC-118",
+          "SWC-128",
+          "SWC-105"
+        ],
+        "exact": false,
+        "class_level": true
+      },
+      {
+        "id": "c10",
+        "gold_swc": [
+          "SWC-115"
+        ],
+        "retrieved": [
+          "SWC-115",
+          "SWC-128",
+          "SWC-112"
+        ],
+        "exact": true,
+        "class_level": true
+      },
+      {
+        "id": "c11",
+        "gold_swc": [
+          "SWC-128"
+        ],
+        "retrieved": [
+          "SWC-115",
+          "SWC-112",
+          "SWC-128"
+        ],
+        "exact": true,
+        "class_level": true
+      },
+      {
+        "id": "c14",
+        "gold_swc": [
+          "SWC-117"
+        ],
+        "retrieved": [
+          "SWC-117",
+          "SWC-114",
+          "SWC-128"
+        ],
+        "exact": true,
+        "class_level": true
+      },
+      {
+        "id": "c17",
+        "gold_swc": [
+          "SWC-107"
+        ],
+        "retrieved": [
+          "SWC-112",
+          "SWC-114",
+          "SWC-115"
+        ],
+        "exact": false,
+        "class_level": false
+      },
+      {
+        "id": "c18",
+        "gold_swc": [
+          "SWC-118"
+        ],
+        "retrieved": [
+          "SWC-105",
+          "SWC-112",
+          "SWC-118"
+        ],
+        "exact": true,
+        "class_level": true
+      },
+      {
+        "id": "c21",
+        "gold_swc": [
+          "SWC-107"
+        ],
+        "retrieved": [
+          "SWC-112",
+          "SWC-115",
+          "SWC-128"
+        ],
+        "exact": false,
+        "class_level": false
+      },
+      {
+        "id": "c24",
+        "gold_swc": [
+          "SWC-124"
+        ],
+        "retrieved": [
+          "SWC-118",
+          "SWC-112",
+          "SWC-105"
+        ],
+        "exact": false,
+        "class_level": true
+      },
+      {
+        "id": "c25",
+        "gold_swc": [
+          "SWC-120"
+        ],
+        "retrieved": [
+          "SWC-114",
+          "SWC-105",
+          "SWC-120"
+        ],
+        "exact": true,
+        "class_level": true
+      },
+      {
+        "id": "c26",
+        "gold_swc": [
+          "SWC-118"
+        ],
+        "retrieved": [
+          "SWC-112",
+          "SWC-105",
+          "SWC-115"
+        ],
+        "exact": false,
+        "class_level": true
+      },
+      {
+        "id": "c27",
+        "gold_swc": [
+          "SWC-107"
+        ],
+        "retrieved": [
+          "SWC-105",
+          "SWC-113",
+          "SWC-128"
+        ],
+        "exact": false,
+        "class_level": false
+      },
+      {
+        "id": "c29",
+        "gold_swc": [
+          "SWC-114",
+          "SWC-116",
+          "SWC-120"
+        ],
+        "retrieved": [
+          "SWC-116",
+          "SWC-112",
+          "SWC-128"
+        ],
+        "exact": true,
+        "class_level": true
+      },
+      {
+        "id": "c31",
+        "gold_swc": [
+          "SWC-112"
+        ],
+        "retrieved": [
+          "SWC-112",
+          "SWC-124",
+          "SWC-118"
+        ],
+        "exact": true,
+        "class_level": true
+      },
+      {
+        "id": "c32",
+        "gold_swc": [
+          "SWC-106"
+        ],
+        "retrieved": [
+          "SWC-115",
+          "SWC-106",
+          "SWC-112"
+        ],
+        "exact": true,
+        "class_level": true
+      },
+      {
+        "id": "c33",
+        "gold_swc": [
+          "SWC-101"
+        ],
+        "retrieved": [
+          "SWC-112"
+        ],
+        "exact": false,
+        "class_level": false
+      },
+      {
+        "id": "c35",
+        "gold_swc": [
+          "SWC-104"
+        ],
+        "retrieved": [
+          "SWC-112",
+          "SWC-128",
+          "SWC-115"
+        ],
+        "exact": false,
+        "class_level": false
+      },
+      {
+        "id": "c36",
+        "gold_swc": [
+          "SWC-116"
+        ],
+        "retrieved": [
+          "SWC-116",
+          "SWC-120",
+          "SWC-107"
+        ],
+        "exact": true,
+        "class_level": true
+      },
+      {
+        "id": "c37",
+        "gold_swc": [
+          "SWC-101"
+        ],
+        "retrieved": [
+          "SWC-116",
+          "SWC-114",
+          "SWC-128"
+        ],
+        "exact": false,
+        "class_level": false
+      },
+      {
+        "id": "c38",
+        "gold_swc": [
+          "SWC-101"
+        ],
+        "retrieved": [
+          "SWC-112"
+        ],
+        "exact": false,
+        "class_level": false
+      },
+      {
+        "id": "c39",
+        "gold_swc": [
+          "SWC-114"
+        ],
+        "retrieved": [
+          "SWC-105",
+          "SWC-114",
+          "SWC-115"
+        ],
+        "exact": true,
+        "class_level": true
+      },
+      {
+        "id": "c41",
+        "gold_swc": [
+          "SWC-128"
+        ],
+        "retrieved": [
+          "SWC-115",
+          "SWC-114",
+          "SWC-112"
+        ],
+        "exact": false,
+        "class_level": false
+      },
+      {
+        "id": "c42",
+        "gold_swc": [
+          "SWC-101"
+        ],
+        "retrieved": [
+          "SWC-112"
+        ],
+        "exact": false,
+        "class_level": false
+      },
+      {
+        "id": "c44",
+        "gold_swc": [
+          "SWC-120"
+        ],
+        "retrieved": [
+          "SWC-112",
+          "SWC-114",
+          "SWC-120"
+        ],
+        "exact": true,
+        "class_level": true
+      },
+      {
+        "id": "c46",
+        "gold_swc": [
+          "SWC-109",
+          "SWC-120"
+        ],
+        "retrieved": [
+          "SWC-112",
+          "SWC-114",
+          "SWC-120"
+        ],
+        "exact": true,
+        "class_level": true
+      },
+      {
+        "id": "c47",
+        "gold_swc": [
+          "SWC-114"
+        ],
+        "retrieved": [
+          "SWC-114",
+          "SWC-112",
+          "SWC-115"
+        ],
+        "exact": true,
+        "class_level": true
+      },
+      {
+        "id": "c49",
+        "gold_swc": [
+          "SWC-116"
+        ],
+        "retrieved": [
+          "SWC-128",
+          "SWC-113",
+          "SWC-112"
+        ],
+        "exact": false,
+        "class_level": false
+      }
+    ]
+  }
+}

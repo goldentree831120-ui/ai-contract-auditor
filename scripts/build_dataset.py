@@ -23,7 +23,6 @@ import hashlib
 import json
 import re
 import shutil
-import subprocess
 import sys
 import tempfile
 import tomllib
@@ -32,6 +31,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
+from auditor.sources import fetch  # noqa: E402
 from auditor.solidity import (  # noqa: E402
     enclosing_function,
     find_anchor,
@@ -42,7 +42,6 @@ from auditor.solidity import (  # noqa: E402
 )
 
 SPEC = REPO_ROOT / "dataset" / "spec.toml"
-CACHE = REPO_ROOT / ".cache" / "sources"
 GENERATED = ["contracts", "raw", "licenses", "labels.json", "CONTRACTS.md"]
 
 # Used only to cross-check our line labels; no SmartBugs contracts are redistributed.
@@ -60,26 +59,6 @@ SMARTBUGS_NAMES = {  # our key -> SmartBugs file name, where names differ
     "sigp-roulette": "roulette.sol",
     "sigp-findthishash": "FindThisHash.sol",
 }
-
-
-def fetch(repo: str, commit: str) -> Path:
-    """Shallow-fetch one commit of a GitHub repo into the cache (idempotent)."""
-    dest = CACHE / repo.replace("/", "__")
-    head = dest / ".git" / "HEAD"
-    if dest.exists() and head.exists():
-        cur = subprocess.run(["git", "-C", str(dest), "rev-parse", "HEAD"],
-                             capture_output=True, text=True).stdout.strip()
-        if cur == commit:
-            return dest
-        shutil.rmtree(dest)
-    dest.mkdir(parents=True, exist_ok=True)
-    print(f"fetching {repo}@{commit[:10]}", flush=True)
-    for cmd in (["git", "init", "-q"],
-                ["git", "remote", "add", "origin", f"https://github.com/{repo}.git"],
-                ["git", "fetch", "-q", "--depth", "1", "origin", commit],
-                ["git", "checkout", "-q", "FETCH_HEAD"]):
-        subprocess.run(cmd, cwd=dest, check=True)
-    return dest
 
 
 def swc_sample(root: Path, doc: str, sample: str) -> str:

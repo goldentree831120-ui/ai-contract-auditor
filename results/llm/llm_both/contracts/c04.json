@@ -1,0 +1,24 @@
+{
+  "id": "c04",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "both",
+  "findings": [
+    {
+      "class": "arithmetic",
+      "function": "init",
+      "line": 7,
+      "function_from_line": "init",
+      "reasoning": "The statement `map[k] -= v;` performs subtraction on a uint256 without safety checks in Solidity 0.4.11, allowing an underflow that wraps the value to 2^256\u20111 and can be abused to inflate stored balances.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 716,
+  "completion_tokens": 189,
+  "seconds": 1.217,
+  "api_seconds": 1.208
+}

@@ -1,0 +1,24 @@
+{
+  "id": "c03",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "rag",
+  "findings": [
+    {
+      "class": "arithmetic",
+      "function": "donate",
+      "line": 7,
+      "function_from_line": "donate",
+      "reasoning": "The addition `credit[to] += msg.value;` is performed without overflow checks in Solidity 0.4.24, allowing an attacker to overflow the credit balance by donating a large enough amount.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 1,
+  "prompt_tokens": 1237,
+  "completion_tokens": 305,
+  "seconds": 0.002,
+  "api_seconds": 1.303
+}

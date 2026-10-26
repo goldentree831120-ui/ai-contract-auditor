@@ -138,8 +138,9 @@ trailofbits/not-so-smart-contracts (Apache-2.0), sigp/solidity-security-blog (CC
 - **Training-data contamination.** SWC-registry, the sigp blog and not-so-smart-contracts
   are widely copied online, so LLMs have likely seen them. Comment and name sanitization
   reduces direct answer lookup but cannot undo memorization of code shapes.
-- **RAG leakage risk (M4).** The SWC registry is also the planned knowledge base. M4 must
-  index only the SWC descriptions and remediation text, never the code samples, or the
-  retrieval step would hand the model the answer.
+- **RAG leakage risk (M4).** The SWC registry is also the knowledge base. M4 indexes only
+  the SWC descriptions and remediation text, never the code samples, and
+  `tests/test_kb.py` enforces this. The descriptions still come from the same registry as
+  most contracts, so retrieval is not fully independent of the dataset.
 - **One labeler.** Labels follow the upstream sources and were reviewed against SmartBugs
   where it overlaps, but were assigned by one person.

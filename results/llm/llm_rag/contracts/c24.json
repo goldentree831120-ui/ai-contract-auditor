@@ -1,0 +1,24 @@
+{
+  "id": "c24",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "rag",
+  "findings": [
+    {
+      "class": "arithmetic",
+      "function": "PopBonusCode",
+      "line": 21,
+      "function_from_line": "PopBonusCode",
+      "reasoning": "The function only checks `0 <= bonusCodes.length`, which is always true, allowing `bonusCodes.length--` to underflow when the array is empty, setting the length to a huge value and potentially breaking the contract's logic.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 1,
+  "prompt_tokens": 1294,
+  "completion_tokens": 235,
+  "seconds": 0.002,
+  "api_seconds": 1.169
+}

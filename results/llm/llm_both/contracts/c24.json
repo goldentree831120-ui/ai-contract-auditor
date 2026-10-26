@@ -1,0 +1,32 @@
+{
+  "id": "c24",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "both",
+  "findings": [
+    {
+      "class": "denial_of_service",
+      "function": "PushBonusCode",
+      "line": 16,
+      "function_from_line": "PushBonusCode",
+      "reasoning": "Anyone can call `PushBonusCode` to append arbitrary values, allowing an attacker to grow the `bonusCodes` array without bound, eventually causing out\u2011of\u2011gas errors for other functions that iterate or manipulate the array.",
+      "confidence": 0.9
+    },
+    {
+      "class": "arithmetic",
+      "function": "PopBonusCode",
+      "line": 21,
+      "function_from_line": "PopBonusCode",
+      "reasoning": "When bonusCodes.length is zero, the require check `0 <= bonusCodes.length` always passes and the subsequent `bonusCodes.length--` underflows, wrapping to a very large value and corrupting the array length.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 1396,
+  "completion_tokens": 412,
+  "seconds": 61.874,
+  "api_seconds": 1.74
+}

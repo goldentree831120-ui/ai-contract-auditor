@@ -1,0 +1,366 @@
+{
+  "Slither 0.11.6 (M2)": {
+    "contracts_total": 49,
+    "contracts_analyzed_ok": 49,
+    "seconds_total": 39.8,
+    "seconds_mean": 0.81,
+    "seconds_median": 0.82,
+    "seconds_max": 1.59,
+    "detector_results_total": 259,
+    "detector_results_mapped": 41,
+    "detector_results_unmapped": 218,
+    "detector_results_by_impact": {
+      "High": 29,
+      "Informational": 183,
+      "Low": 18,
+      "Medium": 14,
+      "Optimization": 15
+    },
+    "vulnerable_contracts": 31,
+    "vulnerable_flagged_any_mapped_class": 20,
+    "clean_contracts": 18,
+    "clean_flagged_any_mapped_class": 7,
+    "per_class": {
+      "access_control": {
+        "contracts_with_class": 8,
+        "flagged_with_this_class": 6,
+        "flagged_without_having_it": 12
+      },
+      "arithmetic": {
+        "contracts_with_class": 5,
+        "flagged_with_this_class": 0,
+        "flagged_without_having_it": 0
+      },
+      "reentrancy": {
+        "contracts_with_class": 3,
+        "flagged_with_this_class": 3,
+        "flagged_without_having_it": 0
+      },
+      "bad_randomness": {
+        "contracts_with_class": 5,
+        "flagged_with_this_class": 3,
+        "flagged_without_having_it": 0
+      },
+      "unchecked_low_level_calls": {
+        "contracts_with_class": 2,
+        "flagged_with_this_class": 2,
+        "flagged_without_having_it": 0
+      },
+      "denial_of_service": {
+        "contracts_with_class": 3,
+        "flagged_with_this_class": 1,
+        "flagged_without_having_it": 0
+      },
+      "front_running": {
+        "contracts_with_class": 3,
+        "flagged_with_this_class": 0,
+        "flagged_without_having_it": 0
+      },
+      "time_manipulation": {
+        "contracts_with_class": 3,
+        "flagged_with_this_class": 2,
+        "flagged_without_having_it": 7
+      },
+      "other": {
+        "contracts_with_class": 2,
+        "flagged_with_this_class": 1,
+        "flagged_without_having_it": 0
+      }
+    },
+    "classes_without_any_slither_detector": [
+      "arithmetic",
+      "front_running"
+    ]
+  },
+  "LLM only": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "m3-v1",
+    "settings": {
+      "reasoning_effort": "low",
+      "temperature": 0,
+      "slice_threshold": 150,
+      "max_completion_tokens": 4096
+    },
+    "contracts_requested": 49,
+    "contracts_done": 49,
+    "stopped": null,
+    "api_calls": 49,
+    "prompt_tokens": 38267,
+    "completion_tokens": 11879,
+    "tokens_per_contract_mean": 1023.4,
+    "cost_usd_at_paid_prices": 0.012867,
+    "api_seconds_total": 76.7,
+    "api_seconds_median": 1.39,
+    "rejected_findings": 0,
+    "vulnerable_contracts": 31,
+    "vulnerable_flagged_any_class": 26,
+    "clean_contracts": 18,
+    "clean_flagged_any_class": 6,
+    "per_class": {
+      "access_control": {
+        "contracts_with_class": 8,
+        "flagged_with_this_class": 6,
+        "flagged_without_having_it": 7
+      },
+      "arithmetic": {
+        "contracts_with_class": 5,
+        "flagged_with_this_class": 5,
+        "flagged_without_having_it": 4
+      },
+      "reentrancy": {
+        "contracts_with_class": 3,
+        "flagged_with_this_class": 3,
+        "flagged_without_having_it": 0
+      },
+      "bad_randomness": {
+        "contracts_with_class": 5,
+        "flagged_with_this_class": 3,
+        "flagged_without_having_it": 0
+      },
+      "unchecked_low_level_calls": {
+        "contracts_with_class": 2,
+        "flagged_with_this_class": 2,
+        "flagged_without_having_it": 0
+      },
+      "denial_of_service": {
+        "contracts_with_class": 3,
+        "flagged_with_this_class": 1,
+        "flagged_without_having_it": 1
+      },
+      "front_running": {
+        "contracts_with_class": 3,
+        "flagged_with_this_class": 1,
+        "flagged_without_having_it": 2
+      },
+      "time_manipulation": {
+        "contracts_with_class": 3,
+        "flagged_with_this_class": 2,
+        "flagged_without_having_it": 1
+      },
+      "other": {
+        "contracts_with_class": 2,
+        "flagged_with_this_class": 0,
+        "flagged_without_having_it": 0
+      }
+    }
+  },
+  "LLM + Slither": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "m3-v1",
+    "context": "slither",
+    "settings": {
+      "reasoning_effort": "low",
+      "temperature": 0,
+      "slice_threshold": 150,
+      "max_completion_tokens": 4096
+    },
+    "contracts_requested": 49,
+    "contracts_done": 49,
+    "stopped": null,
+    "api_calls": 49,
+    "prompt_tokens": 42188,
+    "completion_tokens": 11902,
+    "tokens_per_contract_mean": 1103.9,
+    "cost_usd_at_paid_prices": 0.013469,
+    "api_seconds_total": 57.9,
+    "api_seconds_median": 1.08,
+    "rejected_findings": 0,
+    "vulnerable_contracts": 31,
+    "vulnerable_flagged_any_class": 23,
+    "clean_contracts": 18,
+    "clean_flagged_any_class": 9,
+    "per_class": {
+      "access_control": {
+        "contracts_with_class": 8,
+        "flagged_with_this_class": 6,
+        "flagged_without_having_it": 9
+      },
+      "arithmetic": {
+        "contracts_with_class": 5,
+        "flagged_with_this_class": 4,
+        "flagged_without_having_it": 2
+      },
+      "reentrancy": {
+        "contracts_with_class": 3,
+        "flagged_with_this_class": 3,
+        "flagged_without_having_it": 1
+      },
+      "bad_randomness": {
+        "contracts_with_class": 5,
+        "flagged_with_this_class": 4,
+        "flagged_without_having_it": 0
+      },
+      "unchecked_low_level_calls": {
+        "contracts_with_class": 2,
+        "flagged_with_this_class": 2,
+        "flagged_without_having_it": 0
+      },
+      "denial_of_service": {
+        "contracts_with_class": 3,
+        "flagged_with_this_class": 1,
+        "flagged_without_having_it": 1
+      },
+      "front_running": {
+        "contracts_with_class": 3,
+        "flagged_with_this_class": 0,
+        "flagged_without_having_it": 1
+      },
+      "time_manipulation": {
+        "contracts_with_class": 3,
+        "flagged_with_this_class": 2,
+        "flagged_without_having_it": 5
+      },
+      "other": {
+        "contracts_with_class": 2,
+        "flagged_with_this_class": 1,
+        "flagged_without_having_it": 1
+      }
+    }
+  },
+  "LLM + RAG": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "m3-v1",
+    "context": "rag",
+    "settings": {
+      "reasoning_effort": "low",
+      "temperature": 0,
+      "slice_threshold": 150,
+      "max_completion_tokens": 4096
+    },
+    "contracts_requested": 49,
+    "contracts_done": 49,
+    "stopped": null,
+    "api_calls": 49,
+    "prompt_tokens": 62275,
+    "completion_tokens": 10392,
+    "tokens_per_contract_mean": 1483.0,
+    "cost_usd_at_paid_prices": 0.015576,
+    "api_seconds_total": 83.7,
+    "api_seconds_median": 1.37,
+    "rejected_findings": 0,
+    "vulnerable_contracts": 31,
+    "vulnerable_flagged_any_class": 24,
+    "clean_contracts": 18,
+    "clean_flagged_any_class": 8,
+    "per_class": {
+      "access_control": {
+        "contracts_with_class": 8,
+        "flagged_with_this_class": 6,
+        "flagged_without_having_it": 7
+      },
+      "arithmetic": {
+        "contracts_with_class": 5,
+        "flagged_with_this_class": 4,
+        "flagged_without_having_it": 7
+      },
+      "reentrancy": {
+        "contracts_with_class": 3,
+        "flagged_with_this_class": 3,
+        "flagged_without_having_it": 0
+      },
+      "bad_randomness": {
+        "contracts_with_class": 5,
+        "flagged_with_this_class": 5,
+        "flagged_without_having_it": 0
+      },
+      "unchecked_low_level_calls": {
+        "contracts_with_class": 2,
+        "flagged_with_this_class": 1,
+        "flagged_without_having_it": 0
+      },
+      "denial_of_service": {
+        "contracts_with_class": 3,
+        "flagged_with_this_class": 0,
+        "flagged_without_having_it": 1
+      },
+      "front_running": {
+        "contracts_with_class": 3,
+        "flagged_with_this_class": 0,
+        "flagged_without_having_it": 0
+      },
+      "time_manipulation": {
+        "contracts_with_class": 3,
+        "flagged_with_this_class": 1,
+        "flagged_without_having_it": 2
+      },
+      "other": {
+        "contracts_with_class": 2,
+        "flagged_with_this_class": 0,
+        "flagged_without_having_it": 0
+      }
+    }
+  },
+  "LLM + RAG + Slither": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_version": "m3-v1",
+    "context": "both",
+    "settings": {
+      "reasoning_effort": "low",
+      "temperature": 0,
+      "slice_threshold": 150,
+      "max_completion_tokens": 4096
+    },
+    "contracts_requested": 49,
+    "contracts_done": 49,
+    "stopped": null,
+    "api_calls": 49,
+    "prompt_tokens": 66196,
+    "completion_tokens": 10633,
+    "tokens_per_contract_mean": 1567.9,
+    "cost_usd_at_paid_prices": 0.016309,
+    "api_seconds_total": 81.0,
+    "api_seconds_median": 1.46,
+    "rejected_findings": 0,
+    "vulnerable_contracts": 31,
+    "vulnerable_flagged_any_class": 22,
+    "clean_contracts": 18,
+    "clean_flagged_any_class": 5,
+    "per_class": {
+      "access_control": {
+        "contracts_with_class": 8,
+        "flagged_with_this_class": 6,
+        "flagged_without_having_it": 4
+      },
+      "arithmetic": {
+        "contracts_with_class": 5,
+        "flagged_with_this_class": 5,
+        "flagged_without_having_it": 4
+      },
+      "reentrancy": {
+        "contracts_with_class": 3,
+        "flagged_with_this_class": 2,
+        "flagged_without_having_it": 0
+      },
+      "bad_randomness": {
+        "contracts_with_class": 5,
+        "flagged_with_this_class": 4,
+        "flagged_without_having_it": 0
+      },
+      "unchecked_low_level_calls": {
+        "contracts_with_class": 2,
+        "flagged_with_this_class": 1,
+        "flagged_without_having_it": 0
+      },
+      "denial_of_service": {
+        "contracts_with_class": 3,
+        "flagged_with_this_class": 1,
+        "flagged_without_having_it": 1
+      },
+      "front_running": {
+        "contracts_with_class": 3,
+        "flagged_with_this_class": 0,
+        "flagged_without_having_it": 1
+      },
+      "time_manipulation": {
+        "contracts_with_class": 3,
+        "flagged_with_this_class": 1,
+        "flagged_without_having_it": 3
+      },
+      "other": {
+        "contracts_with_class": 2,
+        "flagged_with_this_class": 1,
+        "flagged_without_having_it": 0
+      }
+    }
+  }
+}
