@@ -124,6 +124,10 @@ def http_transport(url: str, headers: dict, body: dict) -> tuple[int, dict, dict
         except json.JSONDecodeError:
             parsed = {"error": {"message": raw[:300].decode(errors="replace")}}
         return e.code, dict(e.headers or {}), parsed
+    except (urllib.error.URLError, TimeoutError, OSError) as e:
+        # No HTTP response (Wi-Fi drop, DNS failure, timeout): status 0 = retryable network error.
+        reason = getattr(e, "reason", e)
+        return 0, {}, {"error": {"message": f"network error: {reason}"}}
 
 
 class GroqClient:
@@ -218,7 +222,7 @@ class GroqClient:
             seconds = time.perf_counter() - start
             if status == 200:
                 break
-            if status == 429 or status >= 500:
+            if status == 0 or status == 429 or status >= 500:
                 retry_after = resp_headers.get("retry-after") or resp_headers.get("Retry-After")
                 wait = float(retry_after) if retry_after else delay
                 self.sleep(min(wait, 120))
@@ -229,6 +233,9 @@ class GroqClient:
                 raise LLMError("Groq rejected the API key (HTTP 401). Check GROQ_API_KEY in .env.")
             raise LLMError(f"Groq HTTP {status}: {msg[:300]}")
         else:
+            if status == 0:
+                raise LLMError("network error: Groq could not be reached after 7 attempts "
+                               "(check your internet connection, then rerun; finished work is cached).")
             raise LLMError("Groq kept returning 429/5xx after 7 attempts; try again later.")
 
         usage = data.get("usage") or {}

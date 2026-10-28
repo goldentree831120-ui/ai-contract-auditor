@@ -30,6 +30,10 @@ jobs:
         run: python scripts/ablation.py
       - name: Evaluation report matches committed results
         run: python scripts/evaluate.py --check
+      - name: Results explorer builds
+        run: python scripts/build_site.py --out /tmp/site
+      - name: CLI dry run on the example contract (no API key, no API calls)
+        run: auditor audit examples/TipJar.sol --dry-run
 
   slither-smoke:
     runs-on: ubuntu-24.04

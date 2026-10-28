@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Auditor Results</title>
+<meta name="description" content="Evaluation of an LLM smart-contract auditor against Slither on 49 labeled Solidity contracts.">
+<style>
+:root {
+  --bg: #fbfaf8; --panel: #ffffff; --ink: #1d1c1a; --muted: #6b6760; --line: #e4e1db;
+  --accent: #2f5d8a; --accent-soft: #e6eef6; --good: #2e7d4f; --good-soft: #e5f2ea;
+  --bad: #b23a2e; --bad-soft: #f8e6e3; --warn: #8a6100; --warn-soft: #f6eedb;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141413; --panel: #1c1c1a; --ink: #ecebe7; --muted: #a29f98; --line: #33322f;
+    --accent: #8db6dd; --accent-soft: #1f2b37; --good: #7cc79a; --good-soft: #1b2b21;
+    --bad: #ec8c80; --bad-soft: #36201d; --warn: #e2bd6a; --warn-soft: #322a17;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141413; --panel: #1c1c1a; --ink: #ecebe7; --muted: #a29f98; --line: #33322f;
+  --accent: #8db6dd; --accent-soft: #1f2b37; --good: #7cc79a; --good-soft: #1b2b21;
+  --bad: #ec8c80; --bad-soft: #36201d; --warn: #e2bd6a; --warn-soft: #322a17;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.55 var(--sans); }
+main { max-width: 1120px; margin: 0 auto; padding: 28px 16px 64px; }
+h1 { font-size: 26px; line-height: 1.25; margin: 0 0 6px; letter-spacing: -0.01em; }
+h2 { font-size: 18px; margin: 32px 0 10px; }
+p { margin: 0 0 12px; }
+.sub { color: var(--muted); max-width: 70ch; }
+.callout { border-left: 3px solid var(--accent); background: var(--accent-soft); padding: 12px 14px;
+  border-radius: 0 6px 6px 0; margin: 18px 0; max-width: 80ch; }
+nav { display: flex; gap: 4px; flex-wrap: wrap; border-bottom: 1px solid var(--line); margin: 22px 0 8px; }
+nav button { background: none; border: 0; border-bottom: 2px solid transparent; color: var(--muted);
+  font: inherit; padding: 8px 12px; cursor: pointer; }
+nav button[aria-selected="true"] { color: var(--ink); border-color: var(--accent); font-weight: 600; }
+nav button:focus-visible, select:focus-visible, .clist button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+section[hidden] { display: none; }
+.scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+th { font-weight: 600; color: var(--muted); font-size: 12.5px; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.bar { display: inline-block; height: 6px; border-radius: 3px; background: var(--accent); vertical-align: middle; margin-left: 6px; opacity: .75; }
+.tag { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: 12px; margin: 1px 3px 1px 0; white-space: nowrap; }
+.t-v { background: var(--bad-soft); color: var(--bad); }
+.t-c { background: var(--good-soft); color: var(--good); }
+.t-n { background: var(--warn-soft); color: var(--warn); }
+.t-k { background: var(--accent-soft); color: var(--accent); }
+.muted { color: var(--muted); }
+.layout { display: grid; grid-template-columns: 220px 1fr; gap: 16px; align-items: start; }
+.clist { max-height: 70vh; overflow-y: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+.clist button { display: flex; width: 100%; justify-content: space-between; gap: 6px; padding: 7px 10px;
+  border: 0; border-bottom: 1px solid var(--line); background: none; color: var(--ink); font: inherit; font-size: 14px; cursor: pointer; text-align: left; }
+.clist button[aria-current="true"] { background: var(--accent-soft); font-weight: 600; }
+.filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; align-items: center; }
+select { font: inherit; padding: 5px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); color: var(--ink); }
+pre.code { margin: 0; padding: 10px 0; font: 13px/1.5 var(--mono); overflow-x: auto; }
+pre.code span.ln { display: block; padding: 0 12px 0 0; white-space: pre; }
+pre.code span.ln::before { content: attr(data-n); display: inline-block; width: 3.2em; padding-right: 12px; text-align: right; color: var(--muted); user-select: none; }
+pre.code span.gold { background: var(--bad-soft); }
+pre.code span.hit { box-shadow: inset 3px 0 0 var(--accent); }
+.card { border: 1px solid var(--line); border-radius: 8px; background: var(--panel); padding: 12px 14px; margin-bottom: 12px; }
+.find { padding: 6px 0; border-top: 1px solid var(--line); font-size: 14px; }
+.find:first-child { border-top: 0; }
+.legend { font-size: 13px; color: var(--muted); margin: 6px 0 0; }
+footer { margin-top: 40px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); padding-top: 14px; }
+a { color: var(--accent); }
+@media (max-width: 760px) {
+  .layout { grid-template-columns: 1fr; }
+  .clist { max-height: 220px; }
+  h1 { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+<main>
+  <h1>AI smart-contract auditor, evaluated honestly</h1>
+  <p class="sub">An LLM auditor (gpt-oss-120b on Groq) compared with Slither 0.11.6 on 49 labeled Solidity contracts
+    (31 vulnerable, 18 clean, 9 vulnerability classes). Every number on this page comes from the committed result files.</p>
+  <div class="callout" id="headline"></div>
+
+  <nav role="tablist" aria-label="Sections">
+    <button role="tab" aria-selected="true" data-tab="overview">Overview</button>
+    <button role="tab" aria-selected="false" data-tab="classes">Per class</button>
+    <button role="tab" aria-selected="false" data-tab="contracts">Contracts</button>
+    <button role="tab" aria-selected="false" data-tab="fps">False positives</button>
+  </nav>
+
+  <section id="overview">
+    <h2>Headline (single run per condition)</h2>
+    <div class="scroll"><table id="t-head"></table></div>
+    <p class="legend">Contract level: the right class anywhere in the contract. Function level: the right class in the right function.
+      Detection: vulnerable or not. 95% intervals resample the 49 contracts.</p>
+    <h2>Run-to-run variance</h2>
+    <p class="sub">Identical requests (temperature 0) sent again with the cache bypassed.</p>
+    <div class="scroll"><table id="t-var"></table></div>
+    <h2>Missed by every tool and condition</h2>
+    <div class="scroll"><table id="t-miss"></table></div>
+  </section>
+
+  <section id="classes" hidden>
+    <h2>Per class, contract level</h2>
+    <p class="sub">F1 with precision / recall underneath; n = contracts that have the class. "n/a" precision means the tool never reported that class.</p>
+    <div class="scroll"><table id="t-class"></table></div>
+  </section>
+
+  <section id="contracts" hidden>
+    <h2>Contract explorer</h2>
+    <div class="filters">
+      <label>Show <select id="f-label"><option value="">all contracts</option><option value="vulnerable">vulnerable</option><option value="clean">clean</option></select></label>
+      <label>Tool <select id="f-run"></select></label>
+    </div>
+    <div class="layout">
+      <div class="clist" id="clist" aria-label="Contracts"></div>
+      <div id="detail"></div>
+    </div>
+  </section>
+
+  <section id="fps" hidden>
+    <h2>False positives on clean contracts</h2>
+    <p class="sub">Every finding a tool reported on a contract labeled clean. Hard negatives are contracts that look dangerous but are not exploitable.</p>
+    <div class="filters"><label>Tool <select id="fp-run"></select></label></div>
+    <div class="scroll"><table id="t-fp"></table></div>
+  </section>
+
+  <footer>
+    Local analysis of public teaching samples only; no contract was deployed and no live protocol was tested.
+    Small dataset, old Solidity (mostly 0.4.x) and likely training-data contamination: read the limitations in the repository README.
+  </footer>
+</main>
+<script>
+const D = __DATA__;
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const f2 = (x) => (x === null || x === undefined ? "n/a" : Number(x).toFixed(2));
+const byId = Object.fromEntries(D.contracts.map((c) => [c.id, c]));
+
+function headline() {
+  const v = Object.fromEntries(D.variance.map((x) => [x.base, x]));
+  const mean = (a) => a.reduce((s, x) => s + x, 0) / a.length;
+  let t = `Slither reached contract-level F1 ${f2(D.metrics.slither.contract_level.micro.f1)}. `;
+  if (v.llm_only) t += `The LLM alone averaged ${f2(mean(v.llm_only.contract_micro_f1))} over ${v.llm_only.runs.length} runs. `;
+  if (v.llm_only && v.llm_both) {
+    const spread = Math.max(...v.llm_only.contract_micro_f1) - Math.min(...v.llm_only.contract_micro_f1);
+    t += `Repeating identical requests moved F1 by up to ${f2(spread)}, more than the ${f2(Math.abs(mean(v.llm_both.contract_micro_f1) - mean(v.llm_only.contract_micro_f1)))} difference from adding Slither output and retrieved notes, so <strong>no added context showed a reliable gain</strong>.`;
+  }
+  $("headline").innerHTML = t;
+}
+
+function table(el, head, rows) {
+  el.innerHTML = `<thead><tr>${head.map((h) => `<th>${h}</th>`).join("")}</tr></thead><tbody>${rows.map((r) => `<tr>${r.map((c) => `<td${typeof c === "object" && c.num ? ' class="num"' : ""}>${typeof c === "object" ? c.v : c}</td>`).join("")}</tr>`).join("")}</tbody>`;
+}
+const num = (v) => ({ v, num: true });
+
+function overview() {
+  table($("t-head"), ["Condition", "Contract P", "Contract R", "Contract F1 (95% CI)", "Function F1", "Detection P / R", "Clean flagged"],
+    D.base.map((r) => {
+      const m = D.metrics[r], c = m.contract_level.micro, ci = m.contract_micro_f1_95ci;
+      return [esc(D.labels[r]), num(f2(c.precision)), num(f2(c.recall)),
+        num(`${f2(c.f1)} <span class="muted">(${f2(ci[0])}-${f2(ci[1])})</span><span class="bar" style="width:${Math.round(c.f1 * 60)}px"></span>`),
+        num(f2(m.function_level.micro.f1)), num(`${f2(m.detection.precision)} / ${f2(m.detection.recall)}`), num(`${m.detection.fp}/18`)];
+    }));
+  table($("t-var"), ["Condition", "Runs", "Contract F1 per run", "Vulnerable recall per run", "Clean flagged per run", "Same classes in every run"],
+    D.variance.map((v) => [esc(D.labels[v.base] || v.base), num(v.runs.length), num(v.contract_micro_f1.map(f2).join(", ")),
+      num(v.vulnerable_recall.map(f2).join(", ")), num(v.clean_flagged.join(", ")), num(v.contracts_with_identical_classes)]));
+  if (!D.variance.length) $("t-var").innerHTML = "<tbody><tr><td>No repeat runs committed.</td></tr></tbody>";
+  table($("t-miss"), ["Contract", "Class", "Labeled function", "Why it is labeled"],
+    D.missed.map(([id, cls]) => [`<a href="#" data-goto="${id}">${id}</a>`, esc(cls),
+      esc(byId[id].findings.filter((f) => f.class === cls).map((f) => f.function).join(", ")), esc(byId[id].notes)]));
+}
+
+function classes() {
+  const runs = D.base;
+  table($("t-class"), ["Class", "n", ...runs.map((r) => esc(D.labels[r]))],
+    Object.keys(D.classes).map((c) => [
+      `<span title="${esc(D.classes[c])}">${esc(c)}</span>`,
+      num(D.contracts.filter((x) => x.classes.includes(c)).length),
+      ...runs.map((r) => { const v = D.metrics[r].contract_level.per_class[c];
+        return num(`<strong>${f2(v.f1)}</strong><br><span class="muted">${f2(v.precision)} / ${f2(v.recall)}</span>`); })]));
+}
+
+let current = D.contracts[0].id;
+function contractList() {
+  const want = $("f-label").value, run = $("f-run").value;
+  $("clist").innerHTML = D.contracts.filter((c) => !want || c.label === want).map((c) => {
+    const n = (D.preds[run][c.id] || []).length;
+    return `<button data-id="${c.id}" aria-current="${c.id === current}"><span>${c.id} <span class="tag ${c.label === "clean" ? "t-c" : "t-v"}">${c.label}</span></span><span class="muted">${n} found</span></button>`;
+  }).join("");
+}
+function detail() {
+  const c = byId[current], run = $("f-run").value, found = D.preds[run][c.id] || [];
+  const gold = new Set(c.findings.map((f) => f.line));
+  const hit = new Set(found.flatMap((f) => f.lines || []));
+  const code = c.code.replace(/\n$/, "").split("\n").map((l, i) =>
+    `<span class="ln${gold.has(i + 1) ? " gold" : ""}${hit.has(i + 1) ? " hit" : ""}" data-n="${i + 1}">${esc(l) || " "}</span>`).join("");
+  const goldClasses = new Set(c.classes);
+  const roleTag = c.role === "negative_sample" ? '<span class="tag t-n">hard negative</span>' : "";
+  $("detail").innerHTML = `
+    <div class="card"><strong>${c.id}</strong> <span class="tag ${c.label === "clean" ? "t-c" : "t-v"}">${c.label}</span>${roleTag}
+      ${c.classes.map((k) => `<span class="tag t-k">${esc(k)}</span>`).join("")}
+      <p class="muted" style="margin:8px 0 0">${esc(c.notes)}</p>
+      <p class="muted" style="margin:4px 0 0;font-size:13px">Source: <a href="${esc(c.source)}" rel="noopener">${esc(c.source.split("/blob/")[0].replace("https://github.com/", ""))}</a> (${esc(c.license)})</p></div>
+    <div class="card"><strong>${esc(D.labels[run])}</strong> reported ${found.length} finding${found.length === 1 ? "" : "s"}
+      ${found.map((f) => `<div class="find"><span class="tag ${goldClasses.has(f.class) ? "t-c" : "t-v"}">${goldClasses.has(f.class) ? "matches label" : "not in label"}</span>
+        <strong>${esc(f.class)}</strong> in <code>${esc(f.fns.join(", "))}</code>${f.lines && f.lines.length ? ` line ${f.lines[0]}` : ""}${f.confidence != null ? ` <span class="muted">confidence ${f2(f.confidence)}</span>` : ""}
+        <div class="muted">${esc(f.why)}</div></div>`).join("") || '<div class="find muted">No findings.</div>'}</div>
+    <div class="card" style="padding:0"><pre class="code">${code}</pre></div>
+    <p class="legend">Shaded lines are labeled vulnerable; a left bar marks lines the selected tool pointed at.</p>`;
+}
+function contracts() {
+  $("f-run").innerHTML = Object.keys(D.preds).map((r) => `<option value="${r}"${r === "llm_only" ? " selected" : ""}>${esc(D.labels[r])}</option>`).join("");
+  const refresh = () => { contractList(); detail(); };
+  $("f-label").onchange = () => { const vis = D.contracts.filter((c) => !$("f-label").value || c.label === $("f-label").value); if (!vis.some((c) => c.id === current)) current = vis[0].id; refresh(); };
+  $("f-run").onchange = refresh;
+  $("clist").onclick = (e) => { const b = e.target.closest("button"); if (b) { current = b.dataset.id; refresh(); } };
+  refresh();
+}
+
+function fps() {
+  $("fp-run").innerHTML = D.base.map((r) => `<option value="${r}">${esc(D.labels[r])}</option>`).join("");
+  const draw = () => {
+    const run = $("fp-run").value, rows = [];
+    for (const c of D.contracts.filter((x) => x.label === "clean"))
+      for (const f of D.preds[run][c.id] || [])
+        rows.push([`<a href="#" data-goto="${c.id}">${c.id}</a>`, c.role === "negative_sample" ? '<span class="tag t-n">hard negative</span>' : esc(c.role.replace("_", " ")),
+          esc(f.class), `<code>${esc(f.fns.join(", "))}</code>`, `<span class="muted">${esc(f.why)}</span>`]);
+    table($("t-fp"), ["Contract", "Kind", "Class", "Function", "Reasoning or detector"], rows);
+    if (!rows.length) $("t-fp").innerHTML = "<tbody><tr><td>No false positives.</td></tr></tbody>";
+  };
+  $("fp-run").onchange = draw;
+  draw();
+}
+
+function tabs(name) {
+  document.querySelectorAll("nav button").forEach((b) => b.setAttribute("aria-selected", b.dataset.tab === name));
+  document.querySelectorAll("main > section").forEach((s) => (s.hidden = s.id !== name));
+  try { localStorage.setItem("tab", name); } catch (e) {}
+}
+document.querySelector("nav").onclick = (e) => { const b = e.target.closest("button"); if (b) tabs(b.dataset.tab); };
+document.addEventListener("click", (e) => {
+  const a = e.target.closest("a[data-goto]"); if (!a) return;
+  e.preventDefault(); current = a.dataset.goto; $("f-label").value = ""; tabs("contracts"); contractList(); detail();
+});
+
+headline(); overview(); classes(); contracts(); fps();
+try { const t = localStorage.getItem("tab"); if (t && $(t)) tabs(t); } catch (e) {}
+</script>
+</body>
+</html>

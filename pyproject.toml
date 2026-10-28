@@ -10,6 +10,9 @@ requires-python = ">=3.11"
 license = { text = "MIT" }
 dependencies = []
 
+[project.scripts]
+auditor = "auditor.cli:main"
+
 [project.optional-dependencies]
 dev = ["pytest>=8"]
 slither = ["slither-analyzer==0.11.6"]

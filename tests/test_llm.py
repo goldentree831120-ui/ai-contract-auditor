@@ -135,3 +135,26 @@ def test_repeat_changes_cache_key_but_not_request(tmp_path):
     assert not again["cached"] and len(t.calls) == 2
     assert t.calls[0][2] == t.calls[1][2]  # identical request body
     assert c.complete_json("s", "u", SCHEMA, repeat=1)["cached"]
+
+
+def test_network_error_is_retried_then_reported(tmp_path):
+    net = (0, {}, {"error": {"message": "network error: [Errno 101] Network is unreachable"}})
+    t = FakeTransport([net, net, ok_response({"findings": []})])
+    assert make_client(tmp_path, t).complete_json("s", "u", SCHEMA)["content"] == {"findings": []}
+    assert len(t.calls) == 3
+    t2 = FakeTransport([net] * 7)
+    with pytest.raises(LLMError, match="network error"):
+        make_client(tmp_path / "b", t2).complete_json("s", "u", SCHEMA)
+
+
+def test_http_transport_turns_connection_failure_into_status_0(monkeypatch):
+    import urllib.error
+
+    from auditor import llm
+
+    def boom(*a, **k):
+        raise urllib.error.URLError(OSError(101, "Network is unreachable"))
+
+    monkeypatch.setattr(llm.urllib.request, "urlopen", boom)
+    status, _, body = llm.http_transport("https://example.invalid", {}, {})
+    assert status == 0 and "network error" in body["error"]["message"]

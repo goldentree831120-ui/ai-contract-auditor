@@ -18,12 +18,18 @@ def slither_context(contract_id: str) -> str:
     path = SLITHER_DIR / f"{contract_id}.json"
     if not path.exists():
         raise FileNotFoundError(f"{path} missing; run scripts/run_slither.py first")
-    data = json.loads(path.read_text())
+    return slither_context_from_findings(json.loads(path.read_text()).get("findings", []))
+
+
+def slither_context_from_findings(findings: list[dict], file_name: str | None = None) -> str:
+    """Prompt text from parsed Slither findings; file names are replaced by contract.sol."""
     rows = []
-    for f in data.get("findings", []):
+    for f in findings:
         if f["impact"] not in SLITHER_IMPACTS:
             continue
         desc = _FILE.sub("contract.sol", f["description"])
+        if file_name:
+            desc = re.sub(r"[\w./-]*" + re.escape(file_name), "contract.sol", desc)
         lines = f"lines {f['lines'][0]}-{f['lines'][-1]}" if f["lines"] else "no line"
         rows.append(f"- [{f['impact']} impact, {f['confidence']} confidence] {f['check']}: {desc} ({lines})")
     body = "\n".join(rows) if rows else "- (no findings of Low impact or above)"

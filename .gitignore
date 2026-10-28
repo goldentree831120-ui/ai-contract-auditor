@@ -14,3 +14,7 @@ __pycache__/
 
 # later milestones: raw run outputs
 results/raw/
+
+# built results explorer (published by .github/workflows/pages.yml)
+site/
+_site/
