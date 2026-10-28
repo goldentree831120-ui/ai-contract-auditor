@@ -1,0 +1,24 @@
+{
+  "id": "c32",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "both",
+  "findings": [
+    {
+      "class": "access_control",
+      "function": "close",
+      "line": 5,
+      "function_from_line": "close",
+      "reasoning": "The close() function calls selfdestruct without any authorization check, allowing any caller to destroy the contract and withdraw its balance.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 1074,
+  "completion_tokens": 135,
+  "seconds": 1.47,
+  "api_seconds": 0.949
+}

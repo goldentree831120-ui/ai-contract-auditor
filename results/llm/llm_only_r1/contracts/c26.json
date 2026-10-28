@@ -1,0 +1,24 @@
+{
+  "id": "c26",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "none",
+  "findings": [
+    {
+      "class": "access_control",
+      "function": "missing",
+      "line": 11,
+      "function_from_line": "missing",
+      "reasoning": "The function intended to be the constructor is named `missing` instead of matching the contract name `Missing`. In Solidity 0.4.24 this makes it a regular public function, allowing any caller to set `owner` to themselves and later call `withdraw`.",
+      "confidence": 1.0
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 1,
+  "prompt_tokens": 730,
+  "completion_tokens": 234,
+  "seconds": 0.003,
+  "api_seconds": 1.324
+}

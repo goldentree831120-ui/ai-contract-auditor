@@ -1,0 +1,83 @@
+{
+  "machine": {
+    "cpu": "Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz",
+    "logical_cpus": 8,
+    "ram_gb_visible": 3.7,
+    "os": "Linux 6.18.54.1-microsoft-standard-WSL2 (WSL)",
+    "python": "3.12.3",
+    "run_at_utc": "2026-10-27T05:12:21Z"
+  },
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "both",
+  "repeat": 1,
+  "settings": {
+    "reasoning_effort": "low",
+    "temperature": 0,
+    "slice_threshold": 150,
+    "max_completion_tokens": 4096
+  },
+  "contracts_requested": 49,
+  "contracts_done": 49,
+  "stopped": null,
+  "api_calls": 49,
+  "api_calls_from_cache": 0,
+  "prompt_tokens": 66196,
+  "completion_tokens": 11097,
+  "tokens_per_contract_mean": 1577.4,
+  "cost_usd_at_paid_prices": 0.016588,
+  "api_seconds_total": 88.6,
+  "api_seconds_median": 1.66,
+  "rejected_findings": 0,
+  "vulnerable_contracts": 31,
+  "vulnerable_flagged_any_class": 26,
+  "clean_contracts": 18,
+  "clean_flagged_any_class": 7,
+  "per_class": {
+    "access_control": {
+      "contracts_with_class": 8,
+      "flagged_with_this_class": 6,
+      "flagged_without_having_it": 3
+    },
+    "arithmetic": {
+      "contracts_with_class": 5,
+      "flagged_with_this_class": 4,
+      "flagged_without_having_it": 7
+    },
+    "reentrancy": {
+      "contracts_with_class": 3,
+      "flagged_with_this_class": 2,
+      "flagged_without_having_it": 1
+    },
+    "bad_randomness": {
+      "contracts_with_class": 5,
+      "flagged_with_this_class": 5,
+      "flagged_without_having_it": 0
+    },
+    "unchecked_low_level_calls": {
+      "contracts_with_class": 2,
+      "flagged_with_this_class": 2,
+      "flagged_without_having_it": 0
+    },
+    "denial_of_service": {
+      "contracts_with_class": 3,
+      "flagged_with_this_class": 1,
+      "flagged_without_having_it": 2
+    },
+    "front_running": {
+      "contracts_with_class": 3,
+      "flagged_with_this_class": 1,
+      "flagged_without_having_it": 0
+    },
+    "time_manipulation": {
+      "contracts_with_class": 3,
+      "flagged_with_this_class": 2,
+      "flagged_without_having_it": 3
+    },
+    "other": {
+      "contracts_with_class": 2,
+      "flagged_with_this_class": 1,
+      "flagged_without_having_it": 0
+    }
+  }
+}

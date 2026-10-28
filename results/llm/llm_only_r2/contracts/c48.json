@@ -1,0 +1,32 @@
+{
+  "id": "c48",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "none",
+  "findings": [
+    {
+      "class": "arithmetic",
+      "function": "depositFunds",
+      "line": 11,
+      "function_from_line": "depositFunds",
+      "reasoning": "balances[msg.sender] is increased with `+= msg.value` without overflow checks in Solidity 0.4.x, allowing an attacker to overflow the balance and later withdraw more than deposited.",
+      "confidence": 0.9
+    },
+    {
+      "class": "denial_of_service",
+      "function": "withdrawFunds",
+      "line": 23,
+      "function_from_line": "withdrawFunds",
+      "reasoning": "If `msg.sender.transfer` fails (e.g., recipient is a contract with a fallback that uses >2300 gas), the transaction reverts before `locked` is reset, leaving the contract permanently locked and preventing any further withdrawals.",
+      "confidence": 0.85
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 825,
+  "completion_tokens": 468,
+  "seconds": 61.466,
+  "api_seconds": 2.422
+}

@@ -1,0 +1,32 @@
+{
+  "id": "c04",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "none",
+  "findings": [
+    {
+      "class": "access_control",
+      "function": "init",
+      "line": 6,
+      "function_from_line": "init",
+      "reasoning": "The `init` function is public and lacks any authorization, so any user can arbitrarily modify the `map` entries, potentially corrupting the contract's state.",
+      "confidence": 0.9
+    },
+    {
+      "class": "arithmetic",
+      "function": "init",
+      "line": 7,
+      "function_from_line": "init",
+      "reasoning": "The subtraction `map[k] -= v` can underflow because Solidity 0.4.11 does not have built\u2011in overflow checks, allowing an attacker to set the mapping value to a very large number.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 655,
+  "completion_tokens": 262,
+  "seconds": 59.567,
+  "api_seconds": 2.831
+}

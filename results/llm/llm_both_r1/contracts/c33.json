@@ -1,0 +1,24 @@
+{
+  "id": "c33",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "both",
+  "findings": [
+    {
+      "class": "arithmetic",
+      "function": "run",
+      "line": 7,
+      "function_from_line": "run",
+      "reasoning": "The function subtracts an arbitrary input from the unsigned integer `count` without any validation, allowing an underflow that wraps the value to a very large number.",
+      "confidence": 0.99
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 877,
+  "completion_tokens": 143,
+  "seconds": 60.227,
+  "api_seconds": 1.576
+}

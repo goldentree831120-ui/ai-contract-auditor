@@ -1,0 +1,24 @@
+{
+  "id": "c04",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "both",
+  "findings": [
+    {
+      "class": "arithmetic",
+      "function": "init",
+      "line": 7,
+      "function_from_line": "init",
+      "reasoning": "The statement `map[k] -= v;` performs subtraction on a uint256 without checked arithmetic (Solidity <0.8). Supplying a value `v` greater than the current `map[k]` causes an underflow, wrapping the stored value to 2^256\u20111 and allowing an attacker to manipulate the mapping arbitrarily.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 716,
+  "completion_tokens": 203,
+  "seconds": 1.503,
+  "api_seconds": 1.495
+}

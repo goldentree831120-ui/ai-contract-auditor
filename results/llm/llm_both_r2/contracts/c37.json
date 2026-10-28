@@ -1,0 +1,24 @@
+{
+  "id": "c37",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "both",
+  "findings": [
+    {
+      "class": "time_manipulation",
+      "function": "withdraw",
+      "line": 19,
+      "function_from_line": "withdraw",
+      "reasoning": "The withdraw function relies on `now` (block.timestamp) to enforce the lock period, which miners can manipulate within allowed bounds, potentially allowing early withdrawals.",
+      "confidence": 0.9
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 1603,
+  "completion_tokens": 189,
+  "seconds": 61.106,
+  "api_seconds": 1.026
+}

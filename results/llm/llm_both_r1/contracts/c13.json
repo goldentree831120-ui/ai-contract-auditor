@@ -1,0 +1,32 @@
+{
+  "id": "c13",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "both",
+  "findings": [
+    {
+      "class": "reentrancy",
+      "function": "withdraw",
+      "line": 19,
+      "function_from_line": "withdraw",
+      "reasoning": "The contract sends ether to msg.sender before updating the user's balance, allowing a malicious recipient to re\u2011enter withdraw and drain funds.",
+      "confidence": 0.95
+    },
+    {
+      "class": "reentrancy",
+      "function": "refund",
+      "line": 24,
+      "function_from_line": "refund",
+      "reasoning": "The contract transfers the caller's full balance before resetting it to zero, enabling re\u2011entrancy attacks that can repeatedly claim the same funds.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 1534,
+  "completion_tokens": 293,
+  "seconds": 60.807,
+  "api_seconds": 1.736
+}

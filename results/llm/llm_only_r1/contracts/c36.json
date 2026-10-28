@@ -1,0 +1,24 @@
+{
+  "id": "c36",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "none",
+  "findings": [
+    {
+      "class": "time_manipulation",
+      "function": "isSaleFinished",
+      "line": 9,
+      "function_from_line": "isSaleFinished",
+      "reasoning": "The function determines sale completion based on block.timestamp, which miners can influence within a limited range, allowing them to manipulate the reported sale status.",
+      "confidence": 0.9
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 1,
+  "prompt_tokens": 729,
+  "completion_tokens": 170,
+  "seconds": 0.006,
+  "api_seconds": 1.103
+}

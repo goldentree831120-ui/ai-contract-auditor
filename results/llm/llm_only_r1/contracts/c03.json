@@ -1,0 +1,24 @@
+{
+  "id": "c03",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "none",
+  "findings": [
+    {
+      "class": "arithmetic",
+      "function": "donate",
+      "line": 7,
+      "function_from_line": "donate",
+      "reasoning": "The contract adds msg.value to credit[to] without overflow checks. In Solidity 0.4.24 arithmetic wraps on overflow, allowing an attacker to overflow a credit balance and later withdraw an arbitrary amount.",
+      "confidence": 0.85
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 1,
+  "prompt_tokens": 744,
+  "completion_tokens": 359,
+  "seconds": 0.003,
+  "api_seconds": 1.19
+}

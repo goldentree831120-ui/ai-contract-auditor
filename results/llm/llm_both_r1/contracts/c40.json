@@ -1,0 +1,24 @@
+{
+  "id": "c40",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "both",
+  "findings": [
+    {
+      "class": "arithmetic",
+      "function": "transfer",
+      "line": 30,
+      "function_from_line": "transfer",
+      "reasoning": "The contract adds _value to balances[_to] without checking for overflow. An attacker could cause an overflow by transferring a value that makes the recipient's balance wrap around, effectively resetting their balance.",
+      "confidence": 0.85
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 2063,
+  "completion_tokens": 425,
+  "seconds": 62.356,
+  "api_seconds": 2.164
+}

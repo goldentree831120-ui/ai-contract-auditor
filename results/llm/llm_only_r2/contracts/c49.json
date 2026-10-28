@@ -1,0 +1,24 @@
+{
+  "id": "c49",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "none",
+  "findings": [
+    {
+      "class": "arithmetic",
+      "function": "lockEth",
+      "line": 13,
+      "function_from_line": "lockEth",
+      "reasoning": "The calculation `block.number + (_time / 14)` can overflow the uint type in Solidity 0.5, allowing an attacker to set a very large `_time` and cause the unlockBlock to wrap around, potentially enabling immediate withdrawal.",
+      "confidence": 0.78
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 835,
+  "completion_tokens": 268,
+  "seconds": 1.182,
+  "api_seconds": 1.141
+}

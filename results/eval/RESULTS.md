@@ -30,7 +30,12 @@ Definitions: **contract level** = right class anywhere in the contract; **functi
 
 ## Run-to-run variance
 
-Not measured yet (no repeat runs committed).
+Repeat runs send the identical request again (temperature 0) with the cache bypassed.
+
+| condition | runs | contract micro F1 per run | vulnerable recall per run | clean flagged per run | contracts with identical predicted classes |
+|---|---|---|---|---|---|
+| llm_both | 3 | 0.62, 0.65, 0.64 | 0.71, 0.84, 0.71 | 5, 7, 4 | 32/49 |
+| llm_only | 3 | 0.64, 0.57, 0.61 | 0.84, 0.87, 0.81 | 6, 8, 6 | 33/49 |
 
 ## False positives on clean contracts
 

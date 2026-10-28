@@ -1,0 +1,24 @@
+{
+  "id": "c09",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "both",
+  "findings": [
+    {
+      "class": "denial_of_service",
+      "function": "refundAll",
+      "line": 14,
+      "function_from_line": "refundAll",
+      "reasoning": "The loop iterates over an unbounded array of addresses and uses `require(...send(...))`. If any send fails (e.g., the recipient is a contract that rejects the transfer), the whole transaction reverts, blocking refunds for all other addresses and allowing a DoS. Additionally, as the array grows, the loop may exceed the block gas limit.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 1396,
+  "completion_tokens": 359,
+  "seconds": 63.253,
+  "api_seconds": 3.001
+}

@@ -1,0 +1,48 @@
+{
+  "id": "c24",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "none",
+  "findings": [
+    {
+      "class": "access_control",
+      "function": "PushBonusCode",
+      "line": 15,
+      "function_from_line": "PushBonusCode",
+      "reasoning": "The function is public and lacks any authorization check, allowing any user to add arbitrary values to the bonusCodes array.",
+      "confidence": 0.99
+    },
+    {
+      "class": "access_control",
+      "function": "PopBonusCode",
+      "line": 19,
+      "function_from_line": "PopBonusCode",
+      "reasoning": "The function is public and unauthenticated, so any caller can shrink the bonusCodes array, potentially destroying data stored by the owner.",
+      "confidence": 0.99
+    },
+    {
+      "class": "arithmetic",
+      "function": "PopBonusCode",
+      "line": 21,
+      "function_from_line": "PopBonusCode",
+      "reasoning": "When bonusCodes.length is zero, the statement `bonusCodes.length--` underflows the array length, setting it to a very large value and corrupting the contract's storage layout.",
+      "confidence": 0.98
+    },
+    {
+      "class": "access_control",
+      "function": "UpdateBonusCodeAt",
+      "line": 24,
+      "function_from_line": "UpdateBonusCodeAt",
+      "reasoning": "The function is public with no access restriction, permitting any user to overwrite entries in the bonusCodes array.",
+      "confidence": 0.99
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 1,
+  "prompt_tokens": 822,
+  "completion_tokens": 455,
+  "seconds": 0.004,
+  "api_seconds": 2.771
+}

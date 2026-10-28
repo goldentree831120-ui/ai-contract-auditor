@@ -1,0 +1,32 @@
+{
+  "id": "c35",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "none",
+  "findings": [
+    {
+      "class": "other",
+      "function": "sendToWinner",
+      "line": 11,
+      "function_from_line": "sendToWinner",
+      "reasoning": "The contract uses `winner.send(winAmount)` without checking the return value; if the send fails (e.g., recipient is a contract that rejects 2300\u202fgas), the call still proceeds to set `payedOut = true`, permanently locking the payout.",
+      "confidence": 0.9
+    },
+    {
+      "class": "access_control",
+      "function": "withdrawLeftOver",
+      "line": 15,
+      "function_from_line": "withdrawLeftOver",
+      "reasoning": "The function is public and has no restriction, allowing any user to call it after payedOut is true and withdraw the entire contract balance, effectively stealing funds.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 726,
+  "completion_tokens": 453,
+  "seconds": 2.208,
+  "api_seconds": 1.488
+}

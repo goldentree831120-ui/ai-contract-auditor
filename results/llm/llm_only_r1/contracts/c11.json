@@ -1,0 +1,24 @@
+{
+  "id": "c11",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "none",
+  "findings": [
+    {
+      "class": "denial_of_service",
+      "function": "ifillArray",
+      "line": 10,
+      "function_from_line": "ifillArray",
+      "reasoning": "The function pushes 350 addresses into a dynamic array each call. As the array grows, the gas required for each push increases and eventually the transaction will run out of gas, preventing further execution (including the reset branch). An attacker can fill the array to make the function unusable.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 1,
+  "prompt_tokens": 729,
+  "completion_tokens": 298,
+  "seconds": 0.005,
+  "api_seconds": 1.321
+}

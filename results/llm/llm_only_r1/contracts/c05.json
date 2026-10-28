@@ -1,0 +1,24 @@
+{
+  "id": "c05",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "none",
+  "findings": [
+    {
+      "class": "bad_randomness",
+      "function": "constructor",
+      "line": 8,
+      "function_from_line": "GuessGame",
+      "reasoning": "The answer is derived from `block.blockhash(block.number - 1)` and `now`, which are predictable by miners and can be computed off\u2011chain, allowing an attacker to determine the correct guess and win the payout.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 1,
+  "prompt_tokens": 768,
+  "completion_tokens": 304,
+  "seconds": 0.005,
+  "api_seconds": 1.405
+}

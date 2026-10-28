@@ -1,0 +1,40 @@
+{
+  "id": "c35",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "none",
+  "findings": [
+    {
+      "class": "unchecked_low_level_calls",
+      "function": "sendToWinner",
+      "line": 11,
+      "function_from_line": "sendToWinner",
+      "reasoning": "The return value of `winner.send(winAmount)` is ignored; if the send fails the contract does not revert, leaving `payedOut` false and allowing repeated calls that could lock the payout.",
+      "confidence": 0.9
+    },
+    {
+      "class": "access_control",
+      "function": "withdrawLeftOver",
+      "line": 15,
+      "function_from_line": "withdrawLeftOver",
+      "reasoning": "The function is public and has no restriction, allowing any user to call it after payout and withdraw the entire contract balance, effectively stealing funds.",
+      "confidence": 0.95
+    },
+    {
+      "class": "unchecked_low_level_calls",
+      "function": "withdrawLeftOver",
+      "line": 17,
+      "function_from_line": "withdrawLeftOver",
+      "reasoning": "The return value of `msg.sender.send(this.balance)` is ignored; a failing send (e.g., to a contract with a fallback that uses >2300 gas) will silently fail, leaving the balance stuck.",
+      "confidence": 0.85
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 1,
+  "prompt_tokens": 726,
+  "completion_tokens": 468,
+  "seconds": 0.003,
+  "api_seconds": 2.987
+}

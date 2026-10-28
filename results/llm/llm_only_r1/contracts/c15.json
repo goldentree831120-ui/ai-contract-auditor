@@ -1,0 +1,40 @@
+{
+  "id": "c15",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "none",
+  "findings": [
+    {
+      "class": "access_control",
+      "function": "PushBonusCode",
+      "line": 15,
+      "function_from_line": "PushBonusCode",
+      "reasoning": "The function allows any caller to push arbitrary values into the private bonusCodes array, but there is no restriction to the contract owner or an authorized role, enabling unauthorized users to manipulate the stored data.",
+      "confidence": 0.99
+    },
+    {
+      "class": "access_control",
+      "function": "PopBonusCode",
+      "line": 19,
+      "function_from_line": "PopBonusCode",
+      "reasoning": "Anyone can call this function to decrease the length of the bonusCodes array, effectively deleting entries without permission, which can be abused to erase data or manipulate the array state.",
+      "confidence": 0.99
+    },
+    {
+      "class": "access_control",
+      "function": "UpdateBonusCodeAt",
+      "line": 24,
+      "function_from_line": "UpdateBonusCodeAt",
+      "reasoning": "The function permits any address to modify an element of the bonusCodes array at an arbitrary index without any access checks, allowing unauthorized overwriting of stored values.",
+      "confidence": 0.99
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 1,
+  "prompt_tokens": 822,
+  "completion_tokens": 352,
+  "seconds": 0.003,
+  "api_seconds": 1.821
+}

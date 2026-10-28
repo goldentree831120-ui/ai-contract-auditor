@@ -1,0 +1,32 @@
+{
+  "id": "c24",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "both",
+  "findings": [
+    {
+      "class": "arithmetic",
+      "function": "PopBonusCode",
+      "line": 21,
+      "function_from_line": "PopBonusCode",
+      "reasoning": "The function decrements bonusCodes.length without checking that the array is non\u2011empty. When called on an empty array the length underflows to 2^256\u20111, creating an enormous array and breaking contract logic.",
+      "confidence": 0.95
+    },
+    {
+      "class": "other",
+      "function": "UpdateBonusCodeAt",
+      "line": 26,
+      "function_from_line": "UpdateBonusCodeAt",
+      "reasoning": "After an attacker triggers the underflow in PopBonusCode, bonusCodes.length becomes huge, allowing UpdateBonusCodeAt to write to arbitrary storage slots (out\u2011of\u2011bounds index), which can corrupt critical contract state such as the owner address.",
+      "confidence": 0.9
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 1396,
+  "completion_tokens": 515,
+  "seconds": 62.632,
+  "api_seconds": 2.494
+}

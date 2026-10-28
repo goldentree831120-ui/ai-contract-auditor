@@ -1,0 +1,24 @@
+{
+  "id": "c30",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "both",
+  "findings": [
+    {
+      "class": "arithmetic",
+      "function": "run",
+      "line": 12,
+      "function_from_line": "run",
+      "reasoning": "The function subtracts `input` from `count` without checking for underflow. In Solidity 0.4.23 arithmetic is unchecked, so a large `input` can cause `count` to wrap around to a huge value.",
+      "confidence": 0.99
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 923,
+  "completion_tokens": 205,
+  "seconds": 2.014,
+  "api_seconds": 1.989
+}

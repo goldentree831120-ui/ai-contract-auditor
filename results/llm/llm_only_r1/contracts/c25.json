@@ -1,0 +1,24 @@
+{
+  "id": "c25",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "none",
+  "findings": [
+    {
+      "class": "access_control",
+      "function": "settle",
+      "line": 25,
+      "function_from_line": "settle",
+      "reasoning": "If a user never called `lockInGuess`, their `guesses[msg.sender].block` remains 0. The `settle` function only checks `block.number > guesses[msg.sender].block`, which is true for any block > 0, then compares the stored guess (default 0) with `blockhash(0)` (also 0) and transfers 2 ether. An attacker can call `settle` without any prior deposit and drain the contract.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 1,
+  "prompt_tokens": 858,
+  "completion_tokens": 545,
+  "seconds": 0.003,
+  "api_seconds": 1.994
+}

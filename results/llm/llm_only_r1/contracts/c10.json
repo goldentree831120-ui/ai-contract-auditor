@@ -1,0 +1,24 @@
+{
+  "id": "c10",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "none",
+  "findings": [
+    {
+      "class": "access_control",
+      "function": "sendTo",
+      "line": 12,
+      "function_from_line": "sendTo",
+      "reasoning": "The function authorizes callers using tx.origin == owner, which can be bypassed by a malicious contract that forwards a call from the owner, allowing an attacker to trigger sendTo and transfer funds.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 1,
+  "prompt_tokens": 694,
+  "completion_tokens": 152,
+  "seconds": 0.003,
+  "api_seconds": 1.223
+}

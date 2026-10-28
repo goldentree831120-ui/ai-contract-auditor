@@ -1,0 +1,32 @@
+{
+  "id": "c21",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "none",
+  "findings": [
+    {
+      "class": "arithmetic",
+      "function": "donate",
+      "line": 7,
+      "function_from_line": "donate",
+      "reasoning": "In Solidity 0.4.24 arithmetic is unchecked; credit[to] += msg.value can overflow, letting an attacker wrap their credit to a low value and later withdraw more than they deposited.",
+      "confidence": 0.8
+    },
+    {
+      "class": "reentrancy",
+      "function": "withdraw",
+      "line": 12,
+      "function_from_line": "withdraw",
+      "reasoning": "The contract sends Ether to msg.sender via a low\u2011level call before reducing the sender's credit balance, allowing a malicious contract to re\u2011enter withdraw and drain funds.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 1,
+  "prompt_tokens": 743,
+  "completion_tokens": 304,
+  "seconds": 0.002,
+  "api_seconds": 1.436
+}

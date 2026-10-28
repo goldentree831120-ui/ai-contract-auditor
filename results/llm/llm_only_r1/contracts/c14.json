@@ -1,0 +1,24 @@
+{
+  "id": "c14",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "none",
+  "findings": [
+    {
+      "class": "arithmetic",
+      "function": "transfer",
+      "line": 30,
+      "function_from_line": "transfer",
+      "reasoning": "The contract adds _value to balances[_to] without overflow checks. In Solidity 0.4.24 arithmetic is unchecked, so a malicious _value that causes the sum to wrap around can inflate the recipient's balance.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 1,
+  "prompt_tokens": 1366,
+  "completion_tokens": 415,
+  "seconds": 0.004,
+  "api_seconds": 2.758
+}

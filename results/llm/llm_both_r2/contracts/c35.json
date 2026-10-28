@@ -1,0 +1,48 @@
+{
+  "id": "c35",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "both",
+  "findings": [
+    {
+      "class": "access_control",
+      "function": "sendToWinner",
+      "line": 9,
+      "function_from_line": "sendToWinner",
+      "reasoning": "The function can be called by any address, allowing anyone to trigger the payout to the stored winner without any authorization check.",
+      "confidence": 0.95
+    },
+    {
+      "class": "unchecked_low_level_calls",
+      "function": "sendToWinner",
+      "line": 11,
+      "function_from_line": "sendToWinner",
+      "reasoning": "The low\u2011level `send` call ignores its return value, so a failed transfer (e.g., if the winner is a contract that rejects ether) will not be detected and the contract will still mark the payout as completed.",
+      "confidence": 0.9
+    },
+    {
+      "class": "access_control",
+      "function": "withdrawLeftOver",
+      "line": 15,
+      "function_from_line": "withdrawLeftOver",
+      "reasoning": "Anyone can call this function after `payedOut` is true and withdraw the contract's remaining balance, effectively stealing leftover funds.",
+      "confidence": 0.95
+    },
+    {
+      "class": "unchecked_low_level_calls",
+      "function": "withdrawLeftOver",
+      "line": 17,
+      "function_from_line": "withdrawLeftOver",
+      "reasoning": "The `msg.sender.send(this.balance)` call ignores its return value, so a failed transfer will not revert and the caller may think they received ether when they did not.",
+      "confidence": 0.9
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 1450,
+  "completion_tokens": 532,
+  "seconds": 61.764,
+  "api_seconds": 1.674
+}

@@ -1,0 +1,32 @@
+{
+  "id": "c17",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "none",
+  "findings": [
+    {
+      "class": "arithmetic",
+      "function": "addToBalance",
+      "line": 11,
+      "function_from_line": "addToBalance",
+      "reasoning": "userBalance[msg.sender] += msg.value can overflow the uint storage variable in Solidity 0.4.x, potentially wrapping the balance to a low value.",
+      "confidence": 0.95
+    },
+    {
+      "class": "reentrancy",
+      "function": "withdrawBalance",
+      "line": 15,
+      "function_from_line": "withdrawBalance",
+      "reasoning": "The contract sends Ether to msg.sender via a low\u2011level call before resetting the user's balance, allowing a malicious recipient to re\u2011enter withdrawBalance and drain funds.",
+      "confidence": 0.99
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 1,
+  "prompt_tokens": 849,
+  "completion_tokens": 318,
+  "seconds": 0.003,
+  "api_seconds": 1.332
+}

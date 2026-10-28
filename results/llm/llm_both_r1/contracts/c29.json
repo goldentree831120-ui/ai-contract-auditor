@@ -1,0 +1,32 @@
+{
+  "id": "c29",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "both",
+  "findings": [
+    {
+      "class": "time_manipulation",
+      "function": "fallback",
+      "line": 10,
+      "function_from_line": "fallback",
+      "reasoning": "The contract requires `now != pastBlockTime` and stores `now` in state, making the game outcome depend on block timestamps that miners can adjust within allowed limits.",
+      "confidence": 0.9
+    },
+    {
+      "class": "bad_randomness",
+      "function": "fallback",
+      "line": 12,
+      "function_from_line": "fallback",
+      "reasoning": "The contract uses `now % 15 == 0` to decide winner, which is predictable and can be manipulated by miners, allowing them to influence the outcome.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 1562,
+  "completion_tokens": 302,
+  "seconds": 61.951,
+  "api_seconds": 1.848
+}

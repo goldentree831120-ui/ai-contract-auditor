@@ -1,0 +1,32 @@
+{
+  "id": "c24",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "both",
+  "findings": [
+    {
+      "class": "arithmetic",
+      "function": "PopBonusCode",
+      "line": 20,
+      "function_from_line": "PopBonusCode",
+      "reasoning": "The require check `0 <= bonusCodes.length` is always true, allowing `bonusCodes.length--` to underflow when the array is empty, setting the length to a very large value.",
+      "confidence": 0.95
+    },
+    {
+      "class": "denial_of_service",
+      "function": "PopBonusCode",
+      "line": 20,
+      "function_from_line": "PopBonusCode",
+      "reasoning": "An attacker can repeatedly call `PopBonusCode` to underflow the array length, inflating it to a huge size and causing subsequent operations (e.g., pushes) to run out of gas, effectively freezing the contract.",
+      "confidence": 0.9
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 1396,
+  "completion_tokens": 454,
+  "seconds": 62.037,
+  "api_seconds": 1.951
+}

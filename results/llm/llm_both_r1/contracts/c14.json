@@ -1,0 +1,24 @@
+{
+  "id": "c14",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "both",
+  "findings": [
+    {
+      "class": "arithmetic",
+      "function": "transfer",
+      "line": 30,
+      "function_from_line": "transfer",
+      "reasoning": "The addition `balances[_to] += _value;` can overflow the uint256 balance of the recipient because no overflow check is performed (Solidity 0.4.24 does not have built\u2011in overflow protection). An attacker could craft a transfer that wraps the recipient's balance to a low value and later exploit it.",
+      "confidence": 0.95
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 2073,
+  "completion_tokens": 342,
+  "seconds": 62.965,
+  "api_seconds": 2.967
+}

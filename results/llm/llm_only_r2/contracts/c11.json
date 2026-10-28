@@ -1,0 +1,24 @@
+{
+  "id": "c11",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "none",
+  "findings": [
+    {
+      "class": "denial_of_service",
+      "function": "ifillArray",
+      "line": 10,
+      "function_from_line": "ifillArray",
+      "reasoning": "The function allows any caller to push up to 350 addresses into a storage array without limits. As the array approaches its 1500\u2011element cap, the gas required for the loop can exceed the block gas limit, causing the transaction to run out of gas and effectively blocking further use of the function.",
+      "confidence": 0.92
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 729,
+  "completion_tokens": 327,
+  "seconds": 3.16,
+  "api_seconds": 1.662
+}

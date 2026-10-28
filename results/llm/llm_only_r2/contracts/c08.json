@@ -1,0 +1,24 @@
+{
+  "id": "c08",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "none",
+  "findings": [
+    {
+      "class": "unchecked_low_level_calls",
+      "function": "callB",
+      "line": 10,
+      "function_from_line": "callB",
+      "reasoning": "The low\u2011level `call` return value is ignored, so a failure of the external call will not be detected and the transaction will continue as if it succeeded, potentially leading to unexpected behavior.",
+      "confidence": 0.99
+    }
+  ],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 673,
+  "completion_tokens": 172,
+  "seconds": 3.022,
+  "api_seconds": 2.505
+}

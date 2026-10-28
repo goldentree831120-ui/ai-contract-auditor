@@ -1,0 +1,15 @@
+{
+  "id": "c43",
+  "model": "openai/gpt-oss-120b",
+  "prompt_version": "m3-v1",
+  "context": "none",
+  "findings": [],
+  "rejected": [],
+  "mode": "whole",
+  "calls": 1,
+  "cached_calls": 0,
+  "prompt_tokens": 694,
+  "completion_tokens": 93,
+  "seconds": 0.961,
+  "api_seconds": 0.852
+}
